@@ -14,7 +14,7 @@ Un Web Service fonctionne de la manière suivante :
 (Source : oracle.com)
 
 
-web service 
+web service - Explication Chevaldonne :
 ===
 
 trad en 2 lge : nous partage données entre clients; pont entre ts clients pour retrouver ici tous nos dessins
