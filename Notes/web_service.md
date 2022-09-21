@@ -20,7 +20,6 @@ web service - Explication Chevaldonne :
 trad en 2 lge : nous partage données entre clients; pont entre ts clients pour retrouver ici tous nos dessins
 -> persistance en ligne
 
-(si pas de réseau eventuel persist locale)
 
 http, "rest!", sort
 http request meme pr rest -> answer .json
