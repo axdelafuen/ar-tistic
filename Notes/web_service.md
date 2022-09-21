@@ -12,11 +12,10 @@ Un Web Service fonctionne de la manière suivante :
 3. La réponse est ensuite délivrée sous le même format que sa demande : XML, JSON ou HTTP.
 
 (Source : oracle.com)
-===
 
 
 web service 
----
+===
 
 trad en 2 lge : nous partage données entre clients; pont entre ts clients pour retrouver ici tous nos dessins
 -> persistance en ligne
