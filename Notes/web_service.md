@@ -3,7 +3,10 @@ Note de recherche sur les Web Service :
 
 Un Web Service est une application qui permet d’échanger des données avec d’autres applications web. Même si ces dernières sont construites dans des langages de programmation différents.
 
- Web Services les plus connus : SOAP, REST ou HTTP. 
+ Web Services les plus connus : 
+ - SOAP : fonctionne uniquement avec xml
+ - REST : permet de garder des données en cache (contraintes de le faire nous même levée), format : html, xml, json, grande tolérence aux echecs. L'état de la session est conservé par le client et transmis à chaque nouvelle requête
+ - HTTP :
 
 Un Web Service fonctionne de la manière suivante :
 
