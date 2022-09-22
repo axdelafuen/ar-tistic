@@ -5,7 +5,9 @@ Pour faire du cross plateforme :
  
 Avantages | Inconvénients 
  --- | --- 
-96% du code réutilisable (base), plus large public | pertes de fonctionnalités spécifiques à une plateforme, moins performant (+ lent )
+96% du code réutilisable (base),
+ plus large public | pertes de fonctionnalités spécifiques à une plateforme
+ moins performant (+ lent )
 
 
 \ | Avantages | Inconvénients 
