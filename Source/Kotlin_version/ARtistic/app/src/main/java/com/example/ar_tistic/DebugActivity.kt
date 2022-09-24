@@ -13,6 +13,7 @@ import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
 import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
+import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
@@ -52,13 +53,10 @@ class DebugActivity : AppCompatActivity() {
         loc.enableFollowLocation()
 
         // COMPASS
-        val compass = CompassOverlay(
-            applicationContext, InternalCompassOrientationProvider(
-                applicationContext
-            ), map
-        )
+        val compass = CompassOverlay(applicationContext, InternalCompassOrientationProvider(applicationContext), map)
         compass.enableCompass()
         map.getOverlays().add(compass)
+        map.getOverlays().add(RotationGestureOverlay(map))
 
 
 
