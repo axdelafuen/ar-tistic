@@ -1,18 +1,18 @@
-Commande de base du web service (pour les tests) :
+Commandes de bases du web service (pour les tests) :
 ===
 
 DELETE :
 ---
 
 ```sh
-curl --request DELETE --url http://localhost:7070/users/1
+curl --request DELETE --url http://localhost:7070/users/{id}
 ```
 
 GET :
 ---
 
 ```sh
-curl --request GET --url http://localhost:7070/users/ ?1?
+curl --request GET --url http://localhost:7070/users/{id}   <-- optionnel
 ```
 
 POST :
