@@ -1,4 +1,4 @@
-package com.example.stub
+package com.example.classlib
 
 import com.example.classlib.*
 
