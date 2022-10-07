@@ -1,0 +1,20 @@
+kind: pipeline
+type: docker
+name: ARtisticPipeline
+
+trigger:
+    event:
+        - push
+
+steps:
+- name: api-build
+  image: androidsdk/android-30
+  commands:
+  - cd Source/AR_tistic
+  - ./gradlew api:assemble
+
+- name: app-build
+  image: androidsdk/android-30
+  commands:
+  - cd Source/AR_tistic
+  - ./gradlew :app:assembleDebug
