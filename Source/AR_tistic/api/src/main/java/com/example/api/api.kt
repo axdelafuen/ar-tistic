@@ -3,6 +3,8 @@ package com.example.api
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 
+import com.example.classlib.*
+
 fun main() {
 
     val userDao = UserDao()
