@@ -7,8 +7,7 @@ import com.example.classlib.User
 import com.example.stub.*
 
 class UserDao {
-
-    val users = Stub().loadData()
+    val users = Stub().loadUsers()
 
     var lastId: AtomicInteger = AtomicInteger(users.size - 1)
 

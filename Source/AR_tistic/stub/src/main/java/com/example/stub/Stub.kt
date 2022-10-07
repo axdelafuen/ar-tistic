@@ -5,7 +5,7 @@ import java.util.*
 
 class Stub : IPersistancemanager {
 
-    public override fun loadData():HashMap<Int,User>{
+    override fun loadUsers():HashMap<Int,User>{
         return usr()
     }
     fun usr():HashMap<Int, User>{
