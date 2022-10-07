@@ -5,15 +5,13 @@ import java.util.*
 
 class Stub : IPersistancemanager {
 
-    public override fun saveData(users:List<User>) {
-        TODO("Not yet implemented")
-    }
-
-    public override fun loadData():List<User>{
+    public override fun loadData():HashMap<Int,User>{
         return usr()
     }
-    fun usr():List<User>{
-        val usr1:User = User(id= 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password="1234", birthDate=Date(1999,2,2) , subscribes= hashMapOf(), subscribers = hashMapOf(), nbReport = 0)
-        return listOf(usr1)
+    fun usr():HashMap<Int, User>{
+        return hashMapOf(
+            0 to User(id= 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password="1234", birthDate=Date(1999,2,2) , subscribes= hashMapOf(), nbReport = 0 ),
+            1 to User(id= 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+        )
     }
 }

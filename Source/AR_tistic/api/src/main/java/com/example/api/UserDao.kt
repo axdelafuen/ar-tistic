@@ -4,19 +4,17 @@ import java.util.concurrent.atomic.AtomicInteger
 import java.util.*
 import kotlin.collections.HashMap
 import com.example.classlib.User
+import com.example.stub.*
 
 class UserDao {
 
-    val users = hashMapOf(
-        0 to User(id= 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password="1234", birthDate=Date(1999,2,2) , subscribes= hashMapOf(), subscribers = hashMapOf(), nbReport = 0 ),
-        1 to User(id= 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), subscribers = hashMapOf(), nbReport = 0 ),
-    )
+    val users = Stub().loadData()
 
     var lastId: AtomicInteger = AtomicInteger(users.size - 1)
 
-    fun save(name: String, profilePicture:String, email: String, password:String, birthDate:Date, subscribes:HashMap<Int, User>, subscribers: HashMap<Int, User>, nbReport:Int ) {
+    fun save(name: String, profilePicture:String, email: String, password:String, birthDate:Date, subscribes:HashMap<Int, User>, nbReport:Int ) {
         val id = lastId.incrementAndGet()
-        users.put(id, User(id = id, name = name,  profilePicture=profilePicture, email=email, password=password, birthDate=birthDate, subscribes=subscribes, subscribers=subscribers, nbReport=nbReport))
+        users.put(id, User(id = id, name = name,  profilePicture=profilePicture, email=email, password=password, birthDate=birthDate, subscribes=subscribes, nbReport=nbReport))
     }
 
     fun findById(id: Int): User? {
@@ -24,7 +22,7 @@ class UserDao {
     }
 
     fun update(id: Int, user: User) {
-        users.put(id, User(id = id, name = user.name,  profilePicture=user.profilePicture, email=user.email, password=user.password, birthDate=user.birthDate, subscribes=user.subscribes, subscribers=user.subscribers, nbReport=user.nbReport))
+        users.put(id, User(id = id, name = user.name,  profilePicture=user.profilePicture, email=user.email, password=user.password, birthDate=user.birthDate, subscribes=user.subscribes, nbReport=user.nbReport))
     }
 
     fun delete(id: Int) {

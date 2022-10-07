@@ -8,9 +8,6 @@ import com.example.classlib.*
 fun main() {
 
     val userDao = UserDao()
-    //val intPointDao = InterestPointDao()
-    //val drawDao = DrawDao()
-    //val evaluationDao = EvaluationDao()
 
     val app = Javalin.create().apply {
         exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
@@ -38,7 +35,6 @@ fun main() {
                 password = user.password,
                 birthDate = user.birthDate,
                 subscribes = user.subscribes,
-                subscribers = user.subscribers,
                 nbReport = user.nbReport
             )
             ctx.status(201)
