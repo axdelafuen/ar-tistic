@@ -2,5 +2,5 @@ package com.example.classlib
 
 interface IPersistancemanager {
 
-    fun loadUsers():(HashMap<Int,User>)
+    fun loadData():(com.example.classlib.Collection)
 }

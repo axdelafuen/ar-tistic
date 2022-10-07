@@ -8,6 +8,8 @@ import com.example.classlib.*
 fun main() {
 
     val userDao = UserDao()
+    val drawDao = DrawDao()
+    val intPointDao = InterestPointDao()
 
     val app = Javalin.create().apply {
         exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
@@ -53,6 +55,27 @@ fun main() {
             userDao.delete(ctx.pathParam("user-id").toInt())
             ctx.status(204)
         }
+
+        // INTEREST POINTS
+
+        get("/intPoints") { ctx ->
+            ctx.json(intPointDao.intPoints)
+        }
+
+        get("/intPoints/{intPoint-id}") { ctx ->
+            ctx.json(intPointDao.findById(ctx.pathParam("intPoint-id").toInt())!!)
+        }
+
+        // DRAWS
+
+        get("/draws"){ctx->
+            ctx.json(drawDao.draws)
+        }
+
+        get("/draws/{draw-id}"){ctx->
+            ctx.json(drawDao.findById(ctx.pathParam("draw-id").toInt())!!)
+        }
+
     }
 }
 
