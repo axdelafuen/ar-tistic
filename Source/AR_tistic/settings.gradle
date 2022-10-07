@@ -16,3 +16,4 @@ rootProject.name = "AR_tistic"
 include ':app'
 include ':api'
 include ':stub'
+include ':classLib'

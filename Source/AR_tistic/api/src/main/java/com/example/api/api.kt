@@ -35,8 +35,8 @@ fun main() {
                 email = user.email,
                 password = user.password,
                 birthDate = user.birthDate,
-                idSubscribes = user.idSubscribes,
-                idSubscribers = user.idSubscribers,
+                subscribes = user.subscribes,
+                subscribers = user.subscribers,
                 nbReport = user.nbReport
             )
             ctx.status(201)
