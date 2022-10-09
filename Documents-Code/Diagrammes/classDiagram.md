@@ -48,5 +48,16 @@ User <-- User : HashMap< Int,User > subscribes
 Draw <-- User : HashMap< Int,User > authors
 InterestPoint <-- Draw : HashMap< Int,InterestPoint > interestPoints
 
+class Conversation{
+        +Int id
+}
 
+class Message{
+        +Int id
+        +String content
+        +Date date
+}
+User <-- Conversation : HashMap< Int,User > participant
+Message <-- Conversation : HashMap< Int,Message > messages
+User <-- Message : User sender
 ```
