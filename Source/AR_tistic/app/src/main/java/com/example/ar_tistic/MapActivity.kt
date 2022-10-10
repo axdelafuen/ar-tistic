@@ -5,7 +5,6 @@ import android.preference.PreferenceManager
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -36,9 +35,9 @@ class MapActivity : AppCompatActivity() {
         // MAP Initialization
         map = findViewById<MapView>(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK)
-        map.setBuiltInZoomControls(false)
-        map.setMultiTouchControls(false)
-        map.setOnTouchListener { v, event -> true }
+        //map.setBuiltInZoomControls(false)
+        //map.setMultiTouchControls(false)
+        // map.setOnTouchListener { v, event -> true }
 
         // MAP CONTROL SETTING
         val mapController: IMapController = map.getController()

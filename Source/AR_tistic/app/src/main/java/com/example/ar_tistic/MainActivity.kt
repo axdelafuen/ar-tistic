@@ -1,6 +1,7 @@
 package com.example.ar_tistic
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import com.example.classlib.*
@@ -48,7 +49,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 else{
                     if(permission_test()==0){
-                        setContentView(R.layout.activity_map)
+                        val intent = Intent(applicationContext,MapActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                 }
             }
