@@ -34,10 +34,12 @@ class Draw{
 }
 
 class Comment{
+        +Int id
         +String content
 }
 
 class Evaluation{
+        +Int id
         +Int grade
 }
 
