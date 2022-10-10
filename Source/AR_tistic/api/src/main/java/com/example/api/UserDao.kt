@@ -7,8 +7,8 @@ import com.example.classlib.*
 import com.example.stub.*
 
 class UserDao {
-
     var users = Stub().loadUsers()
+    var data = Stub()
 
     var lastId: AtomicInteger = AtomicInteger(users.size - 1)
 
@@ -29,4 +29,22 @@ class UserDao {
         users.remove(id)
     }
 
+    // NEW FUNC FOR API
+/*
+    fun getUsers(index:Int, nbUsers:Int):User?{
+        return data.loadUserIdx(index,nbUsers)
+    }
+
+    fun getUserById(id:Int):User?{
+        return data.loadUsersById(id)
+    }
+
+    fun deleteUserById(id:Int){
+        data.deleteUserById(id)
+    }
+
+    fun updateUserById(id:Int){
+        data.updateUserById(id)
+    }
+*/
 }

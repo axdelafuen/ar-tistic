@@ -23,11 +23,9 @@ fun main() {
         get("/users") { ctx ->
             ctx.json(userDao.users)
         }
-
         get("/users/{user-id}") { ctx ->
             ctx.json(userDao.findById(ctx.pathParam("user-id").toInt())!!)
         }
-
         post("/users") { ctx ->
             val user = ctx.bodyAsClass<User>()
             userDao.save(
@@ -41,7 +39,6 @@ fun main() {
             )
             ctx.status(201)
         }
-
         put("/users/{user-id}") { ctx ->
             val user = ctx.bodyAsClass<User>()
             userDao.update(
@@ -61,7 +58,6 @@ fun main() {
         get("/intPoints") { ctx ->
             ctx.json(intPointDao.intPoints)
         }
-
         get("/intPoints/{intPoint-id}") { ctx ->
             ctx.json(intPointDao.findById(ctx.pathParam("intPoint-id").toInt())!!)
         }
@@ -71,7 +67,6 @@ fun main() {
         get("/draws"){ctx->
             ctx.json(drawDao.draws)
         }
-
         get("/draws/{draw-id}"){ctx->
             ctx.json(drawDao.findById(ctx.pathParam("draw-id").toInt())!!)
         }
