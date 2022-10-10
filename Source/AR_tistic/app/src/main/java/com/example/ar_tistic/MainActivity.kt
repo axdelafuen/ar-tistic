@@ -1,5 +1,8 @@
 package com.example.ar_tistic
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import com.example.classlib.*
 import com.example.stub.*
 import android.os.Bundle
@@ -16,6 +19,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.ar_tistic.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -43,7 +47,9 @@ class MainActivity : AppCompatActivity() {
                     err.visibility= View.VISIBLE
                 }
                 else{
-                    setContentView(R.layout.activity_main)
+                    if(permission_test()==0){
+                        setContentView(R.layout.activity_map)
+                    }
                 }
             }
         }
@@ -56,5 +62,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return false
+    }
+    fun permission_test():Int{
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            )
+            {
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ), 1
+                )
+                return 1
+            }
+            else
+            {
+                return 0
+            }
+        }
+        return 1
     }
 }
