@@ -1,9 +1,9 @@
 package com.example.ar_tistic
 
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.MotionEvent
-import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
@@ -21,6 +21,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 class MapActivity : AppCompatActivity() {
     private lateinit var map:MapView
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Configuration.getInstance().load(
@@ -31,13 +33,19 @@ class MapActivity : AppCompatActivity() {
 
         // LOAD LAYOUT
         setContentView(R.layout.activity_map)
-
         // MAP Initialization
         map = findViewById<MapView>(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK)
-        //map.setBuiltInZoomControls(false)
-        //map.setMultiTouchControls(false)
-        // map.setOnTouchListener { v, event -> true }
+        map.setBuiltInZoomControls(false)
+        map.setMultiTouchControls(true)
+        map.setZoomRounding(true)
+        map.minZoomLevel = 19.0
+        map.maxZoomLevel = 20.0
+
+        val mRotationGestureOverlay = RotationGestureOverlay(applicationContext, map)
+        mRotationGestureOverlay.setEnabled(true)
+        map.getOverlays().add(mRotationGestureOverlay)
+
 
         // MAP CONTROL SETTING
         val mapController: IMapController = map.getController()
@@ -86,6 +94,9 @@ class MapActivity : AppCompatActivity() {
         // ITEM FOCUS
         mOverlay.setFocusItemsOnTap(true)
         map.getOverlays().add(mOverlay)
+
+
+
     }
 
     override fun onPause() {
