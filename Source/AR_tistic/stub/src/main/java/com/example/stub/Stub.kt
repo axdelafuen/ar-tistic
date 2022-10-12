@@ -6,39 +6,55 @@ import java.sql.Time
 import java.util.*
 import kotlin.collections.HashMap
 
-class Stub : IPersistancemanager {
-    var UserHashMap=hashMapOf(
-        0 to User(id= 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password="1234", birthDate=Date(1999,2,2) , subscribes= hashMapOf(), nbReport = 0 ),
-        1 to User(id= 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-        2 to User(id= 2, name = "Patrick", profilePicture = "./img/pp/Fredo.jpg", email = "patrick@gmail.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-        3 to User(id= 3, name = "Nina", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-        4 to User(id= 4, name = "Louis", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-        5 to User(id= 5, name = "1", profilePicture = "./img/pp/Fredo.jpg", email = "2", password="1", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-    )
-    var IntPtsHashMap= hashMapOf(
-        0 to InterestPoint(id=0,name="IUT", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png"),
-        1 to InterestPoint(id=1,name="MAISON", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png"),
-        2 to InterestPoint(id=2,name="RUE", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png"),
-    )
-    var DrawsHashMap = hashMapOf(
-        0 to Draw(id=0,name="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
-        1 to Draw(id=1,name="bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
-        2 to Draw(id=2,name="Peinture", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 )
+class Stub : IPersistancemanager{
+    init {
+        var UserHashMap=hashMapOf(
+            0 to User(id= 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password="1234", birthDate=Date(1999,2,2) , subscribes= hashMapOf(), nbReport = 0 ),
+            1 to User(id= 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            2 to User(id= 2, name = "Patrick", profilePicture = "./img/pp/Fredo.jpg", email = "patrick@gmail.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            3 to User(id= 3, name = "Nina", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            4 to User(id= 4, name = "Louis", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            5 to User(id= 5, name = "1", profilePicture = "./img/pp/Fredo.jpg", email = "2", password="1", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+        )
+        var IntPtsHashMap= hashMapOf(
+            0 to InterestPoint(id=0,name="IUT", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png"),
+            1 to InterestPoint(id=1,name="MAISON", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png"),
+            2 to InterestPoint(id=2,name="RUE", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png"),
+        )
+        var DrawsHashMap = hashMapOf(
+            0 to Draw(id=0,name="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
+            1 to Draw(id=1,name="bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
+            2 to Draw(id=2,name="Peinture", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 )
+        )
+    }
+    var UserHashMap:HashMap<Int,User>
+        get() {
+            return UserHashMap
+        }
+        set(value) {}
+    var DrawsHashMap:HashMap<Int,Draw>
+        get() {
+            return DrawsHashMap
+        }
+        set(value) {}
+    var IntPtsHashMap:HashMap<Int,InterestPoint>
+        get() {
+            return IntPtsHashMap
+        }
+        set(value) {}
 
-
-    )
     override fun loadData():(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsers(),loadInterestPoints(),loadDraws())
         return collec
     }
     fun loadUsers():HashMap<Int,User>{
-        return UserHashMap
+        return this.UserHashMap
     }
     fun loadInterestPoints():HashMap<Int,InterestPoint>{
-        return  IntPtsHashMap
+        return  this.IntPtsHashMap
     }
     fun loadDraws():HashMap<Int,Draw>{
-        return  DrawsHashMap
+        return  this.DrawsHashMap
     }
     fun loadDataIdx(idxUser:Int, nbUser:Int,idxPt:Int, nbPt:Int,idxDraw: Int, nbDraw:Int):(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsersIndex(idxUser,nbUser),loadInterestPointsIndex(idxPt,nbPt),loadDrawsIndex(idxDraw,nbDraw))
@@ -75,4 +91,26 @@ class Stub : IPersistancemanager {
     fun getUserById(idUser:Int):User?{
         return UserHashMap[idUser]
     }
+    fun postUser(usr:User){
+        for ((cpt, user) in UserHashMap.values.withIndex()) {
+            if (user == usr) {
+                UserHashMap[cpt] = user
+            }
+        }
+    }
+    fun putUser(usr:User){
+        for ((cpt, user) in UserHashMap.values.withIndex()) {
+            if (user == null) {
+                UserHashMap.put(cpt,usr)
+            }
+        }
+    }
+    fun deleteUser(usr:User){
+        for ((cpt, user) in UserHashMap.values.withIndex()) {
+            if (user == usr) {
+                UserHashMap.remove(cpt)
+            }
+        }
+    }
+
 }
