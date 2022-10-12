@@ -1,8 +1,8 @@
 package com.example.classlib
 
- class Comment(
-     val id: Int,
-     val content: String,
-     val author: User,
-     val draw: Draw
+ abstract class Comment(
+     open val id: Int,
+     open val content: String,
+     open val author: User,
+     open val draw: Draw
 )
