@@ -32,6 +32,7 @@ fun main(){
     for(dra in idxDraw){
         println(dra.value.name)
     }
+    /*
     println("----get user by id")
     println(stub.getUserById(2))
     println("----post user")
@@ -46,6 +47,6 @@ fun main(){
     println(stub.userHashMap.size)
     stub.deleteUser(2)
     println(stub.userHashMap.size)
-    println(stub.getUserById(2))
+    println(stub.getUserById(2))*/
 
 }
