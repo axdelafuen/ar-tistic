@@ -1,5 +1,5 @@
 package com.example.classlib
 
-abstract class Evalutation(val id:Int,
+data class Evaluation(
                            val grade:Int
-)
+)//:Comment(0,"test",User(), Draw())

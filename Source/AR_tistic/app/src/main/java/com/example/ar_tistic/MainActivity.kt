@@ -49,15 +49,23 @@ class MainActivity : AppCompatActivity() {
                     err.visibility= View.VISIBLE
                 }
                 else{
-                    if(permission_test()==0){
-                        val intent = Intent(applicationContext,MapActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                    if (Build.VERSION.SDK_INT >= 23) {
+                        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                        {
+                            val intent = Intent(applicationContext, MapActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else {
+                            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1)
+                        }
+                        }
                     }
                 }
             }
         }
-    }
+
     private fun existLogPasswd(name:String, pswd:String):Boolean{
         val users= stub.loadUsers()
         for (user in users.values){
@@ -66,28 +74,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return false
-    }
-    fun permission_test():Int{
-        if (Build.VERSION.SDK_INT >= 23) {
-
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            )
-            {
-                ActivityCompat.requestPermissions(
-                    this, arrayOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ), 1
-                )
-                return 1
-            }
-            else
-            {
-                return 0
-            }
-        }
-        return 1
     }
 }
