@@ -1,11 +1,11 @@
 package com.example.database
-import com.example.database.Collaborated.primaryKey
-import com.example.database.InterestPoint.references
-import com.example.database.Relation.bindTo
-import com.example.database.User.bindTo
+
 import org.ktorm.entity.Entity
 import org.ktorm.schema.*
 import java.time.LocalDate
+
+import com.example.classlib.*
+import com.example.stub.*
 
 // object creation
 
@@ -138,12 +138,3 @@ interface ActionDone_ : Entity<ActionDone_> {
 }
 
 // Entity Create
-
-val user_ = Entity.create<User_>()
-val drawing_ = Entity.create<Drawing_>()
-val interestPoint_ = Entity.create<InterestPoint_>()
-val commented_ = Entity.create<Commented_>()
-val collaborated_ = Entity.create<Collaborated_>()
-val actionDone_ = Entity.create<ActionDone_>()
-val noted_ = Entity.create<Noted_>()
-val relation_ = Entity.create<Relation_>()

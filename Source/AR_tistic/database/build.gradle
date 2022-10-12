@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
     implementation 'org.ktorm:ktorm-core:3.2.0'
+    implementation project(':classLib')
+    implementation project(':stub')
 }
 
 java {
