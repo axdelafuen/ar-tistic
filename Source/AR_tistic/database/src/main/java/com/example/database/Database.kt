@@ -1,71 +1,74 @@
 package com.example.database
 import com.example.database.Collaborated.primaryKey
+import com.example.database.InterestPoint.references
+import com.example.database.Relation.bindTo
+import com.example.database.User.bindTo
 import org.ktorm.entity.Entity
 import org.ktorm.schema.*
 import java.time.LocalDate
 
 // object creation
 
-object User : Table<Nothing>("t_User"){
-    val username =  varchar("username").primaryKey()
-    val firstName = varchar("first_Name")
-    val lastName = varchar("last_Name")
-    val DoB = date("date_of_Birth")
-    val password = varchar("password")
-    val mail = varchar("email")
-    val creation = date("date_of_Creation")
-    val nbReport = int("number_of_Report")
-    val score = int("global_Score")
+object User : Table<User_>("t_User"){
+    val username =  varchar("username").primaryKey().bindTo {it.username}
+    val firstName = varchar("first_Name").bindTo {it.firstName}
+    val lastName = varchar("last_Name").bindTo {it.lastName}
+    val DoB = date("date_of_Birth").bindTo {it.DoB}
+    val password = varchar("password").bindTo {it.password}
+    val mail = varchar("email").bindTo {it.mail}
+    val creation = date("date_of_Creation").bindTo {it.creation}
+    val nbReport = int("number_of_Report").bindTo {it.nbReport}
+    val score = int("global_Score").bindTo {it.score}
 }
 
-object Drawing: Table<Nothing>("t_drawing"){
-    val nombreVue = int("nb_views")
-    val dateCreation = date("date_creation")
-    val id = varchar("id").primaryKey()
-    val longevite = int("longevite")
-    val nom = varchar("name")
-    val PointInteretCreation = varchar("id_point_interet")
+object Drawing: Table<Drawing_>("t_drawing"){
+    val nbViews = int("nb_views").bindTo {it.nbViews}
+    val creationDate = date("date_creation").bindTo {it.creationDate}
+    val id = varchar("id").primaryKey().bindTo {it.id}
+    val longevite = int("longevite").bindTo {it.longevite}
+    val nom = varchar("name").bindTo {it.name}
+    val InterestPointCreation = varchar("id_interest_point").references(InterestPoint) {it.pointOfInterest}
 }
 
-object Relation: Table<Nothing>("t_relation"){
-    val idUser = varchar("id_user").primaryKey()
-    val idUserCible = varchar("id_user_cible").primaryKey()
-    val followCible = boolean("follow_cible")
+object Relation: Table<Relation_>("t_relation"){
+    val idUser = varchar("id_user").primaryKey().references(User) {it.user}
+    val idUserCible = varchar("id_user_cible").primaryKey().references(User) {it.userCible}
+    val followCible = boolean("follow_cible").bindTo {it.followCible}
 }
 
-object InterestPoint: Table<Nothing>("t_interest_point"){
-    val altitude = float("altitude")
-    val longitude = float("longitude")
-    val desc = varchar("desc")
-    val name = varchar("name")
-    val id = varchar("id").primaryKey()
+object InterestPoint: Table<InterestPoint_>("t_interest_point"){
+    val altitude = float("altitude").bindTo {it.altitude}
+    val longitude = float("longitude").bindTo {it.longitude}
+    val desc = varchar("desc").bindTo {it.desc}
+    val name = varchar("name").bindTo {it.name}
+    val id = varchar("id").primaryKey().bindTo {it.id}
 }
 
-object Commented: Table<Nothing>("t_commented"){
-    val idUser = varchar("id_user").primaryKey()
-    val drawing = varchar("drawing").primaryKey()
-    val date = date("date")
-    val message = varchar("message")
+object Commented: Table<Commented_>("t_commented"){
+    val idUser = varchar("id_user").primaryKey().references(User) {it.user}
+    val drawing = varchar("drawing").primaryKey().references(Drawing) {it.drawing}
+    val date = date("date").bindTo { it.date }
+    val message = varchar("message").bindTo { it.msg }
 }
 
-object Noted: Table<Nothing>("t_noted"){
-    val idUser = varchar("id_user").primaryKey()
-    val drawing = varchar("drawing").primaryKey()
-    val note = float("note")
+object Noted: Table<Noted_>("t_noted"){
+    val idUser = varchar("id_user").primaryKey().references(User) {it.user}
+    val drawing = varchar("drawing").primaryKey().references(Drawing) {it.drawing}
+    val note = float("note").bindTo { it.note }
 }
 
-object Collaborated: Table<Nothing>("t_collaborated"){
-    val idUser = varchar("id_user").primaryKey()
-    val drawing = varchar("drawing").primaryKey()
-    val dateModif = date("date_modif")
+object Collaborated: Table<Collaborated_>("t_collaborated"){
+    val idUser = varchar("id_user").primaryKey().references(User) { it.user }
+    val drawing = varchar("drawing").primaryKey().references(Drawing) {it.drawing}
+    val dateModif = date("date_modif").bindTo { it.dateModif }
 }
 
-object ActionDone: Table<Nothing>("t_action_done"){
-    val idUser = varchar("id_user").primaryKey()
-    val drawing = varchar("drawing").primaryKey()
-    val report = boolean("report")
-    val like = boolean("like")
-    val creator = boolean("creator")
+object ActionDone: Table<ActionDone_>("t_action_done"){
+    val idUser = varchar("id_user").primaryKey().references(User) {it.user}
+    val drawing = varchar("drawing").primaryKey().references(Drawing) {it.drawing}
+    val report = boolean("report").bindTo { it.report }
+    val like = boolean("like").bindTo { it.like }
+    val creator = boolean("creator").bindTo { it.creator }
 }
 
 
@@ -85,8 +88,8 @@ interface User_ : Entity<User_> {
 }
 
 interface Relation_ : Entity<Relation_> {
-    var user: User
-    var userCible: User
+    var user: User_
+    var userCible: User_
     val followCible: Boolean
 }
 
@@ -95,7 +98,7 @@ interface InterestPoint_ : Entity<InterestPoint_> {
     var longitude: Float
     val id: String
     var desc: String
-    var nom: String
+    var name: String
 }
 
 interface Drawing_ : Entity<Drawing_> {
@@ -108,7 +111,7 @@ interface Drawing_ : Entity<Drawing_> {
 }
 
 interface Commented_ : Entity<Commented_> {
-    val user: User
+    val user: User_
     val drawing: Drawing_
     val date: LocalDate
     val msg: String
@@ -116,8 +119,8 @@ interface Commented_ : Entity<Commented_> {
 
 interface Noted_ : Entity<Noted_> {
     val user: User_
-    val dessin: Drawing_
-    val note: Int
+    val drawing: Drawing_
+    val note: Float
 }
 
 interface Collaborated_ : Entity<Collaborated_> {
