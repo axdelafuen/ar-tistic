@@ -4,11 +4,11 @@ import com.example.classlib.*
 import com.example.classlib.Collection
 import java.sql.Time
 import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
 class Stub : IPersistancemanager{
-
-    private var userHashMap=loadData().users
+    var userHashMap=loadData().users
         get() {
             return field
         }
@@ -21,7 +21,7 @@ class Stub : IPersistancemanager{
             return field
         }
       set(value) {field=value}
-
+    var lastId:AtomicInteger= AtomicInteger(userHashMap.size-1)
     override fun loadData():(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsers(),loadInterestPoints(),loadDraws())
         return collec
@@ -56,65 +56,51 @@ class Stub : IPersistancemanager{
         return collec
     }
     fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return of an hashmap with user in index position
+        if(idx+nb>userHashMap.size)return hashMapOf()//test si idx > nb user
         val ret = HashMap<Int, User>()// hashmap retourné avec la tranche de valeur demandé
         var cpt=0
-        if(idx>userHashMap.size)return hashMapOf()//test si idx > nb user
-        for (user in userHashMap.values){
-
-
-
-            //fqire un while
-
-
-            if ((cpt >= idx) && (cpt==nb)){
-                ret.put(cpt,user)
-                cpt++
-            }
+        while(cpt<nb){
+            ret[cpt]=userHashMap.values.elementAt(cpt+idx)
+            cpt++
         }
         return  ret
     }
     fun loadInterestPointsIndex(idx:Int, nb:Int):HashMap<Int,InterestPoint>{// Return of an hashmap with point of interest in index position
+        if(idx+nb>intPtsHashMap.size)return hashMapOf()//test si idx > nb user
         val ret = HashMap<Int, InterestPoint>()// hashmap retourné avec la tranche de valeur demandé
-        for ((cpt, point) in intPtsHashMap.values.withIndex()){
-            if ((cpt >= idx) && (cpt<nb)){
-                ret[cpt] = point
-            }
+        var cpt=0
+        while(cpt<nb){
+            ret[cpt]=intPtsHashMap.values.elementAt(cpt+idx)
+            cpt++
         }
         return  ret
     }
     fun loadDrawsIndex(idx:Int, nb:Int):HashMap<Int,Draw>{// Return of an hashmap with draws in index position
+        if(idx+nb>drawsHashMap.size)return hashMapOf()//test si idx > nb user
         val ret = HashMap<Int, Draw>()// hashmap retourné avec la tranche de valeur demandé
-        for ((cpt, draw) in drawsHashMap.values.withIndex()){
-            if ((cpt >= idx) && (cpt<nb)){
-                ret[cpt] = draw
-            }
+        var cpt=0
+        while(cpt<nb){
+            ret[cpt]=drawsHashMap.values.elementAt(cpt+idx)
+            cpt++
         }
         return  ret
     }
+
+
+
     //USERS FUNCTIONS
     fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
     }
-    fun postUser(usr:User){
-        for ((cpt, user) in userHashMap.values.withIndex()) {
-            if (user == usr) {
-                userHashMap[cpt] = user
-            }
-        }
+    fun createUser(usr:User){// créé un nouveau
+        val id=lastId.incrementAndGet()
+        userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun putUser(usr:User){
-        for ((cpt, user) in userHashMap.values.withIndex()) {
-            if (user == null) {
-                userHashMap.put(cpt,usr)
-            }
-        }
+    fun updateUser(id:Int,usr:User){// modify
+        userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun deleteUser(usr:User){
-        for ((cpt, user) in userHashMap.values.withIndex()) {
-            if (user == usr) {
-                userHashMap.remove(cpt)
-            }
-        }
+    fun deleteUser(id:Int){
+        userHashMap.remove(id)
     }
 
 }
