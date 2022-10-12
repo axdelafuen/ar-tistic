@@ -21,14 +21,18 @@ fun main() {
         //USERS
 
         get("/users") { ctx ->
-            ctx.json(userDao.users)
+            ctx.json(userDao.getUsers()!!)
         }
         get("/users/{user-id}") { ctx ->
-            ctx.json(userDao.findById(ctx.pathParam("user-id").toInt())!!)
+            ctx.json(userDao.getUserById(ctx.pathParam("user-id").toInt())!!)
+        }
+        get("/users/idx/{idx}/{nb}"){ctx->
+            ctx.json(userDao.getUserWithIdex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
         }
         post("/users") { ctx ->
             val user = ctx.bodyAsClass<User>()
-            userDao.save(
+            userDao.createUser(
+                User(id=0,
                 name = user.name,
                 profilePicture = user.profilePicture,
                 email = user.email,
@@ -36,12 +40,13 @@ fun main() {
                 birthDate = user.birthDate,
                 subscribes = user.subscribes,
                 nbReport = user.nbReport
+                )
             )
             ctx.status(201)
         }
         put("/users/{user-id}") { ctx ->
             val user = ctx.bodyAsClass<User>()
-            userDao.update(
+            userDao.updateUser(
                 id = ctx.pathParam("user-id").toInt(),
                 user = user
             )
@@ -49,7 +54,7 @@ fun main() {
         }
 
         delete("/users/{user-id}") { ctx ->
-            userDao.delete(ctx.pathParam("user-id").toInt())
+            userDao.deleteUser(ctx.pathParam("user-id").toInt())
             ctx.status(204)
         }
 

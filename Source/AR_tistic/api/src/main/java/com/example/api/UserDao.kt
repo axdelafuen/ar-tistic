@@ -7,44 +7,30 @@ import com.example.classlib.*
 import com.example.stub.*
 
 class UserDao {
-    var users = Stub().loadUsers()
+
     var data = Stub()
 
-    var lastId: AtomicInteger = AtomicInteger(users.size - 1)
-
-    fun save(name: String, profilePicture:String, email: String, password:String, birthDate:Date, subscribes:HashMap<Int, User>, nbReport:Int ) {
-        val id = lastId.incrementAndGet()
-        users.put(id, User(id = id, name = name,  profilePicture=profilePicture, email=email, password=password, birthDate=birthDate, subscribes=subscribes, nbReport=nbReport))
-    }
-
-    fun findById(id: Int): User? {
-        return users[id]
-    }
-
-    fun update(id: Int, user: User) {
-        users.put(id, User(id = id, name = user.name,  profilePicture=user.profilePicture, email=user.email, password=user.password, birthDate=user.birthDate, subscribes=user.subscribes, nbReport=user.nbReport))
-    }
-
-    fun delete(id: Int) {
-        users.remove(id)
-    }
-
-    // NEW FUNC FOR API
-/*
-    fun getUsers(index:Int, nbUsers:Int):User?{
-        return data.loadUserIdx(index,nbUsers)
+    fun getUsers():HashMap<Int,User>?{
+        return data.loadUsers()
     }
 
     fun getUserById(id:Int):User?{
-        return data.loadUsersById(id)
+        return data.getUserById(id)
     }
 
-    fun deleteUserById(id:Int){
-        data.deleteUserById(id)
+    fun getUserWithIdex(idx:Int, nb:Int):HashMap<Int,User>?{
+        return data.loadUsersIndex(idx,nb)
     }
 
-    fun updateUserById(id:Int){
-        data.updateUserById(id)
+    fun deleteUser(id:Int){
+        data.deleteUser(id)
     }
-*/
+
+    fun updateUser(id:Int, user:User){
+        data.updateUser(id, user)
+    }
+
+    fun createUser(user:User){
+        data.createUser(user)
+    }
 }
