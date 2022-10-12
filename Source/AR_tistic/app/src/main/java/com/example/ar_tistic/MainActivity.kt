@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        val users= stub.loadUsersIndex(0,2)
+        val users= stub.loadUsers()
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
                 return true

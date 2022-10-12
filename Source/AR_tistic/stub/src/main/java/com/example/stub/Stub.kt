@@ -102,5 +102,19 @@ class Stub : IPersistancemanager{
     fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
+    //DRAWS FUNCTIONS
+    fun getDrawById(idUser:Int):User?{
+        return userHashMap[idUser]
+    }
+    fun createDraw(drw:Draw){// créé un nouveau
+        val id=lastId.incrementAndGet()
+        drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
+    }
+    fun updateDraw(id:Int,drw:Draw){// modify
+        drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
+    }
+    fun deleteDraw(id:Int){
+        userHashMap.remove(id)
+    }
 
 }
