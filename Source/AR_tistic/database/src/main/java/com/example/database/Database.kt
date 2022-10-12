@@ -3,10 +3,6 @@ package com.example.database
 import org.ktorm.entity.Entity
 import org.ktorm.schema.*
 import java.time.LocalDate
-
-import com.example.classlib.*
-import com.example.stub.*
-
 // object creation
 
 object User : Table<User_>("t_User"){
@@ -136,5 +132,3 @@ interface ActionDone_ : Entity<ActionDone_> {
     val creator: Boolean
     val like: Boolean
 }
-
-// Entity Create
