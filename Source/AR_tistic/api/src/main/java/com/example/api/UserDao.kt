@@ -18,7 +18,7 @@ class UserDao {
         return data.getUserById(id)
     }
 
-    fun getUserWithIdex(idx:Int, nb:Int):HashMap<Int,User>?{
+    fun getUserWithIndex(idx:Int, nb:Int):HashMap<Int,User>?{
         return data.loadUsersIndex(idx,nb)
     }
 
