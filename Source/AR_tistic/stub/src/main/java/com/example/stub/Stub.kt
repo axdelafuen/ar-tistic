@@ -102,6 +102,22 @@ class Stub : IPersistancemanager{
     fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
+
+    //DRAWS FUNCTIONS
+    fun getInterestPointById(idPt:Int):InterestPoint?{
+        return intPtsHashMap[idPt]
+    }
+    fun createInterestPoint(intPt:InterestPoint){// créé un nouveau
+        val id=lastId.incrementAndGet()
+        intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))
+    }
+    fun updateInterestPoint(id:Int,intPt:InterestPoint){// modify
+        intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))
+    }
+    fun deleteInterestPoint(id:Int){
+        intPtsHashMap.remove(id)
+    }
+
     //DRAWS FUNCTIONS
     fun getDrawById(idUser:Int):User?{
         return userHashMap[idUser]
@@ -114,7 +130,7 @@ class Stub : IPersistancemanager{
         drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
     }
     fun deleteDraw(id:Int){
-        userHashMap.remove(id)
+        drawsHashMap.remove(id)
     }
 
 }
