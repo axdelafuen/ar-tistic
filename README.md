@@ -3,10 +3,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="./Source/images/AT-tistic_Logo.png" alt="Logo" width="80" height="80">
+    <img src="./Source/images/AT-tistic_Logo.png" alt="Logo" width="200" height="200">
   </a>
 
-  <h3 align="center">AR - tistic</h3>
+  <h1 align="center">AR - tistic</h1>
 
   <p align="center">
     [DESC AR TISTIC]
