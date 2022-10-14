@@ -4,7 +4,6 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="./Source/images/AT-tistic_Logo.png" alt="Logo" width="200" height="200">
   </a>
 
