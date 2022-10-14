@@ -1,4 +1,4 @@
-[![Build Status](https://codefirst.iut.uca.fr/api/badges/ARTeam/SAE-3.01/status.svg)](https://codefirst.iut.uca.fr/alexis.drai/dice_app)
+[![Build Status](https://codefirst.iut.uca.fr/api/badges/ARTeam/SAE-3.01/status.svg)](https://codefirst.iut.uca.fr/ARTeam/SAE-3.01)
 
 ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white) ![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white) ![Play Store](https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white)
 
