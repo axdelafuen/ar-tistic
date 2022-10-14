@@ -8,16 +8,31 @@ import com.example.stub.*
 
 class InterestPointDao{
 
-    var intPoints = Stub().loadInterestPoints()
+    var data = Stub()
 
-    var lastId : AtomicInteger = AtomicInteger(intPoints.size - 1)
-
-    fun save(name: String, desc: String, latitude: Double, longitude: Double, picture: String) {
-        val id = lastId.incrementAndGet()
-        intPoints.put(id, InterestPoint(id = id, name = name, desc=desc, latitude=latitude, longitude=longitude, picture=picture))
+    fun getInterestPoint():HashMap<Int,InterestPoint>?{
+        return data.loadInterestPoints()
     }
 
-    fun findById(id : Int):InterestPoint?{
-        return intPoints[id]
+    fun getInterestPointById(id:Int):InterestPoint?{
+        return data.getInterestPointById(id)
     }
+
+    fun getInterestPointWithIndex(idx:Int, nb:Int):HashMap<Int,InterestPoint>?{
+        return data.loadInterestPointsIndex(idx,nb)
+    }
+
+    fun deleteInterestPoint(id:Int){
+        data.deleteInterestPoint(id)
+    }
+
+    fun updateInterestPoint(id:Int, intPoint:InterestPoint){
+        data.updateInterestPoint(id, intPoint)
+    }
+
+    fun createInterestPoint(intPoint: InterestPoint){
+        data.createInterestPoint(intPoint)
+    }
+
+
 }

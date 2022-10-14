@@ -103,7 +103,7 @@ class Stub : IPersistancemanager{
         userHashMap.remove(id)
     }
 
-    //DRAWS FUNCTIONS
+    //INTEREST POINT FUNCTIONS
     fun getInterestPointById(idPt:Int):InterestPoint?{
         return intPtsHashMap[idPt]
     }

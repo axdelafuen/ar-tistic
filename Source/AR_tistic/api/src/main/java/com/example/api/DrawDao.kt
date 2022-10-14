@@ -9,7 +9,6 @@ import java.sql.Time
 
 class DrawDao{
 
-
     var data = Stub()
 
     fun getDraws():HashMap<Int,Draw>?{

@@ -27,7 +27,7 @@ fun main() {
             ctx.json(userDao.getUserById(ctx.pathParam("user-id").toInt())!!)
         }
         get("/users/idx/{idx}/{nb}"){ctx->
-            ctx.json(userDao.getUserWithIdex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
+            ctx.json(userDao.getUserWithIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
         }
         post("/users") { ctx ->
             val user = ctx.bodyAsClass<User>()
@@ -102,11 +102,41 @@ fun main() {
         // INTEREST POINTS
 
         get("/intPoints") { ctx ->
-            ctx.json(intPointDao.intPoints)
+            ctx.json(intPointDao.getInterestPoint()!!)
         }
         get("/intPoints/{intPoint-id}") { ctx ->
-            ctx.json(intPointDao.findById(ctx.pathParam("intPoint-id").toInt())!!)
+            ctx.json(intPointDao.getInterestPointById(ctx.pathParam("intPoint-id").toInt())!!)
         }
+        get("/intPoints/idx/{idx}/{nb}"){ctx->
+            ctx.json(intPointDao.getInterestPointWithIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
+        }
+        post("/intPoints") { ctx ->
+            val intPoint = ctx.bodyAsClass<InterestPoint>()
+            intPointDao.createInterestPoint(
+                InterestPoint(id=0,
+                    name=intPoint.name,
+                    desc=intPoint.desc,
+                    latitude = intPoint.latitude,
+                    longitude = intPoint.longitude,
+                    picture = intPoint.picture
+                )
+            )
+            ctx.status(201)
+        }
+        put("/intPoints/{intPoint-id}") { ctx ->
+            val intPoint = ctx.bodyAsClass<InterestPoint>()
+            intPointDao.updateInterestPoint(
+                id = ctx.pathParam("intPoint-id").toInt(),
+                intPoint=intPoint
+            )
+            ctx.status(204)
+        }
+
+        delete("/intPoints/{intPoint-id}") { ctx ->
+            intPointDao.deleteInterestPoint(ctx.pathParam("intPoint-id").toInt())
+            ctx.status(204)
+        }
+
     }
 }
 
