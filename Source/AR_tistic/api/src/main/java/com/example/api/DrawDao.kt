@@ -10,16 +10,31 @@ import java.sql.Time
 class DrawDao{
 
 
-    var draws = Stub().loadDraws()
+    var data = Stub()
 
-    var lastId : AtomicInteger = AtomicInteger(draws.size - 1)
-
-    fun save(id:Int, name:String, image:String, interestPoint: HashMap<Int,InterestPoint>, creationDate: Date, lifeTime: Time, authors:HashMap<Int,User>, nbView:Int, nbReport:Int ){
-        val id = lastId.incrementAndGet()
-        draws.put(id,Draw(id=id,name=name,image=image,interestPoint=interestPoint,creationDate=creationDate,lifeTime=lifeTime,authors=authors,nbView=nbView,nbReport=nbReport))
+    fun getDraws():HashMap<Int,Draw>?{
+        return data.loadDraws()
     }
 
-    fun findById(id:Int):Draw?{
-        return draws[id]
+    fun getDrawsById(id:Int):Draw?{
+        return data.getDrawById(id)
     }
+
+    fun getDrawWithIndex(idx:Int,nb:Int):HashMap<Int,Draw>{
+        return data.loadDrawsIndex(idx,nb)
+    }
+
+    fun deleteDraw(id:Int){
+        data.deleteDraw(id)
+    }
+
+    fun updateDraw(id:Int,draw: Draw){
+        data.updateDraw(id,draw)
+    }
+
+    fun createDraw(draw: Draw){
+        data.createDraw(draw)
+    }
+
+
 }

@@ -58,6 +58,47 @@ fun main() {
             ctx.status(204)
         }
 
+        // DRAWS
+
+        get("/draws") { ctx ->
+            ctx.json(drawDao.getDraws()!!)
+        }
+        get("/draws/{draw-id}") { ctx ->
+            ctx.json(drawDao.getDrawsById(ctx.pathParam("draw-id").toInt())!!)
+        }
+        get("/draws/idx/{idx}/{nb}"){ctx->
+            ctx.json(drawDao.getDrawWithIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
+        }
+        post("/draws") { ctx ->
+            val draw = ctx.bodyAsClass<Draw>()
+            drawDao.createDraw(
+                Draw(id=0,
+                    name = draw.name,
+                    image = draw.image,
+                    interestPoint = draw.interestPoint,
+                    creationDate = draw.creationDate,
+                    lifeTime = draw.lifeTime,
+                    authors = draw.authors,
+                    nbView = draw.nbView,
+                    nbReport = draw.nbReport
+                )
+            )
+            ctx.status(201)
+        }
+        put("/draws/{draw-id}") { ctx ->
+            val draw = ctx.bodyAsClass<Draw>()
+            drawDao.updateDraw(
+                id = ctx.pathParam("draw-id").toInt(),
+                draw = draw
+            )
+            ctx.status(204)
+        }
+
+        delete("/draws/{draw-id}") { ctx ->
+            drawDao.deleteDraw(ctx.pathParam("draw-id").toInt())
+            ctx.status(204)
+        }
+
         // INTEREST POINTS
 
         get("/intPoints") { ctx ->
@@ -66,16 +107,6 @@ fun main() {
         get("/intPoints/{intPoint-id}") { ctx ->
             ctx.json(intPointDao.findById(ctx.pathParam("intPoint-id").toInt())!!)
         }
-
-        // DRAWS
-
-        get("/draws"){ctx->
-            ctx.json(drawDao.draws)
-        }
-        get("/draws/{draw-id}"){ctx->
-            ctx.json(drawDao.findById(ctx.pathParam("draw-id").toInt())!!)
-        }
-
     }
 }
 
