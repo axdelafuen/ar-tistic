@@ -29,9 +29,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         checkLogPswd()
+        val register=findViewById<Button>(R.id.registerButton)
+        register.setOnClickListener{
+            val intent = Intent(applicationContext, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
-    val stub = Stub()
+    val stub = Stub().loadData()
     private fun checkLogPswd(){
         val connect = findViewById<Button>(R.id.LoginButton)
         val log = findViewById<EditText>(R.id.LoginEdit)
@@ -67,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        val users= stub.loadUsers()
+        val users= stub.users
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
                 return true
