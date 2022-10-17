@@ -1,8 +1,10 @@
 package com.example.ar_tistic
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import org.osmdroid.api.IMapController
@@ -95,7 +97,12 @@ class MapActivity : AppCompatActivity() {
         mOverlay.setFocusItemsOnTap(true)
         map.getOverlays().add(mOverlay)
 
-
+        //BUTTONS
+        val paintBtn = findViewById<ImageButton>(R.id.drawButton)
+        paintBtn.setOnClickListener {
+            val intent = Intent(this, PaintActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -108,4 +115,7 @@ class MapActivity : AppCompatActivity() {
         super.onResume()
         map.onResume()
     }
+
+
+
 }
