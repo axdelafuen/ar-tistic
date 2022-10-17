@@ -12,6 +12,12 @@
         android:id="@+id/toolbar"
         android:background="@drawable/toolbar_background"
         android:gravity="center">
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/color_choice"
+            android:background="@drawable/red_background"
+            android:layout_margin="10dp"/>
 
         <ImageButton
             android:layout_width="50dp"
@@ -19,6 +25,7 @@
             android:id="@+id/red_color"
             android:background="@drawable/red_background"
             android:layout_margin="10dp"/>
+
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -49,7 +56,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@id/toolbar"
+        android:visibility="visible">
+        <include layout="@layout/paint_view"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:visibility="invisible">
         <include layout="@layout/paint_view"/>
     </RelativeLayout>
 </RelativeLayout>
