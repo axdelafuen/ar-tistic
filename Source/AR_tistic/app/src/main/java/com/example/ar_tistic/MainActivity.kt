@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         val register=findViewById<Button>(R.id.registerButton)
         register.setOnClickListener{
             val intent = Intent(applicationContext,RegisterActivity::class.java)
-            intent.putExtra("persistance",pers)
             startActivity(intent)
             finish()
         }
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             val cttLog=log.text.toString()
             val cttMdp=mdp.text.toString()
             if (cttMdp.trim().isEmpty()||cttLog.trim().isEmpty()){
-                Toast.makeText(this,"l'Email ou mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
             }
             else{
                 if(!existLogPasswd(cttLog,cttMdp)){//log et mdp pas cohérents:
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        val users= stub.users
+        val users= pers.users
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
                 return true

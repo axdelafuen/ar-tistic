@@ -7,21 +7,25 @@ import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class Stub : IPersistancemanager{
-    var userHashMap=loadData().users
+class Stub : IPersistance{
+    override var userHashMap=loadData().users
         get() {
             return field
         }
         set(value) {field=value}
-    private var intPtsHashMap=loadData().interestPoints
+
+    override var intPtsHashMap=loadData().interestPoints
         get() {return  field}
         set(value) {field=value}
-    private var drawsHashMap=loadData().draws
+
+    override var drawsHashMap=loadData().draws
         get() {
             return field
         }
       set(value) {field=value}
+
     var lastId:AtomicInteger= AtomicInteger(userHashMap.size-1)
+
     override fun loadData():(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsers(),loadInterestPoints(),loadDraws())
         return collec
@@ -55,7 +59,7 @@ class Stub : IPersistancemanager{
         var collec:com.example.classlib.Collection = Collection(loadUsersIndex(idxUser,nbUser),loadInterestPointsIndex(idxPt,nbPt),loadDrawsIndex(idxDraw,nbDraw))
         return collec
     }
-    fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return of an hashmap with user in index position
+    fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return an hashmap with user in index position
         if(idx+nb>userHashMap.size)return hashMapOf()//test si idx > nb user
         val ret = HashMap<Int, User>()// hashmap retourné avec la tranche de valeur demandé
         var cpt=0
@@ -89,17 +93,17 @@ class Stub : IPersistancemanager{
 
 
     //USERS FUNCTIONS
-    fun getUserById(idUser:Int):User?{
+    override fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
     }
-    fun createUser(usr:User){// créé un nouveau
+    override fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun updateUser(id:Int,usr:User){// modify
+    override fun updateUser(id:Int,usr:User){// modify
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun deleteUser(id:Int){
+    override fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
 

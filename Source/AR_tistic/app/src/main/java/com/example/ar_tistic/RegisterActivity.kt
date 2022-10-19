@@ -9,10 +9,11 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.classlib.*
 import com.example.stub.*
+import java.util.*
 
 
 class RegisterActivity: AppCompatActivity() {
-    val stub=Stub().loadData()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -23,11 +24,12 @@ class RegisterActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        var pers = Stub() // A terme faire un manager
         register.setOnClickListener{
-            check()
+            check(pers)
         }
     }
-    fun check(){//check errors when register button is press
+    fun check(pers:IPersistance){//check errors when register button is press
 
         val email = findViewById<EditText>(R.id.email)
         val cttmail=email.text.toString()
@@ -38,23 +40,28 @@ class RegisterActivity: AppCompatActivity() {
         errMail.visibility= View.INVISIBLE
         errPswd.visibility= View.INVISIBLE
 
-        val users= stub.users
-        for (user in users.values){//check if email already used
-            if(cttmail==user.email){//used email
-                errMail.visibility= View.VISIBLE
+        val users= pers.loadData().users
+
+        if(checkEmail(users,cttmail)){//used email
+            errMail.visibility= View.VISIBLE
+        }
+        else{//unused mail
+            if(checkPswd()){//similar password
+                pers.createUser(User(0,"","",cttmail,cttPswd1, Date(1999,2,2),subscribes= hashMapOf(),nbReport = 0))
+                //Test -> creation of user
+                println("----------Test ajout----------")
+                for(usr in pers.userHashMap){
+                    println(usr.value.name)
+                }
+                //
+                val intent = Intent(applicationContext,ProfilActivity::class.java)
+                intent.putExtra("email", cttmail)
+                intent.putExtra("pswd", cttPswd1)
+                startActivity(intent)
+                finish()
             }
-            else{//unused mail
-                if(checkPswd()){//similar password
-                    //add user to persistance
-                    val intent = Intent(applicationContext,ProfilActivity::class.java)
-                    intent.putExtra("email", cttmail)
-                    intent.putExtra("pswd", cttPswd1)
-                    startActivity(intent)
-                    finish()
-                }
-                else{
-                    errPswd.visibility= View.VISIBLE
-                }
+            else{
+                errPswd.visibility= View.VISIBLE
             }
         }
     }
@@ -64,5 +71,11 @@ class RegisterActivity: AppCompatActivity() {
         val pswd2 = findViewById<EditText>(R.id.confirmPsswd)
         val cttPswd2=pswd2.text.toString()
         return cttPswd1.equals(cttPswd2)
+    }
+    fun checkEmail(users:HashMap<Int,User>,email:String):Boolean{//return true if email is already used
+        for (usr in users.values) {//check if email already used
+            if(usr.email==email)return true
+        }
+        return false
     }
 }
