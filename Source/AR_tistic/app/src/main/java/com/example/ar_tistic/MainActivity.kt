@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 
 class MainActivity : AppCompatActivity() {
-    val stub = Stub().loadData()
+    val pers = Stub().loadData()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val register=findViewById<Button>(R.id.registerButton)
         register.setOnClickListener{
             val intent = Intent(applicationContext,RegisterActivity::class.java)
+            intent.putExtra("persistance",pers)
             startActivity(intent)
             finish()
         }

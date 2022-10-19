@@ -31,20 +31,29 @@ class RegisterActivity: AppCompatActivity() {
 
         val email = findViewById<EditText>(R.id.email)
         val cttmail=email.text.toString()
-        val err = findViewById<TextView>(R.id.emailused)
-        err.visibility= View.INVISIBLE
+        val errMail = findViewById<TextView>(R.id.emailused)
+        val errPswd = findViewById<TextView>(R.id.unequalPswd)
+        val pswd1 = findViewById<EditText>(R.id.psswd)
+        val cttPswd1=pswd1.text.toString()
+        errMail.visibility= View.INVISIBLE
+        errPswd.visibility= View.INVISIBLE
 
         val users= stub.users
         for (user in users.values){//check if email already used
             if(cttmail==user.email){//used email
-                err.visibility= View.VISIBLE
+                errMail.visibility= View.VISIBLE
             }
             else{//unused mail
                 if(checkPswd()){//similar password
                     //add user to persistance
                     val intent = Intent(applicationContext,ProfilActivity::class.java)
+                    intent.putExtra("email", cttmail)
+                    intent.putExtra("pswd", cttPswd1)
                     startActivity(intent)
                     finish()
+                }
+                else{
+                    errPswd.visibility= View.VISIBLE
                 }
             }
         }
