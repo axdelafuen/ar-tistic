@@ -31,6 +31,7 @@ fun main() {
         }
         post("/users") { ctx ->
             val user = ctx.bodyAsClass<User>()
+            println(user)
             userDao.createUser(
                 User(id=0,
                 name = user.name,

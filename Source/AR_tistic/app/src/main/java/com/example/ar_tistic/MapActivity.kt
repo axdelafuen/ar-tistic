@@ -1,8 +1,10 @@
 package com.example.ar_tistic
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import org.osmdroid.api.IMapController
@@ -19,9 +21,11 @@ import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
-class MapActivity : AppCompatActivity() {
+
+class MapActivity : AppCompatActivity(){
     private lateinit var map:MapView
 
+    @SuppressLint("WrongViewCast")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,24 +46,20 @@ class MapActivity : AppCompatActivity() {
         map.minZoomLevel = 19.0
         map.maxZoomLevel = 20.0
 
-        val mRotationGestureOverlay = RotationGestureOverlay(applicationContext, map)
-        mRotationGestureOverlay.setEnabled(true)
-        map.getOverlays().add(mRotationGestureOverlay)
-
-
         // MAP CONTROL SETTING
         val mapController: IMapController = map.getController()
         mapController.setZoom(20.0)
 
         // L0CATION CREATE
-        val loc = MyLocationNewOverlay(
-            GpsMyLocationProvider(
-                applicationContext
-            ), map
-        )
-        map.getOverlays().add(loc)
+        var loc = MyLocationNewOverlay(GpsMyLocationProvider(applicationContext), map)
         loc.enableMyLocation()
         loc.enableFollowLocation()
+        loc.isDrawAccuracyEnabled = false
+        map.getOverlays().add(loc)
+
+        val mRotationGestureOverlay = RotationGestureOverlay(applicationContext, map)
+        mRotationGestureOverlay.setEnabled(true)
+        map.getOverlays().add(mRotationGestureOverlay)
 
         // COMPASS
         val compass = CompassOverlay(
@@ -72,15 +72,23 @@ class MapActivity : AppCompatActivity() {
 
         // GEOPOINT CREATE
         val IUT = GeoPoint(45.76196, 3.10846)
+        val AncienneEglise = GeoPoint(45.77355, 3.28696)
+        val Casa =  GeoPoint(45.77252, 3.28249)
 
         // ITEMS ARRAY
         val items = ArrayList<OverlayItem>()
         val home = OverlayItem("IUT Clermont-Ferrand", "IUT de Clermont Auvergne", IUT)
         val m = home.getMarker(0)
+        val eglise = OverlayItem("Ancienne Eglise de Vertaizon", "Ancienne Eglise de Vertaizon", AncienneEglise)
+        val e = eglise.getMarker(0)
+        val casa = OverlayItem("CASA", "CASA", Casa)
+        val c = casa.getMarker(0)
         items.add(home)
+        items.add(eglise)
+        items.add(casa)
 
         // DISPLAY ITEMS INFO
-        val mOverlay = ItemizedOverlayWithFocus(
+        val overlayTap = ItemizedOverlayWithFocus(
             applicationContext, items, object : OnItemGestureListener<OverlayItem?> {
                 override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
                     return true
@@ -90,13 +98,19 @@ class MapActivity : AppCompatActivity() {
                     return false
                 }
             })
+        overlayTap.setFocusItemsOnTap(true)
+        map.getOverlays().add(overlayTap)
 
-        // ITEM FOCUS
-        mOverlay.setFocusItemsOnTap(true)
-        map.getOverlays().add(mOverlay)
+        val centerLoc = findViewById<ImageButton>(R.id.centerLoc)
+        centerLoc.setOnClickListener{
+            loc.enableFollowLocation()
+        }
 
+    }
 
-
+    override fun onResume() {
+        super.onResume()
+        map.onResume()
     }
 
     override fun onPause() {
@@ -104,8 +118,4 @@ class MapActivity : AppCompatActivity() {
         map.onPause()
     }
 
-    override fun onResume() {
-        super.onResume()
-        map.onResume()
-    }
 }

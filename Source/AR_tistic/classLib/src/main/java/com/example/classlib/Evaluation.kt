@@ -1,7 +1,5 @@
 package com.example.classlib
 
-import com.example.classlib.Comment
-
 data class Evaluation(
     override val id: Int,
     override val content: String,

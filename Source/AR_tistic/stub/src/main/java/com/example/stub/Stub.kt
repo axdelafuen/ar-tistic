@@ -3,7 +3,6 @@ package com.example.stub
 import com.example.classlib.*
 import com.example.classlib.Collection
 import java.sql.Time
-import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
@@ -13,10 +12,10 @@ class Stub : IPersistancemanager{
             return field
         }
         set(value) {field=value}
-    private var intPtsHashMap=loadData().interestPoints
+    var intPtsHashMap=loadData().interestPoints
         get() {return  field}
         set(value) {field=value}
-    private var drawsHashMap=loadData().draws
+    var drawsHashMap=loadData().draws
         get() {
             return field
         }

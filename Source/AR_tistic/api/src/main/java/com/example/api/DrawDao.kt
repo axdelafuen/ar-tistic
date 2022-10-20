@@ -11,8 +11,8 @@ class DrawDao{
 
     var data = Stub()
 
-    fun getDraws():HashMap<Int,Draw>?{
-        return data.loadDraws()
+    fun getDraws(): HashMap<Int, Draw>? {
+        return data.drawsHashMap
     }
 
     fun getDrawsById(id:Int):Draw?{

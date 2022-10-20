@@ -1,6 +1,5 @@
 package com.example.classlib
 
-import java.util.*
 
 data class User(val id: Int,
                 val name: String,
