@@ -11,7 +11,7 @@ class InterestPointDao{
     var data = Stub()
 
     fun getInterestPoint():HashMap<Int,InterestPoint>?{
-        return data.loadInterestPoints()
+        return data.intPtsHashMap
     }
 
     fun getInterestPointById(id:Int):InterestPoint?{

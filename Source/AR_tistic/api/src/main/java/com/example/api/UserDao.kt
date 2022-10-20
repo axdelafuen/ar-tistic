@@ -11,7 +11,7 @@ class UserDao {
     var data = Stub()
 
     fun getUsers():HashMap<Int,User>?{
-        return data.loadUsers()
+        return data.userHashMap
     }
 
     fun getUserById(id:Int):User?{
