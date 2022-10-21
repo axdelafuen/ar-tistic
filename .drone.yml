@@ -22,7 +22,7 @@ steps:
 - name: code analysis
   image: aosapps/drone-sonar-plugin
   settings:
-      sonar_host: https://codefirst.ddns.net/sonar/
+      sonar_host: https://codefirst.iut.uca.fr/sonar/
       sonar_token: 96864ed9ef8d6343007881fc9ef30eb70eaf846d
       level: DEBUG
       sources: .
