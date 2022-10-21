@@ -24,6 +24,6 @@ steps:
   settings:
       sources: ./Source
   commands:
-        ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=$${sonar_host} -Dsonar.login=$${sonar_token}
+  - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=$${sonar_host} -Dsonar.login=$${sonar_token}
   depends_on: [ app-build, api-build]
 
