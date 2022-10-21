@@ -19,7 +19,7 @@ steps:
   - cd Source/AR_tistic
   - ./gradlew :app:assembleDebug
 
-  - name: code analysis
+- name: code analysis
   image: aosapps/drone-sonar-plugin
   settings:
       sonar_host: https://codefirst.ddns.net/sonar/
