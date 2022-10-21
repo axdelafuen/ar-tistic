@@ -21,11 +21,13 @@ steps:
 
 - name: code analysis
   image: androidsdk/android-30
+  environment:
+      SONAR_TOKEN:
+        from_secret: sonar_token
   settings:
       sources: ./Source
   commands:
   - cd Source/AR_tistic
-  - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=sqp_5e415651f882560d743bd044904d93507c89e5b5
-  secrets: [SONAR_TOKEN]
+  - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN}
   depends_on: [ app-build, api-build]
 
