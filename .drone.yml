@@ -23,10 +23,8 @@ steps:
   image: aosapps/drone-sonar-plugin
   settings:
       sonar_login:
-        from_secret: sonar_login2
+        from_secret: sonar_token
       sonar_host:
         from_secret: sonar_host
-      sonar_token:
-        from_secret: sonar_token
       sources: ./Source
   depends_on: [ app-build, api-build]
