@@ -22,8 +22,10 @@ steps:
 - name: code analysis
   image: aosapps/drone-sonar-plugin
   settings:
-      sonar_host: https://codefirst.iut.uca.fr/sonar/
-      sonar_token: 96864ed9ef8d6343007881fc9ef30eb70eaf846d
+      sonar_host:
+        from_secret: sonar_host
+      sonar_token:
+        from_secret: sonar_token
       level: DEBUG
-      sources: .
-  depends_on: [ app-build ]
+      sources: ./Sources
+  depends_on: [ app-build ]      
