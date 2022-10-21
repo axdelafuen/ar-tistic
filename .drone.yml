@@ -28,4 +28,4 @@ steps:
         from_secret: sonar_token
       level: DEBUG
       sources: ./Sources
-  depends_on: [ app-build ]      
+  depends_on: [ app-build ]
