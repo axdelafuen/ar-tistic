@@ -22,9 +22,8 @@ steps:
 - name: code analysis
   image: aosapps/drone-sonar-plugin
   settings:
-      sonar_login:
-        from_secret: sonar_token
-      sonar_host:
-        from_secret: sonar_host
       sources: ./Source
+  commands:
+        ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=$${sonar_host} -Dsonar.login=$${sonar_token}
   depends_on: [ app-build, api-build]
+
