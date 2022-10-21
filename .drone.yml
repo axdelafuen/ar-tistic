@@ -20,7 +20,7 @@ steps:
   - ./gradlew :app:assembleDebug
 
 - name: code analysis
-  image: aosapps/drone-sonar-plugin, androidsdk/android-30
+  image: androidsdk/android-30
   settings:
       sources: ./Source
   commands:
