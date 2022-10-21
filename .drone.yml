@@ -29,4 +29,4 @@ steps:
       sonar_token:
         from_secret: sonar_token
       sources: ./Source
-  depends_on: [ app-build api-build]
+  depends_on: [ app-build, api-build]
