@@ -27,5 +27,9 @@ steps:
   - cd Source/AR_tistic
   - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar/ -Dsonar.login=$${SONAR_TOKEN}
   secrets: [sonar_token]
+  settings:
+      sonar_host: https://codefirst.iut.uca.fr/sonar/
+      sonar_token:
+        from_secret: SONAR_TOKEN
   depends_on: [ app-build, api-build]
 
