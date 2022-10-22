@@ -28,7 +28,7 @@ class PaintActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         redBtn.setOnClickListener {
-            paintBrush.color = Color.parseColor("#0000FF")
+            paintBrush.color = Color.parseColor("#FF0000")
             currentColor(paintBrush.color)
         }
         blueBtn.setOnClickListener {
