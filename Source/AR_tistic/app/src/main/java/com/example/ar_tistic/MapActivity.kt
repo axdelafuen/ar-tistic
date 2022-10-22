@@ -96,6 +96,7 @@ class MapActivity : AppCompatActivity() {
         map.getOverlays().add(mOverlay)
 
         
+        
         //BUTTONS
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
