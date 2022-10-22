@@ -107,6 +107,13 @@ class MapActivity : AppCompatActivity(){
             loc.enableFollowLocation()
         }
 
+        //BUTTONS
+        val paintBtn = findViewById<ImageButton>(R.id.drawButton)
+        paintBtn.setOnClickListener {
+            val intent = Intent(this, PaintActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onResume() {
