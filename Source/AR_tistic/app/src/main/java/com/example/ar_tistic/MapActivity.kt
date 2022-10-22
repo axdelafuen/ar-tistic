@@ -19,7 +19,6 @@ import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
-
 class MapActivity : AppCompatActivity() {
     private lateinit var map:MapView
 
@@ -95,7 +94,6 @@ class MapActivity : AppCompatActivity() {
         // ITEM FOCUS
         mOverlay.setFocusItemsOnTap(true)
         map.getOverlays().add(mOverlay)
-
         //BUTTONS
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
