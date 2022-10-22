@@ -1,5 +1,3 @@
-Class Diagram :
-===
 
 ```mermaid
 classDiagram
