@@ -12,7 +12,7 @@
   <h1 align="center">AR - tistic</h1>
 
   <p align="center">
-    [DESC AR TISTIC]
+AR-tistic est une application mobile basée sur de la réalité augmentée. L'idée est de concevoir un "réseau social" en AR. L'application permettrait d'être localisé en temps réel. Lorsque les utilisateurs approcheront des points d'intérêts, ils seront autorisés à utiliser de l'AR pour dessiner autour d'eux. Les utilisateurs pourraient donc partager leurs œuvres d'arts, et contempler celles des autres, sur les points d'intérêts disponibles sur l'application.
     <br />
     <br />
     <br />
