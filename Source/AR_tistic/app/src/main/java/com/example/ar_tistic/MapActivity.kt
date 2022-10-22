@@ -96,6 +96,7 @@ class MapActivity : AppCompatActivity() {
         map.getOverlays().add(mOverlay)
 
 
+
     }
 
     override fun onPause() {
