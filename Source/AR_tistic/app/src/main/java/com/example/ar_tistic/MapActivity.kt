@@ -96,13 +96,7 @@ class MapActivity : AppCompatActivity() {
         map.getOverlays().add(mOverlay)
 
 
-        //BUTTONS
-        val paintBtn = findViewById<ImageButton>(R.id.drawButton)
-        paintBtn.setOnClickListener {
-            val intent = Intent(this, PaintActivity::class.java)
-            startActivity(intent)
-        }
-
+        
     }
 
     override fun onPause() {
@@ -114,7 +108,4 @@ class MapActivity : AppCompatActivity() {
         super.onResume()
         map.onResume()
     }
-
-
-
 }
