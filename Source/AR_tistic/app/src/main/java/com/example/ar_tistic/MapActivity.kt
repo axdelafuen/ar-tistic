@@ -94,6 +94,8 @@ class MapActivity : AppCompatActivity() {
         // ITEM FOCUS
         mOverlay.setFocusItemsOnTap(true)
         map.getOverlays().add(mOverlay)
+
+        
         //BUTTONS
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
