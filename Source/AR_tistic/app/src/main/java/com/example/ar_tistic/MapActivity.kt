@@ -108,4 +108,5 @@ class MapActivity : AppCompatActivity() {
         super.onResume()
         map.onResume()
     }
-    }
+
+}
