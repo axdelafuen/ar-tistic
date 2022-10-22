@@ -96,7 +96,6 @@ class MapActivity : AppCompatActivity() {
         map.getOverlays().add(mOverlay)
 
 
-        
     }
 
     override fun onPause() {
@@ -108,5 +107,4 @@ class MapActivity : AppCompatActivity() {
         super.onResume()
         map.onResume()
     }
-
 }
