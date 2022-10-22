@@ -6,7 +6,7 @@
 
 <br />
 <div align="center">
-    <img src="./Source/images/AT-tistic_Logo.png" alt="Logo" width="200" height="200">
+    <img src="./Source/img/AR-tistic_Logo.png" alt="Logo" width="200" height="200">
   </a>
 
   <h1 align="center">AR - tistic</h1>
