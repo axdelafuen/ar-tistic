@@ -3,6 +3,8 @@ package com.example.api
 import com.example.classlib.Date
 import com.example.classlib.User
 import com.google.gson.Gson
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
@@ -24,7 +26,6 @@ fun main(){
     post(urlAllUsers,jsonData)
 
     get(urlAllUsers)
-/*
     put(urlUserById0,jsonData)
 
     get(urlAllUsers)
@@ -33,7 +34,6 @@ fun main(){
 
     get(urlAllUsers)
 
- */
 }
 
 fun get(url:URL){
@@ -59,22 +59,48 @@ fun delete(url:URL){
 fun post(url:URL, data:String){
     with(url.openConnection() as HttpURLConnection){
         requestMethod = "POST"
-        doInput = false
         doOutput = true
         this.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
-        this.setRequestProperty("Accept", "application/x-www-form-urlencoded")
+        this.setRequestProperty("Content-Length", data.length.toString())
 
         val wr = OutputStreamWriter(this.outputStream)
         wr.write(data)
         wr.flush()
+
+        BufferedReader(InputStreamReader(inputStream)).use {
+            val response = StringBuffer()
+
+            var inputLine = it.readLine()
+            while (inputLine != null) {
+                response.append(inputLine)
+                inputLine = it.readLine()
+            }
+            println("Response : $response")
+        }
+
     }
 }
 fun put(url:URL, data:String){
     with(url.openConnection() as HttpURLConnection){
         requestMethod = "PUT"
         doOutput = true
+
+        this.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
+        this.setRequestProperty("Content-Length", data.length.toString())
+
         val wr = OutputStreamWriter(outputStream)
         wr.write(data)
         wr.flush()
+
+        BufferedReader(InputStreamReader(inputStream)).use {
+            val response = StringBuffer()
+
+            var inputLine = it.readLine()
+            while (inputLine != null) {
+                response.append(inputLine)
+                inputLine = it.readLine()
+            }
+            println("Response : $response")
+        }
     }
 }
