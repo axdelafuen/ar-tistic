@@ -34,5 +34,5 @@ fun main(){
             set(it.salary, 50)
             set(it.departmentId, 1)
         }*/
-    docker container run -it --rm zenika/kotlin
+    //docker container run -it --rm zenika/kotlin
 }
