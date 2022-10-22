@@ -1,6 +1,7 @@
 package com.example.ar_tistic
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
