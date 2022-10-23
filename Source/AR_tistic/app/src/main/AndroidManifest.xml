@@ -42,7 +42,17 @@
         </activity>
         <activity
             android:name=".MapActivity"
-            android:exported="true"></activity>
+            android:exported="true"
+
+            />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".ProfilActivity"
+            android:exported="true"
+            />
     </application>
 
 </manifest>
