@@ -47,7 +47,9 @@ class RegisterActivity: AppCompatActivity() {
         }
         else{//unused mail
             if(checkPswd()){//similar password
-                pers.createUser(User(0,"","",cttmail,cttPswd1, Date(1999,2,2),subscribes= hashMapOf(),nbReport = 0))
+                pers.createUser(User(0,"","",cttmail,cttPswd1, Date(1999,2,2),
+                    subscribes = hashMapOf(),
+                    nbReport = 0))
                 //Test -> creation of user
                 println("----------Test ajout----------")
                 for(usr in pers.userHashMap){

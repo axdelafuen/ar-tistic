@@ -3,24 +3,29 @@ package com.example.stub
 import com.example.classlib.*
 import com.example.classlib.Collection
 import java.sql.Time
+import java.util.Date
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class Stub : IPersistancemanager{
-    var userHashMap=loadData().users
+class Stub : IPersistance{
+    override var userHashMap=loadData().users
         get() {
             return field
         }
         set(value) {field=value}
-    var intPtsHashMap=loadData().interestPoints
+
+    override var intPtsHashMap=loadData().interestPoints
         get() {return  field}
         set(value) {field=value}
-    var drawsHashMap=loadData().draws
+
+    override var drawsHashMap=loadData().draws
         get() {
             return field
         }
         set(value) {field=value}
+
     var lastId:AtomicInteger= AtomicInteger(userHashMap.size-1)
+
     override fun loadData():(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsers(),loadInterestPoints(),loadDraws())
         return collec
@@ -28,12 +33,12 @@ class Stub : IPersistancemanager{
     fun loadUsers():HashMap<Int,User>{
 
         return hashMapOf(
-            0 to User(id= 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password="1234", birthDate=Date(1999,2,2) , subscribes= hashMapOf(), nbReport = 0 ),
-            1 to User(id= 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-            2 to User(id= 2, name = "Patrick", profilePicture = "./img/pp/Fredo.jpg", email = "patrick@gmail.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-            3 to User(id= 3, name = "Nina", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-            4 to User(id= 4, name = "Louis", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password="aaaa123", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
-            5 to User(id= 5, name = "1", profilePicture = "./img/pp/Fredo.jpg", email = "2", password="1", birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            0 to User(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password ="1234", birthDate = Date(1999,2,2) , subscribes = hashMapOf(), nbReport = 0 ),
+            1 to User(id = 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            2 to User(id = 2, name = "Patrick", profilePicture = "./img/pp/Fredo.jpg", email = "patrick@gmail.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            3 to User(id = 3, name = "Nina", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            4 to User(id = 4, name = "Louis", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            5 to User(id = 5, name = "1", profilePicture = "./img/pp/Fredo.jpg", email = "2", password ="1", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
         )
     }
     fun loadInterestPoints():HashMap<Int,InterestPoint>{
@@ -45,16 +50,22 @@ class Stub : IPersistancemanager{
     }
     fun loadDraws():HashMap<Int,Draw>{
         return hashMapOf(
-            0 to Draw(id=0,name="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
-            1 to Draw(id=1,name="bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
-            2 to Draw(id=2,name="Peinture", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 )
+            0 to Draw(
+                id =0,
+                name ="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
+            1 to Draw(
+                id =1,
+                name ="bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
+            2 to Draw(
+                id =2,
+                name ="Peinture", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 )
         )
     }
     fun loadDataIdx(idxUser:Int, nbUser:Int,idxPt:Int, nbPt:Int,idxDraw: Int, nbDraw:Int):(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsersIndex(idxUser,nbUser),loadInterestPointsIndex(idxPt,nbPt),loadDrawsIndex(idxDraw,nbDraw))
         return collec
     }
-    fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return of an hashmap with user in index position
+    fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return an hashmap with user in index position
         if(idx+nb>userHashMap.size)return hashMapOf()//test si idx > nb user
         val ret = HashMap<Int, User>()// hashmap retourné avec la tranche de valeur demandé
         var cpt=0
@@ -88,21 +99,21 @@ class Stub : IPersistancemanager{
 
 
     //USERS FUNCTIONS
-    fun getUserById(idUser:Int):User?{
+    override fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
     }
-    fun createUser(usr:User){// créé un nouveau
+    override fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun updateUser(id:Int,usr:User){// modify
+    override fun updateUser(id:Int,usr:User){// modify
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun deleteUser(id:Int){
+    override fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
 
-    //INTEREST POINT FUNCTIONS
+    //DRAWS FUNCTIONS
     fun getInterestPointById(idPt:Int):InterestPoint?{
         return intPtsHashMap[idPt]
     }

@@ -33,7 +33,8 @@ fun main() {
             val user = ctx.bodyAsClass<User>()
             println(user)
             userDao.createUser(
-                User(id=0,
+                User(
+                    id =0,
                 name = user.name,
                 profilePicture = user.profilePicture,
                 email = user.email,
@@ -73,7 +74,8 @@ fun main() {
         post("/draws") { ctx ->
             val draw = ctx.bodyAsClass<Draw>()
             drawDao.createDraw(
-                Draw(id=0,
+                Draw(
+                    id =0,
                     name = draw.name,
                     image = draw.image,
                     interestPoint = draw.interestPoint,
