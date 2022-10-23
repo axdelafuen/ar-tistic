@@ -9,9 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.classlib.*
 import com.example.stub.*
-import java.util.*
-import java.util.Date
-
 
 class RegisterActivity: AppCompatActivity() {
 
