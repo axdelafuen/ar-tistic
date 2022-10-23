@@ -3,6 +3,6 @@ package com.example.classlib
 
 data class Collection (
     var users:HashMap<Int,User>,
-    var interestPoints:HashMap<Int,InterestPoint>,
-    var draws:HashMap<Int,Draw>
+    val interestPoints:HashMap<Int,InterestPoint>,
+    val draws:HashMap<Int,Draw>
     )

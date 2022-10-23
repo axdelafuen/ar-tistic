@@ -6,16 +6,16 @@ import java.sql.Time
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class Stub : IPersistance{
-    override var userHashMap=loadData().users
+class Stub : IPersistancemanager{
+    var userHashMap=loadData().users
         get() {
             return field
         }
         set(value) {field=value}
-    override var intPtsHashMap=loadData().interestPoints
+    var intPtsHashMap=loadData().interestPoints
         get() {return  field}
         set(value) {field=value}
-    override var drawsHashMap=loadData().draws
+    var drawsHashMap=loadData().draws
         get() {
             return field
         }
@@ -54,7 +54,7 @@ class Stub : IPersistance{
         var collec:com.example.classlib.Collection = Collection(loadUsersIndex(idxUser,nbUser),loadInterestPointsIndex(idxPt,nbPt),loadDrawsIndex(idxDraw,nbDraw))
         return collec
     }
-    fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return an hashmap with user in index position
+    fun loadUsersIndex(idx:Int, nb:Int):HashMap<Int,User>{// Return of an hashmap with user in index position
         if(idx+nb>userHashMap.size)return hashMapOf()//test si idx > nb user
         val ret = HashMap<Int, User>()// hashmap retourné avec la tranche de valeur demandé
         var cpt=0
@@ -88,17 +88,17 @@ class Stub : IPersistance{
 
 
     //USERS FUNCTIONS
-    override fun getUserById(idUser:Int):User?{
+    fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
     }
-    override fun createUser(usr:User){// créé un nouveau
+    fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    override fun updateUser(id:Int,usr:User){// modify
+    fun updateUser(id:Int,usr:User){// modify
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    override fun deleteUser(id:Int){
+    fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
 
