@@ -19,7 +19,7 @@ class Stub : IPersistancemanager{
         get() {
             return field
         }
-      set(value) {field=value}
+        set(value) {field=value}
     var lastId:AtomicInteger= AtomicInteger(userHashMap.size-1)
     override fun loadData():(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsers(),loadInterestPoints(),loadDraws())
