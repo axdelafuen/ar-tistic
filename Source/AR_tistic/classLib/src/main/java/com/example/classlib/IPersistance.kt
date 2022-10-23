@@ -1,6 +1,6 @@
 package com.example.classlib
 
-interface IPersistancemanager {
+interface IPersistance {
 
     fun loadData():(com.example.classlib.Collection)
 }

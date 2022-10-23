@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         checkLogPswd()
     }
 
-    val stub = Stub()
+    val pers = Stub().loadData()
     private fun checkLogPswd(){
         val connect = findViewById<Button>(R.id.LoginButton)
         val log = findViewById<EditText>(R.id.LoginEdit)
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             val cttLog=log.text.toString()
             val cttMdp=mdp.text.toString()
             if (cttMdp.trim().isEmpty()||cttLog.trim().isEmpty()){
-                Toast.makeText(this,"l'Email ou mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
             }
             else{
                 if(!existLogPasswd(cttLog,cttMdp)){//log et mdp pas cohérents:
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        val users= stub.loadUsers()
+        val users= pers.users
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
                 return true
