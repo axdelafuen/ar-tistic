@@ -9,7 +9,6 @@
 
     <application
         android:allowBackup="true"
-        tools:replace="android:allowBackup"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -17,23 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AR_tistic"
+        tools:replace="android:allowBackup"
         tools:targetApi="31">
         <activity
-            android:name=".ProfilActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".RegisterAcitivity"
+            android:name=".PaintActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -54,9 +40,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".MapActivity"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
