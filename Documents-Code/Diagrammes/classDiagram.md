@@ -62,4 +62,8 @@ class Message{
 User <-- Conversation : HashMap< Int,User > participant
 Message <-- Conversation : HashMap< Int,Message > messages
 User <-- Message : User sender
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 3ac612a62d850552063d68860f290d189ea4941d
