@@ -14,9 +14,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
+import com.example.classlib.Date
+import com.example.classlib.Manager
+import com.example.classlib.User
 
 class MainActivity : AppCompatActivity() {
-    val pers = Stub().loadData()
+    val pers = Manager(Stub()).persistence.loadData()
+    var usr:User = User(0, "0", "0","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -47,11 +51,13 @@ class MainActivity : AppCompatActivity() {
                     err.visibility= View.VISIBLE
                 }
                 else{
-                    if (Build.VERSION.SDK_INT >= 23) {
+                    if (Build.VERSION.SDK_INT >= 23) {//Permissions localisation
                         if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                             checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                         {
+                            // Add user to thoses pages :
                             val intent = Intent(applicationContext, MapActivity::class.java)
+                            //intent.putExtra("usr", usr) override this ?
                             startActivity(intent)
                             finish()
                         }
@@ -68,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         val users= pers.users
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
+                usr=user
                 return true
             }
         }

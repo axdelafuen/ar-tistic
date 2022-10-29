@@ -1,6 +1,6 @@
 package com.example.classlib
 
-interface IPersistance : java.io.Serializable{
+interface IPersistenceManager : java.io.Serializable{
     var userHashMap:HashMap<Int,User>
     var intPtsHashMap:HashMap<Int,InterestPoint>
     var drawsHashMap:HashMap<Int,Draw>

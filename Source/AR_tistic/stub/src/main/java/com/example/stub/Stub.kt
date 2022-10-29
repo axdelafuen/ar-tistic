@@ -6,7 +6,7 @@ import java.sql.Time
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class Stub : IPersistance{
+class Stub : IPersistenceManager {
     override var userHashMap=loadData().users
         get() {
             return field

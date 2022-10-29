@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.classlib.*
 import com.example.stub.*
 
@@ -22,12 +23,12 @@ class RegisterActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        var pers = Stub() // A terme faire un manager
+        var pers = Manager(Stub()).persistence
         register.setOnClickListener{
             check(pers)
         }
     }
-    fun check(pers:IPersistance){//check errors when register button is press
+    fun check(pers:IPersistenceManager){//check errors when register button is press
 
         val email = findViewById<EditText>(R.id.email)
         val cttmail=email.text.toString()
@@ -35,6 +36,8 @@ class RegisterActivity: AppCompatActivity() {
         val errPswd = findViewById<TextView>(R.id.unequalPswd)
         val pswd1 = findViewById<EditText>(R.id.psswd)
         val cttPswd1=pswd1.text.toString()
+        val pswd2 = findViewById<EditText>(R.id.confirmPsswd)
+        val cttPswd2=pswd2.text.toString()
         errMail.visibility= View.INVISIBLE
         errPswd.visibility= View.INVISIBLE
 
@@ -42,6 +45,9 @@ class RegisterActivity: AppCompatActivity() {
 
         if(checkEmail(users,cttmail)){//used email
             errMail.visibility= View.VISIBLE
+        }
+        else if (cttmail.trim().isEmpty()||cttPswd1.trim().isEmpty()||cttPswd2.trim().isEmpty()){//empty fields
+            Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
         }
         else{//unused mail
             if(checkPswd()){//similar password
