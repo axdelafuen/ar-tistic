@@ -1,8 +1,10 @@
 package com.example.ar_tistic
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 
 class ProfilActivity : AppCompatActivity() {
@@ -11,6 +13,11 @@ class ProfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
         getInfos()
+        var retMap=findViewById<ImageButton>(R.id.returnMapPage)
+        retMap.setOnClickListener(){
+            returnMap()
+        }
+
     }
     fun getInfos(){
         var nomA=findViewById<TextView>(R.id.nameTxtView)
@@ -20,6 +27,11 @@ class ProfilActivity : AppCompatActivity() {
         val pswd = intent.getSerializableExtra("pswd") as String?
         nomA.text=email
         pswdA.text=pswd
+    }
+    fun returnMap(){
+        val intent = Intent(applicationContext,MapActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

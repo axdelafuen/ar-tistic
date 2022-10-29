@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -113,7 +114,11 @@ class MapActivity : AppCompatActivity(){
             val intent = Intent(this, PaintActivity::class.java)
             startActivity(intent)
         }
-
+        val profilBtn = findViewById<ImageButton>(R.id.profileButton)
+        profilBtn.setOnClickListener {
+            val intent = Intent(this, ProfilActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
