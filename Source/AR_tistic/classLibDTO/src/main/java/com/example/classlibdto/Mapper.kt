@@ -26,4 +26,18 @@ class Mapper {
             picture = interestPointDTO.picture
         )
     }
+
+    fun mapDraw(drawDTO:DrawDTO):Draw{
+        return Draw(
+            id = drawDTO.id,
+            name = drawDTO.name,
+            image = drawDTO.image,
+            interestPoint = drawDTO.interestPoint,
+            creationDate = drawDTO.creationDate,
+            lifeTime = drawDTO.lifeTime,
+            authors = drawDTO.authors,
+            nbView = drawDTO.nbView,
+            nbReport = drawDTO.nbReport
+        )
+    }
 }
