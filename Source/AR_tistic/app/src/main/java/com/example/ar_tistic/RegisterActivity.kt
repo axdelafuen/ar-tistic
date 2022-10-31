@@ -23,7 +23,7 @@ class RegisterActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        var pers = Manager(Stub()).persistence
+        val pers = Manager(Stub()).persistence
         register.setOnClickListener{
             check(pers)
         }
