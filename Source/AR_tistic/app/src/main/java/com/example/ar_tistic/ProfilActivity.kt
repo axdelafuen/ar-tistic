@@ -34,12 +34,14 @@ class ProfilActivity : AppCompatActivity() {
         val cttemail = intent.getSerializableExtra("email") as String
         val cttpswd = intent.getSerializableExtra("pswd") as String
         //val usr = intent.getSerializableExtra("usr") as User
-        val usr = getIntent().getSerializableExtra("usr")
+        val t = getIntent().getSerializableExtra("test") as Test
 
         //var usr=createUser(cttemail,cttpswd)
 
-        email.text="usr.email"
-        name.text="usr.name"
+        email.text=t.aze
+
+        //email.text=usr.email
+        //name.text=usr.name
         //birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
 
         pswdA.text=cttpswd

@@ -63,7 +63,9 @@ class RegisterActivity: AppCompatActivity() {
                 val intent = Intent(applicationContext,ProfilActivity::class.java)
                 intent.putExtra("email", cttmail)
                 intent.putExtra("pswd", cttPswd1)
-                intent.putExtra("usr", usr1)
+                //intent.putExtra("usr", usr1)
+                val t1=Test()
+                intent.putExtra("test", t1)
                 startActivity(intent)
                 finish()
             }
