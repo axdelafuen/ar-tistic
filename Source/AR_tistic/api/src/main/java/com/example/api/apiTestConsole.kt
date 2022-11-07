@@ -1,7 +1,7 @@
 package com.example.api
 
+import User
 import com.example.classlib.Date
-import com.example.classlib.User
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader

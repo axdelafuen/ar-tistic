@@ -1,5 +1,6 @@
 package com.example.api
 
+import User
 import kotlin.collections.HashMap
 import com.example.classlib.*
 import com.example.stub.*

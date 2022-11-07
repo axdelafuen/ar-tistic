@@ -1,5 +1,6 @@
 package com.example.classlib
 
+import User
 import java.sql.Time
 import kotlin.collections.HashMap
 

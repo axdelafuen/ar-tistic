@@ -1,5 +1,6 @@
 package com.example.ar_tistic
 
+import User
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -51,9 +52,8 @@ class RegisterActivity: AppCompatActivity() {
         }
         else{//unused mail
             if(checkPswd()){//similar password
-                pers.createUser(User(0,"","",cttmail,cttPswd1, Date(1999,2,2),
-                    subscribes = hashMapOf(),
-                    nbReport = 0))
+                val usr1:User=User(0,"","",cttmail,cttPswd1, Date(1999,2,2), subscribes = hashMapOf(), nbReport = 0)
+                pers.createUser(usr1)
                 //Test -> creation of user
                 println("----------Test ajout----------")
                 for(usr in pers.userHashMap){
@@ -63,6 +63,7 @@ class RegisterActivity: AppCompatActivity() {
                 val intent = Intent(applicationContext,ProfilActivity::class.java)
                 intent.putExtra("email", cttmail)
                 intent.putExtra("pswd", cttPswd1)
+                intent.putExtra("usr", usr1)
                 startActivity(intent)
                 finish()
             }

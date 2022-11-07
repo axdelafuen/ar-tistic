@@ -1,5 +1,7 @@
 package com.example.classlib
 
+import User
+
 interface IPersistenceManager : java.io.Serializable{
     var userHashMap:HashMap<Int,User>
     var intPtsHashMap:HashMap<Int,InterestPoint>

@@ -1,5 +1,6 @@
 package com.example.stub
 
+import User
 import com.example.classlib.*
 import com.example.classlib.Collection
 import java.sql.Time

@@ -1,11 +1,8 @@
-package com.example.classlib
+import com.example.classlib.Date
+import java.io.Serializable;
 
-data class User(
-    val id: Int,
-    val name: String,
-    val profilePicture:String,
-    val email: String,
-    val password:String,
-    val birthDate: Date,
-    val subscribes:HashMap<Int,User>,
-    val nbReport:Int)
+public class User(var id: Int, var name: String, var profilePicture:String, var email: String, var password:String, var birthDate: Date, var subscribes:HashMap<Int,User>, var nbReport:Int) : Serializable {
+
+
+
+}

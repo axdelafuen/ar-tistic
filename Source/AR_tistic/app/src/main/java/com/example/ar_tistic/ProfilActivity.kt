@@ -1,13 +1,13 @@
 package com.example.ar_tistic
 
+import User
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import com.example.classlib.Date
-import com.example.classlib.User
+import com.example.classlib.*
 
 class ProfilActivity : AppCompatActivity() {
 
@@ -33,13 +33,14 @@ class ProfilActivity : AppCompatActivity() {
         // passer le manager
         val cttemail = intent.getSerializableExtra("email") as String
         val cttpswd = intent.getSerializableExtra("pswd") as String
+        //val usr = intent.getSerializableExtra("usr") as User
+        val usr = getIntent().getSerializableExtra("usr")
 
+        //var usr=createUser(cttemail,cttpswd)
 
-        var usr=createUser(cttemail,cttpswd)
-
-        email.text=cttemail
-        name.text=usr.name
-        birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
+        email.text="usr.email"
+        name.text="usr.name"
+        //birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
 
         pswdA.text=cttpswd
     }
