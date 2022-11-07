@@ -1,13 +1,15 @@
-package com.example.api
+package com.example.testconsol
 
 import com.example.classlib.Date
 import com.example.classlib.User
+import com.example.classlibdto.*
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+
 
 fun main(){
     println("API - Test Console : \n")
@@ -16,15 +18,19 @@ fun main(){
     var urlUserById2 = URL("http://localhost:7070/users/2/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
 
-    get(urlAllUsers)
 
-    val user = User(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(),0 )
+    val userDTO = UserDTO(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", birthDate = Date(1999,2,2), nbReport = 0 )
+    val user = User(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
     val gson = Gson()
     val jsonData = gson.toJson(user)
     println("\n"+jsonData+"\n")
 
-    post(urlAllUsers,jsonData)
+    //post(urlAllUsers,jsonData)
+    //println(gson.fromJson(get(urlAllUsers),User::class.java).name)
 
+    //val usr = gson.fromJson(get(urlUserById0),User::class.java)
+    //println(usr.name+"//"+usr.nbReport)
+    /*
     get(urlAllUsers)
     put(urlUserById0,jsonData)
 
@@ -33,18 +39,22 @@ fun main(){
     delete(urlUserById2)
 
     get(urlAllUsers)
-
+    */
 }
 
-fun get(url:URL){
+fun get(url:URL):String{
+    lateinit var jsonStr:String
     with(url.openConnection() as HttpURLConnection){
         requestMethod = "GET"
 
+
         inputStream.bufferedReader().use{
-            it.lines().forEach{ line -> println(line)}
+            it.lines().forEach{ line -> jsonStr = line }
         }
     }
-    println("\n")
+    //println(jsonStr)
+    //println("\n")
+    return jsonStr
 }
 fun delete(url:URL){
     with(url.openConnection() as HttpURLConnection){
@@ -53,7 +63,7 @@ fun delete(url:URL){
         doInput = true
         doOutput = false
 
-        println("Code de retour du delete (204 = succes) : "+this.responseCode);
+        println("Code de retour du delete (204 = succes) : "+this.responseCode)
     }
 }
 fun post(url:URL, data:String){

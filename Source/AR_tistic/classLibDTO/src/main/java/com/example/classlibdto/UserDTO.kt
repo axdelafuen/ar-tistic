@@ -7,8 +7,6 @@ data class UserDTO (
     val name: String,
     val profilePicture:String,
     val email: String,
-    val password:String,
     val birthDate: Date,
-    val subscribes:HashMap<Int,User>,
     val nbReport:Int
         )
