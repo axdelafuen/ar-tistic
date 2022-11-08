@@ -2,7 +2,8 @@ package com.example.testconsol
 
 import com.example.classlib.Date
 import com.example.classlib.User
-import com.example.classlibdto.*
+import com.example.classlibdto.DateDTO
+import com.example.classlibdto.UserDTO
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -10,26 +11,31 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 
-
 fun main(){
     println("API - Test Console : \n")
     var urlAllUsers = URL("http://localhost:7070/users/")
     var urlUserById0 = URL("http://localhost:7070/users/0/")
     var urlUserById2 = URL("http://localhost:7070/users/2/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
+    var urlUserById7 = URL("http://localhost:7070/users/7/")
 
 
-    val userDTO = UserDTO(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", birthDate = Date(1999,2,2), nbReport = 0 )
+    val userDTO = UserDTO(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", birthDate = DateDTO(1999, 12 ,12), nbReport = 0 )
     val user = User(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
     val gson = Gson()
     val jsonData = gson.toJson(user)
-    println("\n"+jsonData+"\n")
+    //println("\n"+jsonData+"\n")
 
-    //post(urlAllUsers,jsonData)
-    //println(gson.fromJson(get(urlAllUsers),User::class.java).name)
 
-    //val usr = gson.fromJson(get(urlUserById0),User::class.java)
-    //println(usr.name+"//"+usr.nbReport)
+    println(get(urlAllUsers))
+    println("//////////////")
+    post(urlAllUsers,jsonData)
+    println("//////////////")
+    val usr = gson.fromJson(get(urlUserById0),User::class.java)
+    println(usr.name+"//"+usr.nbReport)
+    println("//////////////")
+    val usr2 = gson.fromJson(get(urlUserById7),User::class.java)
+    println(usr2.name+ (usr2.subscribes.get(0)!!.name))
     /*
     get(urlAllUsers)
     put(urlUserById0,jsonData)
@@ -46,7 +52,6 @@ fun get(url:URL):String{
     lateinit var jsonStr:String
     with(url.openConnection() as HttpURLConnection){
         requestMethod = "GET"
-
 
         inputStream.bufferedReader().use{
             it.lines().forEach{ line -> jsonStr = line }
@@ -90,8 +95,8 @@ fun post(url:URL, data:String){
 
     }
 }
-fun put(url:URL, data:String){
-    with(url.openConnection() as HttpURLConnection){
+fun put(url:URL, data:String) {
+    with(url.openConnection() as HttpURLConnection) {
         requestMethod = "PUT"
         doOutput = true
 

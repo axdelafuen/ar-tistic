@@ -1,6 +1,5 @@
 package com.example.classlibdto
 
-import com.example.classlib.*
 /*
 class Mapper {
     fun mapUser(userDTO: UserDTO):User{

@@ -1,7 +1,5 @@
 package com.example.classlibdto
 
-import com.example.classlib.*
-
 data class InterestPointDTO(
     val id: Int,
     val name : String,
