@@ -2,6 +2,8 @@ package com.example.classlib
 
 import java.io.Serializable
 
-class Test : Serializable {
-    var aze = "Hello world"
+class Test(var aze:String) : Serializable {
+    init {
+        this.aze=aze
+    }
 }

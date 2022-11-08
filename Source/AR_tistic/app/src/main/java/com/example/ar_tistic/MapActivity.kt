@@ -1,5 +1,6 @@
 package com.example.ar_tistic
 
+import User
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
@@ -25,6 +26,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 class MapActivity : AppCompatActivity(){
+    lateinit var usr:User
     private lateinit var map:MapView
 
     @SuppressLint("WrongViewCast")
@@ -36,7 +38,8 @@ class MapActivity : AppCompatActivity(){
                 applicationContext
             )
         )
-
+        //LOAD USER
+        usr = intent.getSerializableExtra("usr") as User
         // LOAD LAYOUT
         setContentView(R.layout.activity_map)
         // MAP Initialization
@@ -113,11 +116,14 @@ class MapActivity : AppCompatActivity(){
         paintBtn.setOnClickListener {
             val intent = Intent(this, PaintActivity::class.java)
             startActivity(intent)
+            finish()
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {
             val intent = Intent(this, ProfilActivity::class.java)
+            intent.putExtra("usr", usr)
             startActivity(intent)
+            finish()
         }
     }
 

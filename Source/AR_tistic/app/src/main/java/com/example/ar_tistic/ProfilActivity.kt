@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.classlib.*
 
 class ProfilActivity : AppCompatActivity() {
-
+    lateinit var usr:User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
@@ -31,30 +31,16 @@ class ProfilActivity : AppCompatActivity() {
 
         val intent = intent
         // passer le manager
-        val cttemail = intent.getSerializableExtra("email") as String
-        val cttpswd = intent.getSerializableExtra("pswd") as String
-        //val usr = intent.getSerializableExtra("usr") as User
-        val t = getIntent().getSerializableExtra("test") as Test
-
-        //var usr=createUser(cttemail,cttpswd)
-
-        email.text=t.aze
-
-        //email.text=usr.email
-        //name.text=usr.name
-        //birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
-
-        pswdA.text=cttpswd
+        usr = intent.getSerializableExtra("usr") as User
+        email.text=usr.email
+        name.text=usr.name
+        birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
+        pswdA.text=usr.password
     }
     fun returnMap(){
         val intent = Intent(applicationContext,MapActivity::class.java)
+        intent.putExtra("usr", usr)
         startActivity(intent)
         finish()
     }
-    fun createUser(email:String, pswd:String):User{
-        var id=1//Id from manager
-        val ppDefault="/img/ppDefault"
-        return User(id, "User"+id, "",email,pswd, Date(1999,2,2),hashMapOf(),0)
-    }
-
 }

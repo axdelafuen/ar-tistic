@@ -52,7 +52,7 @@ class RegisterActivity: AppCompatActivity() {
         }
         else{//unused mail
             if(checkPswd()){//similar password
-                val usr1:User=User(0,"","",cttmail,cttPswd1, Date(1999,2,2), subscribes = hashMapOf(), nbReport = 0)
+                val usr1:User=createUser(cttmail,cttPswd1)
                 pers.createUser(usr1)
                 //Test -> creation of user
                 println("----------Test ajout----------")
@@ -61,11 +61,9 @@ class RegisterActivity: AppCompatActivity() {
                 }
                 //
                 val intent = Intent(applicationContext,ProfilActivity::class.java)
-                intent.putExtra("email", cttmail)
-                intent.putExtra("pswd", cttPswd1)
-                //intent.putExtra("usr", usr1)
-                val t1=Test()
-                intent.putExtra("test", t1)
+                intent.putExtra("usr", usr1)
+                //val t1=Test("Helloooo")
+                //intent.putExtra("test", t1)
                 startActivity(intent)
                 finish()
             }
@@ -86,5 +84,10 @@ class RegisterActivity: AppCompatActivity() {
             if(usr.email==email)return true
         }
         return false
+    }
+    fun createUser(email:String, pswd:String):User{// return new user with uniq id and the email and mdp giv in parameter
+        var id=1//Id from manager
+        val ppDefault="/img/ppDefault"
+        return User(id, "User"+id, "",email,pswd, Date(1999,2,2),hashMapOf(),0)
     }
 }
