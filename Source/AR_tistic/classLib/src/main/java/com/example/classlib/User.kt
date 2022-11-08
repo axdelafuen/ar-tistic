@@ -12,5 +12,4 @@ class User(var id:Int, var name: String, var profilePicture:String, var email: S
         this.subscribes=subscribes
         this.nbReport=nbReport
     }
-
 }

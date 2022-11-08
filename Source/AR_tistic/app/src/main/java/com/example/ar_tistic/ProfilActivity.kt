@@ -19,7 +19,15 @@ class ProfilActivity : AppCompatActivity() {
         retMap.setOnClickListener(){
             returnMap()
         }
+        var upload=findViewById<Button>(R.id.upload)
+        upload.setOnClickListener(){
 
+            val intent = Intent()
+                .setType("*/*")
+                .setAction(Intent.ACTION_GET_CONTENT)
+
+            startActivityForResult(Intent.createChooser(intent, "Select a file"), 777)
+        }
     }
     fun getInfos(){
         var email=findViewById<TextView>(R.id.emailTxtView)
