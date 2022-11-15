@@ -116,7 +116,6 @@ class MapActivity : AppCompatActivity(){
         paintBtn.setOnClickListener {
             val intent = Intent(this, PaintActivity::class.java)
             startActivity(intent)
-            finish()
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {

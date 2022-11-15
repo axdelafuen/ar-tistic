@@ -112,6 +112,14 @@ class  Stub : IPersistenceManager {
     override fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
+    override fun finUserByLogPswd(log: String, psswrd: String): User {
+        for (user in userHashMap.values){
+            if((user.name==log&&psswrd==user.password) || (user.email==log&&psswrd==user.password)){
+                return user
+            }
+        }
+        return User(0, "0", "0","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
+    }
 
     //DRAWS FUNCTIONS
     fun getInterestPointById(idPt:Int):InterestPoint?{

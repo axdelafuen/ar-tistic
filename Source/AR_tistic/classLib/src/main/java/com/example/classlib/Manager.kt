@@ -1,5 +1,10 @@
 package com.example.classlib
 
-data  class Manager(val persistence:IPersistenceManager) {
+import User
 
+class Manager(var persistence:IPersistenceManager, var usr:User) {
+    init {
+        this.persistence=persistence;
+        this.usr=usr;
+    }
 }

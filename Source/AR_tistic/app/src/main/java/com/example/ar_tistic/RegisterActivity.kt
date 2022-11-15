@@ -62,8 +62,6 @@ class RegisterActivity: AppCompatActivity() {
                 //
                 val intent = Intent(applicationContext,ProfilActivity::class.java)
                 intent.putExtra("usr", usr1)
-                //val t1=Test("Helloooo")
-                //intent.putExtra("test", t1)
                 startActivity(intent)
                 finish()
             }
