@@ -112,7 +112,7 @@ class  Stub : IPersistenceManager {
     override fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
-    override fun finUserByLogPswd(log: String, psswrd: String): User {
+    override fun findUserByLogPswd(log: String, psswrd: String): User {
         for (user in userHashMap.values){
             if((user.name==log&&psswrd==user.password) || (user.email==log&&psswrd==user.password)){
                 return user

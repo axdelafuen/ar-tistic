@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.classlib.*
 
 class ProfilActivity : AppCompatActivity() {
-    lateinit var usr:User
+    lateinit var manager:Manager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
@@ -21,11 +21,9 @@ class ProfilActivity : AppCompatActivity() {
         }
         var upload=findViewById<Button>(R.id.upload)
         upload.setOnClickListener(){
-
             val intent = Intent()
                 .setType("*/*")
                 .setAction(Intent.ACTION_GET_CONTENT)
-
             startActivityForResult(Intent.createChooser(intent, "Select a file"), 777)
         }
     }
@@ -34,12 +32,9 @@ class ProfilActivity : AppCompatActivity() {
         var pswdA=findViewById<TextView>(R.id.psswdTxtView)
         var name=findViewById<TextView>(R.id.nameTxtView)
         var birthDate=findViewById<TextView>(R.id.bdTxtView)
-
-
-
         val intent = intent
-        // passer le manager
-        usr = intent.getSerializableExtra("usr") as User
+        manager = intent.getSerializableExtra("manager") as Manager
+        var usr:User=manager.usr
         email.text=usr.email
         name.text=usr.name
         birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
@@ -47,7 +42,7 @@ class ProfilActivity : AppCompatActivity() {
     }
     fun returnMap(){
         val intent = Intent(applicationContext,MapActivity::class.java)
-        intent.putExtra("usr", usr)
+        intent.putExtra("manager", manager)
         startActivity(intent)
         finish()
     }

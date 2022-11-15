@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.classlib.Manager
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -26,9 +27,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 class MapActivity : AppCompatActivity(){
-    lateinit var usr:User
+    lateinit var manager: Manager
     private lateinit var map:MapView
-
     @SuppressLint("WrongViewCast")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +38,8 @@ class MapActivity : AppCompatActivity(){
                 applicationContext
             )
         )
-        //LOAD USER
-        usr = intent.getSerializableExtra("usr") as User
+        //Get manager
+        manager = intent.getSerializableExtra("manager") as Manager
         // LOAD LAYOUT
         setContentView(R.layout.activity_map)
         // MAP Initialization
@@ -120,7 +120,7 @@ class MapActivity : AppCompatActivity(){
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {
             val intent = Intent(this, ProfilActivity::class.java)
-            intent.putExtra("usr", usr)
+            intent.putExtra("manager", manager)
             startActivity(intent)
             finish()
         }

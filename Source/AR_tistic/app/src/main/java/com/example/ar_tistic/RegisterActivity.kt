@@ -13,7 +13,7 @@ import com.example.classlib.*
 import com.example.stub.*
 
 class RegisterActivity: AppCompatActivity() {
-
+    lateinit var manager:Manager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -24,9 +24,9 @@ class RegisterActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        val pers = Manager(Stub()).persistence
+
         register.setOnClickListener{
-            check(pers)
+            check(manager.persistence)
         }
     }
     fun check(pers:IPersistenceManager){//check errors when register button is press
@@ -61,7 +61,7 @@ class RegisterActivity: AppCompatActivity() {
                 }
                 //
                 val intent = Intent(applicationContext,ProfilActivity::class.java)
-                intent.putExtra("usr", usr1)
+                intent.putExtra("manager", manager)
                 startActivity(intent)
                 finish()
             }

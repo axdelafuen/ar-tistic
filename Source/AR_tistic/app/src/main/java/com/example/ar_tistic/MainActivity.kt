@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity() {
                             // Add user to pers once passed all verifications
                             manager.usr=loadUser(cttLog,cttMdp)
                             val intent = Intent(applicationContext, MapActivity::class.java)
+                            intent.putExtra("manager", manager)
                             startActivity(intent)
-                            intent.putExtra("usr", usr)
                             finish()
                         }
                         else {
@@ -90,11 +90,9 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
-
-
     /// FUNCTION
     /// Load by the persistance by log & passwrd
-    private fun loadUser(log:String, psswrd:String):User{// add user to the pers when
-        return manager.persistence.
+    private fun loadUser(log:String, pswd:String):User{// add user to the pers when
+        return manager.persistence.findUserByLogPswd(log,pswd)
     }
 }

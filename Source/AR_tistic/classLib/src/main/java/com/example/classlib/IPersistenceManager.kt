@@ -1,8 +1,9 @@
 package com.example.classlib
 
 import User
+import java.io.Serializable
 
-interface IPersistenceManager : java.io.Serializable{
+interface IPersistenceManager : Serializable {
     var userHashMap:HashMap<Int,User>
     var intPtsHashMap:HashMap<Int,InterestPoint>
     var drawsHashMap:HashMap<Int,Draw>
@@ -12,7 +13,7 @@ interface IPersistenceManager : java.io.Serializable{
     fun createUser(usr:User)
     fun updateUser(id:Int,usr:User)
     fun deleteUser(id:Int)
-    fun finUserByLogPswd(log:String, psswrd:String):User
+    fun findUserByLogPswd(log:String, psswrd:String):User
 
     // DRAWS METHODS
 
