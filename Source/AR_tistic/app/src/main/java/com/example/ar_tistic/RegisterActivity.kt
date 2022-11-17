@@ -15,6 +15,7 @@ import com.example.stub.*
 class RegisterActivity: AppCompatActivity() {
     lateinit var manager:Manager
     override fun onCreate(savedInstanceState: Bundle?) {
+        manager=intent.getSerializableExtra("manager") as Manager
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val returnMain=findViewById<Button>(R.id.returnLogPageButton)

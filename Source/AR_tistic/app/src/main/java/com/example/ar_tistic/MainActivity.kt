@@ -20,7 +20,7 @@ import com.example.classlib.Manager
 
 class MainActivity : AppCompatActivity() {
     //Main user -> init null
-    var usr:User = User(0, "0", "0","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
+    var usr:User = User(0, "0", "@drawable/pp_edit","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     //Manager -> 'll be given to all activities
     val manager=Manager(Stub(),usr)// replace by pers needed
     // Persistance loaded
@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         val register=findViewById<Button>(R.id.registerButton)
         register.setOnClickListener{
             val intent = Intent(applicationContext,RegisterActivity::class.java)
+            intent.putExtra("manager", manager)
             startActivity(intent)
             finish()
         }
@@ -65,8 +66,7 @@ class MainActivity : AppCompatActivity() {
                             // Add user to pers once passed all verifications
                             manager.usr=loadUser(cttLog,cttMdp)
                             val intent = Intent(applicationContext, MapActivity::class.java)
-                            //intent.putExtra("manager", manager)
-                            intent.putExtra("usr", usr)
+                            intent.putExtra("manager", manager)
                             startActivity(intent)
                             finish()
                         }

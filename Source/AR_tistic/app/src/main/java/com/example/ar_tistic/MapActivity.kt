@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classlib.Manager
+import com.example.stub.Stub
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -39,7 +40,8 @@ class MapActivity : AppCompatActivity(){
             )
         )
         //Get manager
-        manager = intent.getSerializableExtra("manager") as Manager
+        //
+        manager=intent.getSerializableExtra("manager") as Manager
         // LOAD LAYOUT
         setContentView(R.layout.activity_map)
         // MAP Initialization
@@ -122,7 +124,6 @@ class MapActivity : AppCompatActivity(){
             val intent = Intent(this, ProfilActivity::class.java)
             intent.putExtra("manager", manager)
             startActivity(intent)
-            finish()
         }
     }
 

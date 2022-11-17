@@ -13,4 +13,4 @@ data class Draw(
     val lifeTime: Time,
     val authors:HashMap<Int,User>,
     val nbView:Int,
-    val nbReport:Int)
+    val nbReport:Int):java.io.Serializable
