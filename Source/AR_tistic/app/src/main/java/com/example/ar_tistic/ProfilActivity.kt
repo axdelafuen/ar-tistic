@@ -33,12 +33,14 @@ class ProfilActivity : AppCompatActivity() {
         var name=findViewById<TextView>(R.id.nameTxtView)
         var birthDate=findViewById<TextView>(R.id.bdTxtView)
         val intent = intent
-        manager = intent.getSerializableExtra("manager") as Manager
-        var usr:User=manager.usr
+        //Get manager
+        //manager = intent.getSerializableExtra("manager") as Manager
+        val usr = intent.getSerializableExtra("usr") as User
+        /*var usr:User=manager.usr
         email.text=usr.email
         name.text=usr.name
         birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
-        pswdA.text=usr.password
+        pswdA.text=usr.password*/
     }
     fun returnMap(){
         val intent = Intent(applicationContext,MapActivity::class.java)

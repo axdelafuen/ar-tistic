@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
                             // Add user to pers once passed all verifications
                             manager.usr=loadUser(cttLog,cttMdp)
                             val intent = Intent(applicationContext, MapActivity::class.java)
-                            intent.putExtra("manager", manager)
+                            //intent.putExtra("manager", manager)
+                            intent.putExtra("usr", usr)
                             startActivity(intent)
                             finish()
                         }
