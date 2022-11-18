@@ -47,3 +47,15 @@ steps:
         from_secret: db_user
       CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
         from_secret: db_password
+  
+- name: container-api
+  image: plugins/docker
+  settings:
+    dockerfile: ./Source/AR_tistic/api/src/main/java/com/example/api/Dockerfile
+    context: ./Source/AR_tistic
+    registry: hub.codefirst.iut.uca.fr
+    repo: hub.codefirst.iut.uca.fr/axel.de_la_fuente/api-artistic
+    username:
+      from_secret: secret-registry-username
+    password:
+      from_secret: secret-registry-password
