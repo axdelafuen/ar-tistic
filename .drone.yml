@@ -70,4 +70,4 @@ steps:
     CONTAINERNAME: api-artistic
     COMMAND: create
     OVERWRITE: true
-  depends_on: [ api-build ]
+  depends_on: [ container-api ]
