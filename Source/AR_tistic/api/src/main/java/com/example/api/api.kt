@@ -2,14 +2,13 @@ package com.example.api
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import com.example.stub.*
 
 import com.example.classlib.*
+import com.example.datacontract.toDTO
 
 fun main() {
-
-    val userDao = UserDao()
-    val drawDao = DrawDao()
-    val intPointDao = InterestPointDao()
+    val data=Stub();
 
     val app = Javalin.create().apply {
         exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
@@ -21,18 +20,18 @@ fun main() {
         //USERS
 
         get("/users") { ctx ->
-            ctx.json(userDao.getUsers()!!)
+            ctx.json(toDTO(data.userHashMap)!!)
         }
         get("/users/{user-id}") { ctx ->
-            ctx.json(userDao.getUserById(ctx.pathParam("user-id").toInt())!!)
+            ctx.json(toDTO(data.getUserById(ctx.pathParam("user-id").toInt())!!))
         }
         get("/users/idx/{idx}/{nb}"){ctx->
-            ctx.json(userDao.getUserWithIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
+            ctx.json(toDTO(data.loadUsersIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!))
         }
         post("/users") { ctx ->
             val user = ctx.bodyAsClass<User>()
             println(user)
-            userDao.createUser(
+            data.createUser(
                 User(
                     id =0,
                 name = user.name,
@@ -48,18 +47,18 @@ fun main() {
         }
         put("/users/{user-id}") { ctx ->
             val user = ctx.bodyAsClass<User>()
-            userDao.updateUser(
+            data.updateUser(
                 id = ctx.pathParam("user-id").toInt(),
-                user = user
+                usr = user
             )
             ctx.status(204)
         }
 
         delete("/users/{user-id}") { ctx ->
-            userDao.deleteUser(ctx.pathParam("user-id").toInt())
+            data.deleteUser(ctx.pathParam("user-id").toInt())
             ctx.status(204)
         }
-
+/*
         // DRAWS
 
         get("/draws") { ctx ->
@@ -139,7 +138,7 @@ fun main() {
             intPointDao.deleteInterestPoint(ctx.pathParam("intPoint-id").toInt())
             ctx.status(204)
         }
-
+*/
     }
 }
 

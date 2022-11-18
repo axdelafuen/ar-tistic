@@ -2,7 +2,6 @@ package com.example.testconsol
 
 import com.example.classlib.Date
 import com.example.classlib.User
-import com.example.classlibdto.DateDTO
 import com.example.classlibdto.UserDTO
 import com.google.gson.Gson
 import java.io.BufferedReader
@@ -20,8 +19,8 @@ fun main(){
     var urlUserById7 = URL("http://localhost:7070/users/7/")
 
 
-    val userDTO = UserDTO(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", birthDate = DateDTO(1999, 12 ,12), nbReport = 0 )
-    val user = User(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
+    val userDTO = User(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", password="1233", email = "alice@alice.kt", birthDate = Date(1999, 12 ,12), subscribes = hashMapOf(), nbReport = 0 )
+    val user = UserDTO(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
     val gson = Gson()
     val jsonData = gson.toJson(user)
     //println("\n"+jsonData+"\n")
@@ -34,8 +33,8 @@ fun main(){
     val usr = gson.fromJson(get(urlUserById0),User::class.java)
     println(usr.name+"//"+usr.nbReport)
     println("//////////////")
-    val usr2 = gson.fromJson(get(urlUserById7),User::class.java)
-    println(usr2.name+ (usr2.subscribes.get(0)!!.name))
+    val usr2 = gson.fromJson(get(urlUserById3),User::class.java)
+    println(usr2.name+(usr2.subscribes.get(0)?.name))
     /*
     get(urlAllUsers)
     put(urlUserById0,jsonData)
@@ -90,7 +89,7 @@ fun post(url:URL, data:String){
                 response.append(inputLine)
                 inputLine = it.readLine()
             }
-            println("Response : $response")
+            //println("Response : $response")
         }
 
     }
