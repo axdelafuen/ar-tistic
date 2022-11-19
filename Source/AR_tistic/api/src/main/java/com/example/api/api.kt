@@ -14,7 +14,7 @@ fun main() {
             val app = Javalin.create().apply {
                 exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
                 error(404) { ctx -> ctx.json("not found") }
-            }.start("https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente", 7070)
+            }.start(1705)
 
             app.routes {
 
