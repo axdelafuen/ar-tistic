@@ -1,4 +1,4 @@
-FROM androidsdk/android-30 as BUILD
+FROM androidsdk/android-33 as BUILD
 
 COPY . /src
 WORKDIR /src
