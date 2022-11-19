@@ -9,4 +9,4 @@ FROM androidsdk/android-30
 COPY --from=BUILD /src/api/build/libs/api.jar /bin/runner/run.jar
 WORKDIR /bin/runner
 
-CMD ["java","-jar","run.jar"]
+CMD ["java","-Dfile.encoding=UTF-8","-jar","run.jar"]
