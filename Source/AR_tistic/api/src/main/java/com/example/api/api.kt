@@ -5,10 +5,10 @@ import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*
 
 import com.example.classlib.*
-import com.example.classlibdto.UserDTO
+import com.example.classlibdto.*
 import com.example.datacontract.toDTO
 
-        fun main() {
+fun main() {
             val data = Stub();
 
             val app = Javalin.create().apply {
