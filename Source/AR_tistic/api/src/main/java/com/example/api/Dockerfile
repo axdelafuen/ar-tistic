@@ -4,7 +4,7 @@ COPY . /src
 WORKDIR /src
 RUN ./gradlew api:assemble
 
-FROM androidsdk/android-30
+FROM androidsdk/android-33
 
 COPY --from=BUILD /src/api/build/libs/api.jar /bin/runner/run.jar
 WORKDIR /bin/runner
