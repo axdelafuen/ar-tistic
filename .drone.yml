@@ -9,13 +9,13 @@ trigger:
 steps:
 
 - name: app-build
-  image: androidsdk/android-30
+  image: androidsdk/android-33
   commands:
   - cd Source/AR_tistic
   - ./gradlew :app:assembleDebug
   
 - name: api-build
-  image: androidsdk/android-30
+  image: androidsdk/android-33
   commands:
   - cd Source/AR_tistic
   - ./gradlew assemble
@@ -23,7 +23,7 @@ steps:
   depends_on: [ app-build ]
 
 - name: code analysis
-  image: androidsdk/android-30
+  image: androidsdk/android-33
   environment:
       SONAR_TOKEN:
         from_secret: sonar_token
