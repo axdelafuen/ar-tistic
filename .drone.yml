@@ -67,5 +67,5 @@ steps:
     IMAGENAME: hub.codefirst.iut.uca.fr/axel.de_la_fuente/api-artistic:latest
     CONTAINERNAME: api-artistic
     COMMAND: create
-    # OVERWRITE: true
+    OVERWRITE: true
   depends_on: [ container-api ]
