@@ -2,6 +2,10 @@ FROM androidsdk/android-31 as BUILD
 
 COPY . /src
 WORKDIR /src
+RUN ./gradlew stub:assemble
+RUN ./gradlew classLib:assemble
+RUN ./gradlew classLibDTO:assemble
+RUN ./gradlew dataContract:assemble
 RUN ./gradlew api:assemble
 
 FROM androidsdk/android-31
