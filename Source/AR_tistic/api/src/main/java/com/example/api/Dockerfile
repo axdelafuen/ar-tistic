@@ -13,4 +13,5 @@ FROM androidsdk/android-31
 COPY --from=BUILD /src/api/build/libs/api.jar /bin/runner/run.jar
 WORKDIR /bin/runner
 
-CMD ["java","-Dfile.encoding=UTF-8","-jar","run.jar"]
+EXPOSE 1705
+ENTRYPOINT ["java","-Dfile.encoding=UTF-8","-jar","run.jar"]
