@@ -18,6 +18,7 @@ steps:
   image: androidsdk/android-30
   commands:
   - cd Source/AR_tistic
+  - ./gradlew assemble
   - ./gradlew api:assemble
   depends_on: [ app-build ]
 
