@@ -18,6 +18,9 @@ steps:
   image: androidsdk/android-31
   commands:
   - cd Source/AR_tistic
+  - ./gradlew stub:assemble
+  - ./gradlew classLib:assemble
+  - ./gradlew classLibDTO:assemble
   - ./gradlew dataContract:assemble
   - ./gradlew api:assemble
   depends_on: [ app-build ]
