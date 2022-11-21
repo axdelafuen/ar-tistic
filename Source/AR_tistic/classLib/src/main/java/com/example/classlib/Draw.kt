@@ -1,19 +1,20 @@
 package com.example.classlib
 
+import java.io.Serializable
 import kotlin.collections.HashMap
 
-class Draw{
-    val id:Int
-    val name:String
-    val image:String
-    val interestPoint: HashMap<Int,InterestPoint>
-    val creationDate: Date
-    val lifeTime: Time
-    val authors:HashMap<Int,User>
-    val nbView:Int
-    val nbReport:Int
+class Draw(
+    var id:Int,
+    var name:String,
+    var image:String,
+    var interestPoint: HashMap<Int,InterestPoint>,
+    var creationDate: Date,
+    var lifeTime: Time,
+    var authors:HashMap<Int,User>,
+    var nbView:Int,
+    var nbReport:Int):Serializable{
 
-    constructor(id:Int, name:String, image:String, interestPoint: HashMap<Int,InterestPoint>, creationDate:Date, lifeTime: Time, authors:HashMap<Int,User>, nbView:Int, nbReport:Int){
+    init{
         this.id = id
         this.name = name
         this.image = image

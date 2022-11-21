@@ -9,25 +9,25 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 
-class ClientAPI:IPersistenceManager{
+@Suppress("NewApi")
+class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     val url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
-    val gson = Gson();
 
     override fun loadData(): Collection {
-        return gson.fromJson(get(URL(url+"loadData")),Collection::class.java)
+        return Gson().fromJson(get(URL(url+"loadData")),Collection::class.java)
     }
 
     override fun getUserById(idUser: Int): User? {
-        return gson.fromJson(get(URL(url+"users")),User::class.java)
+        return Gson().fromJson(get(URL(url+"users")),User::class.java)
     }
 
     override fun createUser(usr: User) {
-        post(URL(url+"users"),gson.toJson(usr))
+        post(URL(url+"users"),Gson().toJson(usr))
     }
 
     override fun updateUser(id: Int, usr: User) {
-        put(URL(url+"users"+id as String),gson.toJson(usr))
+        put(URL(url+"users"+id as String),Gson().toJson(usr))
     }
 
     override fun deleteUser(id: Int) {
@@ -35,16 +35,16 @@ class ClientAPI:IPersistenceManager{
     }
 
     override fun findUserByLogPswd(log: String, psswrd: String): User {
-        return gson.fromJson(get(URL(url+"user/"+log+"/"+psswrd+"/")),User::class.java)
+        return Gson().fromJson(get(URL(url+"user/pwd/"+log+"/"+psswrd+"/")),User::class.java)
     }
 
     /// http requests :
 
-    fun get(url: URL):String{
+    @Suppress("NewApi")
+    private fun get(url: URL):String{
         lateinit var jsonStr:String
         with(url.openConnection() as HttpURLConnection){
             requestMethod = "GET"
-
             inputStream.bufferedReader().use{
                 it.lines().forEach{ line -> jsonStr = line }
             }
@@ -53,7 +53,7 @@ class ClientAPI:IPersistenceManager{
         //println("\n")
         return jsonStr
     }
-    fun delete(url: URL){
+    private fun delete(url: URL){
         with(url.openConnection() as HttpURLConnection){
             requestMethod  = "DELETE"
             this.setRequestProperty("Content-Type", "text/plain")
@@ -63,7 +63,7 @@ class ClientAPI:IPersistenceManager{
             println("Code de retour du delete (204 = succes) : "+this.responseCode)
         }
     }
-    fun post(url: URL, data:String){
+    private fun post(url: URL, data:String){
         with(url.openConnection() as HttpURLConnection){
             requestMethod = "POST"
             doOutput = true
@@ -87,7 +87,7 @@ class ClientAPI:IPersistenceManager{
 
         }
     }
-    fun put(url: URL, data:String) {
+    private fun put(url: URL, data:String) {
         with(url.openConnection() as HttpURLConnection) {
             requestMethod = "PUT"
             doOutput = true

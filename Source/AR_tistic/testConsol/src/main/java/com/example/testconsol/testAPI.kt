@@ -4,6 +4,7 @@ import com.example.classlib.Collection
 import com.example.classlib.Date
 import com.example.classlib.User
 import com.example.classlibdto.UserDTO
+import com.example.clientapi.ClientAPI
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -25,7 +26,11 @@ fun main(){
     val gson = Gson()
     val jsonData = gson.toJson(user)
 
-    println(gson.fromJson(get(URL(url+"loadData")), Collection::class.java))
+    //println(gson.fromJson(get(URL(url+"loadData")), Collection::class.java).users.get(1)?.name)
+
+    var api = ClientAPI()
+    var u = api.findUserByLogPswd("1","1")
+    //println(u.name)
 
     //println("\n"+jsonData+"\n")
 

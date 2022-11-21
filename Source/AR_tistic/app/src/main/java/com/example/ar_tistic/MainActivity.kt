@@ -18,15 +18,18 @@ import com.example.classlib.Date
 import com.example.classlib.Manager
 import com.example.classlib.User
 import com.example.clientapi.ClientAPI
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
-    //Main user -> init null
-    var usr:User = User(0, "0", "@drawable/pp_edit","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     //Manager -> 'll be given to all activities
-    val manager=Manager(ClientAPI(),usr)// replace by pers needed
+    val manager=Manager(ClientAPI())
     // Persistance loaded
-    val pers = manager.persistence.loadData()
-    override fun onCreate(savedInstanceState: Bundle?) {
+    lateinit var pers:com.example.classlib.Collection
+    var thread = Thread({
+        pers = manager.persistence.loadData()
+        //println(pers.users.get(2)!!.name)
+    }).start()
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         val users= pers.users
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
-                usr=user
+                manager.usr=user
                 return true
             }
         }
@@ -95,6 +98,7 @@ class MainActivity : AppCompatActivity() {
     /// FUNCTION
     /// Load by the persistance by log & passwrd
     private fun loadUser(log:String, pswd:String):User{// add user to the pers when
-        return manager.persistence.findUserByLogPswd(log,pswd)
+        return manager.persistence.findUserByLogPswd(log, pswd)
     }
+
 }
