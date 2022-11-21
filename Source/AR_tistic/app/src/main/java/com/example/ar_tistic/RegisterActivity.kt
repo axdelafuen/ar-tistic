@@ -1,5 +1,6 @@
 package com.example.ar_tistic
 
+import User
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,8 +13,9 @@ import com.example.classlib.*
 import com.example.stub.*
 
 class RegisterActivity: AppCompatActivity() {
-
+    lateinit var manager:Manager
     override fun onCreate(savedInstanceState: Bundle?) {
+        manager=intent.getSerializableExtra("manager") as Manager
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val returnMain=findViewById<Button>(R.id.returnLogPageButton)
@@ -23,9 +25,9 @@ class RegisterActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        var pers = Manager(Stub()).persistence
+
         register.setOnClickListener{
-            check(pers)
+            check(manager.persistence)
         }
     }
     fun check(pers:IPersistenceManager){//check errors when register button is press
@@ -51,18 +53,16 @@ class RegisterActivity: AppCompatActivity() {
         }
         else{//unused mail
             if(checkPswd()){//similar password
-                pers.createUser(User(0,"","",cttmail,cttPswd1, Date(1999,2,2),
-                    subscribes = hashMapOf(),
-                    nbReport = 0))
+                val usr1:User=createUser(cttmail,cttPswd1)
+                pers.createUser(usr1)
                 //Test -> creation of user
                 println("----------Test ajout----------")
                 for(usr in pers.userHashMap){
                     println(usr.value.name)
                 }
                 //
-                val intent = Intent(applicationContext,ProfilActivity::class.java)
-                intent.putExtra("email", cttmail)
-                intent.putExtra("pswd", cttPswd1)
+                val intent = Intent(applicationContext,MapActivity::class.java)
+                intent.putExtra("manager", manager)
                 startActivity(intent)
                 finish()
             }
@@ -83,5 +83,10 @@ class RegisterActivity: AppCompatActivity() {
             if(usr.email==email)return true
         }
         return false
+    }
+    fun createUser(email:String, pswd:String):User{// return new user with uniq id and the email and mdp giv in parameter
+        var id=1//Id from manager
+        val ppDefault="/img/ppDefault"
+        return User(id, "User"+id, "",email,pswd, Date(1999,2,2),hashMapOf(),0)
     }
 }

@@ -1,12 +1,13 @@
 package com.example.stub
 
+import User
 import com.example.classlib.*
 import com.example.classlib.Collection
 import java.sql.Time
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class Stub : IPersistenceManager {
+class  Stub : IPersistenceManager {
     override var userHashMap=loadData().users
         get() {
             return field
@@ -110,6 +111,14 @@ class Stub : IPersistenceManager {
     }
     override fun deleteUser(id:Int){
         userHashMap.remove(id)
+    }
+    override fun findUserByLogPswd(log: String, psswrd: String): User {
+        for (user in userHashMap.values){
+            if((user.name==log&&psswrd==user.password) || (user.email==log&&psswrd==user.password)){
+                return user
+            }
+        }
+        return User(0, "0", "0","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     }
 
     //DRAWS FUNCTIONS
