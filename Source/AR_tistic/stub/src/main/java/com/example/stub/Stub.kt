@@ -7,17 +7,17 @@ import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
 class  Stub : IPersistenceManager {
-    override var userHashMap=loadData().users
+    var userHashMap=loadData().users
         get() {
             return field
         }
         set(value) {field=value}
 
-    override var intPtsHashMap=loadData().interestPoints
+    var intPtsHashMap=loadData().interestPoints
         get() {return  field}
         set(value) {field=value}
 
-    override var drawsHashMap=loadData().draws
+    var drawsHashMap=loadData().draws
         get() {
             return field
         }

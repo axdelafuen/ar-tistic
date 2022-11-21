@@ -17,12 +17,13 @@ import androidx.core.app.ActivityCompat
 import com.example.classlib.Date
 import com.example.classlib.Manager
 import com.example.classlib.User
+import com.example.clientapi.ClientAPI
 
 class MainActivity : AppCompatActivity() {
     //Main user -> init null
     var usr:User = User(0, "0", "@drawable/pp_edit","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     //Manager -> 'll be given to all activities
-    val manager=Manager(Stub(),usr)// replace by pers needed
+    val manager=Manager(ClientAPI(),usr)// replace by pers needed
     // Persistance loaded
     val pers = manager.persistence.loadData()
     override fun onCreate(savedInstanceState: Bundle?) {

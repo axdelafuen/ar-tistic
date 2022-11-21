@@ -36,6 +36,19 @@ fun main() {
                         )
                     )
                 }
+                get("/user/pwd/{login}/{pwd}"){ctx ->
+                    ctx.json(
+                        toDTO(
+                            data.findUserByLogPswd(
+                                ctx.pathParam("login").toString(),
+                                ctx.pathParam("pwd").toString()
+                            )
+                        )
+                    )
+                }
+                get("/loadData/"){ctx ->
+                    ctx.json(data.loadData())
+                }
                 post("/users") { ctx ->
                     val user = ctx.bodyAsClass<User>()
                     println(user)
