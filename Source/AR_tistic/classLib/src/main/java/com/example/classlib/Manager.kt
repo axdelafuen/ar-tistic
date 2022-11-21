@@ -1,6 +1,5 @@
 package com.example.classlib
 
-import User
 import java.io.Serializable
 
 class Manager(var persistence:IPersistenceManager, var usr:User): Serializable {
