@@ -1,6 +1,5 @@
 package com.example.ar_tistic
 
-import User
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

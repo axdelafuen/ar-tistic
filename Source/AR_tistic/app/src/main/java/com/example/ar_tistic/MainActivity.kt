@@ -1,6 +1,5 @@
 package com.example.ar_tistic
 
-import User
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,6 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import com.example.classlib.Date
 import com.example.classlib.Manager
+import com.example.classlib.User
 
 class MainActivity : AppCompatActivity() {
     //Main user -> init null

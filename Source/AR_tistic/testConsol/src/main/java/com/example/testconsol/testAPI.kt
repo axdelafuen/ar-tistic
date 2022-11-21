@@ -1,12 +1,8 @@
 package com.example.testconsol
 
-import User
 import com.example.classlib.Date
-<<<<<<< HEAD:Source/AR_tistic/testConsol/src/main/java/com/example/testconsol/testAPI.kt
 import com.example.classlib.User
 import com.example.classlibdto.UserDTO
-=======
->>>>>>> origin/v1.2-Register-Profil:Source/AR_tistic/api/src/main/java/com/example/api/apiTestConsole.kt
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader

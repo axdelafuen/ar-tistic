@@ -1,6 +1,5 @@
 package com.example.api
 
-import User
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*

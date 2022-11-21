@@ -1,6 +1,5 @@
 package com.example.ar_tistic
 
-import User
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.Image
