@@ -61,7 +61,7 @@ class RegisterActivity: AppCompatActivity() {
                     println(usr.value.name)
                 }
                 //
-                val intent = Intent(applicationContext,ProfilActivity::class.java)
+                val intent = Intent(applicationContext,MapActivity::class.java)
                 intent.putExtra("manager", manager)
                 startActivity(intent)
                 finish()
