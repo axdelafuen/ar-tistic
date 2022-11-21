@@ -1,6 +1,5 @@
 package com.example.classlib
 
-import User
 import java.io.Serializable
 
 interface IPersistenceManager : Serializable {
