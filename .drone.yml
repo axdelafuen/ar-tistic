@@ -7,20 +7,20 @@ trigger:
         - push
 
 steps:
-- name: api-build
-  image: androidsdk/android-30
-  commands:
-  - cd Source/AR_tistic
-  - ./gradlew api:assemble
-
-- name: app-build
-  image: androidsdk/android-30
+  
+- name: build
+  image: androidsdk/android-31
   commands:
   - cd Source/AR_tistic
   - ./gradlew :app:assembleDebug
+  - ./gradlew stub:assemble
+  - ./gradlew classLib:assemble
+  - ./gradlew classLibDTO:assemble
+  - ./gradlew dataContract:assemble
+  - ./gradlew api:assemble
 
 - name: code analysis
-  image: androidsdk/android-30
+  image: androidsdk/android-31
   environment:
       SONAR_TOKEN:
         from_secret: sonar_token
@@ -29,7 +29,7 @@ steps:
   commands:
   - cd Source/AR_tistic
   - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN}
-  depends_on: [ app-build, api-build]
+  depends_on: [ build ]
 
 - name: deploy-container-mysql
   image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
@@ -47,3 +47,25 @@ steps:
         from_secret: db_user
       CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
         from_secret: db_password
+  
+- name: container-api
+  image: plugins/docker
+  settings:
+    dockerfile: ./Source/AR_tistic/api/src/main/java/com/example/api/Dockerfile
+    context: ./Source/AR_tistic
+    registry: hub.codefirst.iut.uca.fr
+    repo: hub.codefirst.iut.uca.fr/axel.de_la_fuente/api-artistic
+    username:
+      from_secret: secret-registry-username
+    password:
+      from_secret: secret-registry-password
+  depends_on: [ build ]
+  
+- name: deploy-api-containers
+  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+  environment:
+    IMAGENAME: hub.codefirst.iut.uca.fr/axel.de_la_fuente/api-artistic:latest
+    CONTAINERNAME: api-artistic
+    COMMAND: create
+    OVERWRITE: true
+  depends_on: [ container-api ]

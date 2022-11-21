@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/classLib" />
+            <option value="$PROJECT_DIR$/classLibDTO" />
+            <option value="$PROJECT_DIR$/dataContract" />
             <option value="$PROJECT_DIR$/database" />
             <option value="$PROJECT_DIR$/stub" />
             <option value="$PROJECT_DIR$/testConsol" />

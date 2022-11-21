@@ -14,8 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AR_tistic"
 include ':app'
-include ':api'
 include ':stub'
 include ':classLib'
 include ':database'
 include ':testConsol'
+include ':classLibDTO'
+include ':dataContract'
+include ':api'
