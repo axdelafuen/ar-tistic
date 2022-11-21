@@ -2,64 +2,71 @@ package com.example.api
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import com.example.stub.*
 
 import com.example.classlib.*
+import com.example.classlibdto.*
+import com.example.datacontract.toDTO
 
 fun main() {
+            val data = Stub();
 
-    val userDao = UserDao()
-    val drawDao = DrawDao()
-    val intPointDao = InterestPointDao()
+            val app = Javalin.create().apply {
+                exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
+                error(404) { ctx -> ctx.json("not found :(") }
+            }.start(1705)
 
-    val app = Javalin.create().apply {
-        exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
-        error(404) { ctx -> ctx.json("not found") }
-    }.start(7070)
+            app.routes {
 
-    app.routes {
+                //USERS
 
-        //USERS
+                get("/users") { ctx ->
+                    ctx.json(toDTO(data.userHashMap)!!)
+                }
+                get("/users/{user-id}") { ctx ->
+                    ctx.json(toDTO(data.getUserById(ctx.pathParam("user-id").toInt())!!))
+                }
+                get("/users/idx/{idx}/{nb}") { ctx ->
+                    ctx.json(
+                        toDTO(
+                            data.loadUsersIndex(
+                                ctx.pathParam("idx").toInt(),
+                                ctx.pathParam("nb").toInt()
+                            )!!
+                        )
+                    )
+                }
+                post("/users") { ctx ->
+                    val user = ctx.bodyAsClass<User>()
+                    println(user)
+                    data.createUser(
+                        User(
+                            id = 0,
+                            name = user.name,
+                            profilePicture = user.profilePicture,
+                            email = user.email,
+                            password = user.password,
+                            birthDate = user.birthDate,
+                            subscribes = user.subscribes,
+                            nbReport = user.nbReport
+                        )
+                    )
+                    ctx.status(201)
+                }
+                put("/users/{user-id}") { ctx ->
+                    val user = ctx.bodyAsClass<User>()
+                    data.updateUser(
+                        id = ctx.pathParam("user-id").toInt(),
+                        usr = user
+                    )
+                    ctx.status(204)
+                }
 
-        get("/users") { ctx ->
-            ctx.json(userDao.getUsers()!!)
-        }
-        get("/users/{user-id}") { ctx ->
-            ctx.json(userDao.getUserById(ctx.pathParam("user-id").toInt())!!)
-        }
-        get("/users/idx/{idx}/{nb}"){ctx->
-            ctx.json(userDao.getUserWithIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
-        }
-        post("/users") { ctx ->
-            val user = ctx.bodyAsClass<User>()
-            println(user)
-            userDao.createUser(
-                User(
-                    id =0,
-                name = user.name,
-                profilePicture = user.profilePicture,
-                email = user.email,
-                password = user.password,
-                birthDate = user.birthDate,
-                subscribes = user.subscribes,
-                nbReport = user.nbReport
-                )
-            )
-            ctx.status(201)
-        }
-        put("/users/{user-id}") { ctx ->
-            val user = ctx.bodyAsClass<User>()
-            userDao.updateUser(
-                id = ctx.pathParam("user-id").toInt(),
-                user = user
-            )
-            ctx.status(204)
-        }
-
-        delete("/users/{user-id}") { ctx ->
-            userDao.deleteUser(ctx.pathParam("user-id").toInt())
-            ctx.status(204)
-        }
-
+                delete("/users/{user-id}") { ctx ->
+                    data.deleteUser(ctx.pathParam("user-id").toInt())
+                    ctx.status(204)
+                }
+/*
         // DRAWS
 
         get("/draws") { ctx ->
@@ -139,7 +146,6 @@ fun main() {
             intPointDao.deleteInterestPoint(ctx.pathParam("intPoint-id").toInt())
             ctx.status(204)
         }
-
-    }
+*/ }
 }
 

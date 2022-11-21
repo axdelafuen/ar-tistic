@@ -11,4 +11,6 @@ java {
 dependencies {
     implementation project(':stub')
     implementation project(':classLib')
+    implementation project(':classLibDTO')
+    implementation 'com.google.code.gson:gson:2.8.9'
 }

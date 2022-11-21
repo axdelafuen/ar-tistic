@@ -1,6 +1,6 @@
 package com.example.classlib
 
-data class Evaluation(
+class Evaluation(
     override val id: Int,
     override val content: String,
     override val author: User,
