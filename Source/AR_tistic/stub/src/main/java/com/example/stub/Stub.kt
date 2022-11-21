@@ -2,7 +2,6 @@ package com.example.stub
 
 import com.example.classlib.*
 import com.example.classlib.Collection
-import java.sql.Time
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
@@ -51,13 +50,13 @@ class  Stub : IPersistenceManager {
         return hashMapOf(
             0 to Draw(
                 id =0,
-                name ="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
+                name ="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24,10,10), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
             1 to Draw(
                 id =1,
-                name ="bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
+                name ="bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24,10,10), authors = hashMapOf(), nbView = 60, nbReport = 0 ),
             2 to Draw(
                 id =2,
-                name ="Peinture", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24), authors = hashMapOf(), nbView = 60, nbReport = 0 )
+                name ="Peinture", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24,10,10), authors = hashMapOf(), nbView = 60, nbReport = 0 )
         )
     }
     fun loadDataIdx(idxUser:Int, nbUser:Int,idxPt:Int, nbPt:Int,idxDraw: Int, nbDraw:Int):(com.example.classlib.Collection){

@@ -1,6 +1,5 @@
 package com.example.classlibdto
 
-import java.sql.Time
 import com.example.classlib.*
 
 data class DrawDTO (

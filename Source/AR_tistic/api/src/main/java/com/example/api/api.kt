@@ -5,7 +5,6 @@ import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*
 
 import com.example.classlib.*
-import com.example.classlibdto.*
 import com.example.datacontract.toDTO
 
 fun main() {
@@ -46,7 +45,7 @@ fun main() {
                         )
                     )
                 }
-                get("/loadData/"){ctx ->
+                get("/loadData"){ctx ->
                     ctx.json(data.loadData())
                 }
                 post("/users") { ctx ->

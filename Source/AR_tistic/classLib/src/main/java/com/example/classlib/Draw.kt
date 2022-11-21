@@ -1,6 +1,5 @@
 package com.example.classlib
 
-import java.sql.Time
 import kotlin.collections.HashMap
 
 class Draw{
