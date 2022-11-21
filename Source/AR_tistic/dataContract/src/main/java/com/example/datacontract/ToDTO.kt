@@ -4,7 +4,7 @@ import com.example.classlib.*
 import com.example.classlibdto.*
 
 fun toDTO(user:User):UserDTO{
-    return UserDTO(user.id,user.name,user.profilePicture,user.email,user.password,user.birthDate,user.subscribes,user.nbReport);
+    return UserDTO(user.id,user.email,user.profilePicture,user.name,user.password,user.birthDate,user.subscribes,user.nbReport);
 }
 
 fun toDTO(users:HashMap<Int,User>):HashMap<Int,UserDTO>{
