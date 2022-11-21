@@ -13,4 +13,3 @@ class User(var id:Int, var name: String, var profilePicture:String="@drawable/pp
         this.nbReport=nbReport
     }
 }
-
