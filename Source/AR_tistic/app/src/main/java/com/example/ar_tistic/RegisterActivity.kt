@@ -12,6 +12,7 @@ import com.example.classlib.*
 import com.example.stub.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class RegisterActivity: AppCompatActivity() {
@@ -27,17 +28,10 @@ class RegisterActivity: AppCompatActivity() {
         }
 
         register.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                kotlin.runCatching {
-                    check(manager.persistence)
-                }
-            }
-            runOnUiThread{
-                // chargmement pdnt execution
-            }
+            check()
         }
     }
-    fun check(pers:IPersistenceManager){//check errors when register button is press
+    fun check(){//check errors when register button is press
 
         val email = findViewById<EditText>(R.id.email)
         val cttmail=email.text.toString()
@@ -50,36 +44,41 @@ class RegisterActivity: AppCompatActivity() {
         errMail.visibility= View.INVISIBLE
         errPswd.visibility= View.INVISIBLE
 
-        if(checkEmail(cttmail)){//used email
-            errMail.visibility= View.VISIBLE
-        }
-        else {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                if(checkEmail(cttmail)){//used email
+                    errMail.visibility= View.VISIBLE
+                }
 
-            if (cttmail.trim().isEmpty() || cttPswd1.trim().isEmpty() || cttPswd2.trim().isEmpty()) {//empty fields
-                Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
-            }
-            else {//unused mail
-                if (checkPswd()) {//similar password
-                    val usr1: User = createUser(cttmail, cttPswd1)
-                    pers.createUser(usr1)
-                    //Test -> creation of user
-                    /*
-                println("----------Test ajout----------")
-                for(usr in pers.userHashMap){
-                    println(usr.value.name)
-                }
-                 */
-                    //
-                    val intent = Intent(applicationContext, MapActivity::class.java)
-                    intent.putExtra("manager", manager)
-                    startActivity(intent)
-                    finish()
-                }
                 else {
-                    errPswd.visibility = View.VISIBLE
+                    if (cttmail.trim().isEmpty() || cttPswd1.trim().isEmpty() || cttPswd2.trim().isEmpty()) {//empty fields
+                        Toast.makeText(this@RegisterActivity,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
+                    }
+
+                    else {//unused mail
+                        CoroutineScope(Dispatchers.IO).launch {
+                            runCatching {
+                                if (checkPswd()) {//similar password
+                                    val usr1: User = createUser(cttmail, cttPswd1)
+                                    manager.persistence.createUser(usr1)
+                                    //Test -> creation of user
+                                    val intent = Intent(applicationContext, MapActivity::class.java)
+                                    intent.putExtra("manager", manager)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    errPswd.visibility = View.VISIBLE
+                                }
+                            }
+                        }
+                    }
+                        runOnUiThread{
+                            ///
+                        }
+                    }
                 }
             }
-        }
+
     }
     fun checkPswd():Boolean{//return true if the 2 password are equal
         val pswd1 = findViewById<EditText>(R.id.psswd)
@@ -89,7 +88,7 @@ class RegisterActivity: AppCompatActivity() {
         return cttPswd1.equals(cttPswd2)
     }
     fun checkEmail(email:String):Boolean{//return true if email is already used
-        if(email== manager.persistence.getuserByNameOrEmail(email)!!.email || email == manager.persistence.getuserByNameOrEmail(email)!!.name ){
+        if(email.equals(manager.persistence.getuserByEmail(email)?.email)){
             return true
         }
         return false

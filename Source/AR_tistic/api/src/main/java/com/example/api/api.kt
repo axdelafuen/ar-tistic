@@ -6,13 +6,14 @@ import com.example.stub.*
 
 import com.example.classlib.*
 import com.example.datacontract.toDTO
+import com.google.gson.Gson
 
 fun main() {
             val data = Stub();
 
             val app = Javalin.create().apply {
                 exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
-                error(404) { ctx -> ctx.json("not found :(") }
+                error(404) { ctx -> ctx.json(Gson().toJson("notFound")) }
             }.start(1705)
 
             app.routes {
@@ -25,8 +26,8 @@ fun main() {
                 get("/users/{user-id}") { ctx ->
                     ctx.json(toDTO(data.getUserById(ctx.pathParam("user-id").toInt())!!))
                 }
-                get("/users/name/{content}"){ ctx ->
-                    ctx.json(toDTO(data.getuserByNameOrEmail(ctx.pathParam("content").toString())!!))
+                get("/users/email/{content}"){ ctx ->
+                    ctx.json(toDTO(data.getuserByEmail(ctx.pathParam("content").toString())!!))
                 }
                 get("/users/idx/{idx}/{nb}") { ctx ->
                     ctx.json(

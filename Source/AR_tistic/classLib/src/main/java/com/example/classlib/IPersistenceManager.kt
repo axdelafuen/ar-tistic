@@ -4,8 +4,8 @@ import java.io.Serializable
 
 interface IPersistenceManager : Serializable {
     // USER METHODS
-    fun getUserById(idUser:Int):User?
-    fun getuserByNameOrEmail(content:String):User?
+    fun getUserById(idUser:Int):User
+    fun getuserByEmail(content:String):User
     fun createUser(usr:User)
     fun updateUser(id:Int,usr:User)
     fun deleteUser(id:Int)

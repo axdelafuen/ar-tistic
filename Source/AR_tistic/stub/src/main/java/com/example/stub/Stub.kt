@@ -99,17 +99,17 @@ class  Stub : IPersistenceManager {
     //USERS FUNCTIONS
 
 
-    override fun getUserById(idUser:Int):User?{
-        return userHashMap[idUser]
+    override fun getUserById(idUser:Int):User{
+        return userHashMap[idUser]!!
     }
 
-    override fun getuserByNameOrEmail(content: String): User? {
+    override fun getuserByEmail(content: String): User {
         for(user in userHashMap){
-            if(content == user.value.name || content == user.value.email){
+            if(content == user.value.email){
                 return user.value
             }
         }
-        return null
+        return null!!
     }
     override fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()

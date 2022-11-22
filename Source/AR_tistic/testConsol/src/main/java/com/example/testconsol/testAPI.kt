@@ -29,7 +29,8 @@ fun main(){
     //println(gson.fromJson(get(URL(url+"loadData")), Collection::class.java).users.get(1)?.name)
 
     var api = ClientAPI()
-    var u = api.findUserByLogPswd("1","1")
+    var u = api.getuserByEmail("alice@alice.kt")
+
     //println(u.name)
 
     //println("\n"+jsonData+"\n")
