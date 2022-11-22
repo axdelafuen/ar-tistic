@@ -21,21 +21,25 @@ fun main() {
                 //USERS
 
                 get("/users") { ctx ->
-                    ctx.json(toDTO(data.userHashMap)!!)
+                    ctx.json(toDTO(data.userHashMap))
                 }
                 get("/users/{user-id}") { ctx ->
                     val res = data.getUserById(ctx.pathParam("user-id").toInt())
                     if(res==null){
                         ctx.json(Gson().toJson("notFound"))
                     }
-                    ctx.json(toDTO(res))
+                    else{
+                        ctx.json(toDTO(res))
+                    }
                 }
                 get("/users/email/{content}"){ ctx ->
                     val res = data.getuserByEmail(ctx.pathParam("context").toString())
                     if(res==null){
                         ctx.json(Gson().toJson("notFound"))
                     }
-                    ctx.json(toDTO(res))
+                    else{
+                        ctx.json(toDTO(res))
+                    }
                 }
                 get("/users/idx/{idx}/{nb}") { ctx ->
                     ctx.json(
@@ -43,19 +47,21 @@ fun main() {
                             data.loadUsersIndex(
                                 ctx.pathParam("idx").toInt(),
                                 ctx.pathParam("nb").toInt()
-                            )!!
+                            )
                         )
                     )
                 }
                 get("/user/pwd/{login}/{pwd}"){ctx ->
-                    ctx.json(
-                        toDTO(
-                            data.findUserByLogPswd(
-                                ctx.pathParam("login").toString(),
-                                ctx.pathParam("pwd").toString()
-                            )
-                        )
+                    val res = data.findUserByLogPswd(
+                        ctx.pathParam("login").toString(),
+                        ctx.pathParam("pwd").toString()
                     )
+                    if(res==null){
+                        ctx.json(Gson().toJson("notFound"))
+                    }
+                    else{
+                        ctx.json(toDTO(res))
+                    }
                 }
                 get("/loadData"){ctx ->
                     ctx.json(data.loadData())

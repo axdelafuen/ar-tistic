@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     /// FUNCTION
     /// Login and mdp exists
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        if(name.equals(manager.persistence.findUserByLogPswd(name,pswd).name) || name.equals(manager.persistence.findUserByLogPswd(name,pswd).email)){
+        if(name.equals(manager.persistence.findUserByLogPswd(name,pswd)?.name) || name.equals(manager.persistence.findUserByLogPswd(name,pswd)?.email)){
             return true
         }
         return false

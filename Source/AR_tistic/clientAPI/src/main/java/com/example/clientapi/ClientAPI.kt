@@ -18,16 +18,15 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         return Gson().fromJson(get(URL(url+"loadData")),Collection::class.java)
     }
 
-    override fun getUserById(idUser: Int): User {
-        var res = get(URL(url+"users"))
-        if(res=="" || res == null){
-            return null!!
+    override fun getUserById(idUser: Int): User? {
+        val res = get(URL(url+"users"))
+        if(res=="notFound"){
+            return null
         }
         return Gson().fromJson(res,User::class.java)
-
     }
 
-    override fun getuserByEmail(content: String): User {
+    override fun getuserByEmail(content: String): User? {
         return Gson().fromJson(get(URL(url+"users/email/"+content)),User::class.java)
     }
 
@@ -43,7 +42,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         delete(URL(url+"users"+id as String))
     }
 
-    override fun findUserByLogPswd(log: String, psswrd: String): User {
+    override fun findUserByLogPswd(log: String, psswrd: String): User? {
         return Gson().fromJson(get(URL(url+"user/pwd/"+log+"/"+psswrd+"/")),User::class.java)
     }
 
@@ -51,19 +50,14 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     @Suppress("NewApi")
     private fun get(url: URL):String{
-        var jsonStr: String? = null
+        lateinit var jsonStr: String
         with(url.openConnection() as HttpURLConnection){
             requestMethod = "GET"
             inputStream.bufferedReader().use{
                 it.lines().forEach{ line -> jsonStr = line }
             }
         }
-        //println(jsonStr)
-        //println("\n")
-        if(jsonStr==null){
-            return null!!
-        }
-        return jsonStr as String
+        return jsonStr
     }
     private fun delete(url: URL){
         with(url.openConnection() as HttpURLConnection){
