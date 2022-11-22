@@ -3,9 +3,6 @@ package com.example.classlib
 import java.io.Serializable
 
 interface IPersistenceManager : Serializable {
-    var userHashMap:HashMap<Int,User>
-    var intPtsHashMap:HashMap<Int,InterestPoint>
-    var drawsHashMap:HashMap<Int,Draw>
     // USER METHODS
     fun loadData():(com.example.classlib.Collection)
     fun getUserById(idUser:Int):User?

@@ -55,10 +55,12 @@ class RegisterActivity: AppCompatActivity() {
                 val usr1:User=createUser(cttmail,cttPswd1)
                 pers.createUser(usr1)
                 //Test -> creation of user
+                /*
                 println("----------Test ajout----------")
                 for(usr in pers.userHashMap){
                     println(usr.value.name)
                 }
+                 */
                 //
                 val intent = Intent(applicationContext,MapActivity::class.java)
                 intent.putExtra("manager", manager)

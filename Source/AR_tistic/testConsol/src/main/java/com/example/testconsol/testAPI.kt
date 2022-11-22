@@ -1,8 +1,10 @@
 package com.example.testconsol
 
+import com.example.classlib.Collection
 import com.example.classlib.Date
 import com.example.classlib.User
 import com.example.classlibdto.UserDTO
+import com.example.clientapi.ClientAPI
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -12,7 +14,7 @@ import java.net.URL
 
 fun main(){
     println("API - Test Console : \n")
-    var urlAllUsers = URL("http://localhost:7070/users/")
+    var url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
     var urlUserById0 = URL("http://localhost:7070/users/0/")
     var urlUserById2 = URL("http://localhost:7070/users/2/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
@@ -23,9 +25,18 @@ fun main(){
     val user = UserDTO(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
     val gson = Gson()
     val jsonData = gson.toJson(user)
+
+    //println(gson.fromJson(get(URL(url+"loadData")), Collection::class.java).users.get(1)?.name)
+
+    var api = ClientAPI()
+    var u = api.findUserByLogPswd("1","1")
+    //println(u.name)
+
     //println("\n"+jsonData+"\n")
 
+    //println(get(URL(urlAllUsers+"users/")))
 
+/*
     println(get(urlAllUsers))
     println("//////////////")
     post(urlAllUsers,jsonData)
@@ -35,6 +46,7 @@ fun main(){
     println("//////////////")
     val usr2 = gson.fromJson(get(urlUserById3),User::class.java)
     println(usr2.name+(usr2.subscribes.get(0)?.name))
+*/
     /*
     get(urlAllUsers)
     put(urlUserById0,jsonData)

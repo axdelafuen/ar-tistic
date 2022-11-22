@@ -17,15 +17,22 @@ import androidx.core.app.ActivityCompat
 import com.example.classlib.Date
 import com.example.classlib.Manager
 import com.example.classlib.User
+import com.example.clientapi.ClientAPI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
-    //Main user -> init null
-    var usr:User = User(0, "0", "@drawable/pp_edit","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     //Manager -> 'll be given to all activities
-    val manager=Manager(Stub(),usr)// replace by pers needed
+    val manager=Manager(ClientAPI())
     // Persistance loaded
-    val pers = manager.persistence.loadData()
-    override fun onCreate(savedInstanceState: Bundle?) {
+    lateinit var pers:com.example.classlib.Collection
+    var thread = Thread({
+        pers = manager.persistence.loadData()
+        //println(pers.users.get(2)!!.name)
+    }).start()
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -38,54 +45,74 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun checkLogPswd(){
+    private fun checkLogPswd() {
+
         val connect = findViewById<Button>(R.id.LoginButton)
         val log = findViewById<EditText>(R.id.LoginEdit)
         val mdp = findViewById<EditText>(R.id.MdpEdit)
         val err = findViewById<TextView>(R.id.ErrorLog)
+
+
+
         connect.setOnClickListener {
-            err.visibility= View.GONE
-            val cttLog=log.text.toString()
-            val cttMdp=mdp.text.toString()
+            err.visibility = View.GONE
+            val cttLog = log.text.toString()
+            val cttMdp = mdp.text.toString()
             //Empty fields
-            if (cttMdp.trim().isEmpty()||cttLog.trim().isEmpty()){
-                Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
+            if (cttMdp.trim().isEmpty() || cttLog.trim().isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "l'Email ou le mot de passe ne peut etre vide",
+                    Toast.LENGTH_LONG
+                ).show()
             }
             else{
-                //check passwrd & log
-                if(!existLogPasswd(cttLog,cttMdp)){// non equal
-                    err.visibility= View.VISIBLE
-                }
-                //found log & password
-                else{
-                    //Permissions localisation
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-                        {
-                            // Add user to pers once passed all verifications
-                            manager.usr=loadUser(cttLog,cttMdp)
-                            val intent = Intent(applicationContext, MapActivity::class.java)
-                            intent.putExtra("manager", manager)
-                            startActivity(intent)
-                            finish()
+                CoroutineScope(Dispatchers.IO).launch {
+                kotlin.runCatching {
+                        //check passwrd & log
+                        if (!existLogPasswd(cttLog, cttMdp)) {// non equal
+                            err.visibility = View.VISIBLE
                         }
-                        else {
-                            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1)
-                        }
+                    //found log & password
+                    else {
+                        //Permissions localisation
+                        if (Build.VERSION.SDK_INT >= 23) {
+                            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                                checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                            ) {
+                                // Add user to pers once passed all verifications
+                                manager.usr = loadUser(cttLog, cttMdp)
+                                val intent = Intent(applicationContext, MapActivity::class.java)
+                                intent.putExtra("manager", manager)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                ActivityCompat.requestPermissions(
+                                    this@MainActivity,
+                                    arrayOf(
+                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION
+                                    ),
+                                    1
+                                )
+                            }
                         }
                     }
                 }
+                }
+                runOnUiThread {
+                    //lancer un logo chargement
+                }
             }
         }
-
+    }
     /// FUNCTION
     /// Login and mdp exists
     private fun existLogPasswd(name:String, pswd:String):Boolean{
         val users= pers.users
         for (user in users.values){
             if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
-                usr=user
+                manager.usr=user
                 return true
             }
         }
@@ -94,6 +121,7 @@ class MainActivity : AppCompatActivity() {
     /// FUNCTION
     /// Load by the persistance by log & passwrd
     private fun loadUser(log:String, pswd:String):User{// add user to the pers when
-        return manager.persistence.findUserByLogPswd(log,pswd)
+        return manager.persistence.findUserByLogPswd(log, pswd)
     }
+
 }

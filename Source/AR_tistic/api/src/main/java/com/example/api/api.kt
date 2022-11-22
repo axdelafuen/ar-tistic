@@ -5,7 +5,6 @@ import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*
 
 import com.example.classlib.*
-import com.example.classlibdto.*
 import com.example.datacontract.toDTO
 
 fun main() {
@@ -35,6 +34,19 @@ fun main() {
                             )!!
                         )
                     )
+                }
+                get("/user/pwd/{login}/{pwd}"){ctx ->
+                    ctx.json(
+                        toDTO(
+                            data.findUserByLogPswd(
+                                ctx.pathParam("login").toString(),
+                                ctx.pathParam("pwd").toString()
+                            )
+                        )
+                    )
+                }
+                get("/loadData"){ctx ->
+                    ctx.json(data.loadData())
                 }
                 post("/users") { ctx ->
                     val user = ctx.bodyAsClass<User>()
