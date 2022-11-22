@@ -25,6 +25,9 @@ fun main() {
                 get("/users/{user-id}") { ctx ->
                     ctx.json(toDTO(data.getUserById(ctx.pathParam("user-id").toInt())!!))
                 }
+                get("/users/name/{content}"){ ctx ->
+                    ctx.json(toDTO(data.getuserByNameOrEmail(ctx.pathParam("content").toString())!!))
+                }
                 get("/users/idx/{idx}/{nb}") { ctx ->
                     ctx.json(
                         toDTO(

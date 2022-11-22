@@ -24,7 +24,7 @@ class  Stub : IPersistenceManager {
 
     var lastId:AtomicInteger= AtomicInteger(userHashMap.size-1)
 
-    override fun loadData():(com.example.classlib.Collection){
+    fun loadData():(com.example.classlib.Collection){
         var collec:com.example.classlib.Collection = Collection(loadUsers(),loadInterestPoints(),loadDraws())
         return collec
     }
@@ -97,8 +97,19 @@ class  Stub : IPersistenceManager {
 
 
     //USERS FUNCTIONS
+
+
     override fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
+    }
+
+    override fun getuserByNameOrEmail(content: String): User? {
+        for(user in userHashMap){
+            if(content == user.value.name || content == user.value.email){
+                return user.value
+            }
+        }
+        return null
     }
     override fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()

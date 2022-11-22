@@ -14,12 +14,16 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     val url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
 
-    override fun loadData(): Collection {
+    fun loadData(): Collection {
         return Gson().fromJson(get(URL(url+"loadData")),Collection::class.java)
     }
 
     override fun getUserById(idUser: Int): User? {
         return Gson().fromJson(get(URL(url+"users")),User::class.java)
+    }
+
+    override fun getuserByNameOrEmail(content: String): User? {
+        return Gson().fromJson(get(URL(url+"users/name/"+content)),User::class.java)
     }
 
     override fun createUser(usr: User) {

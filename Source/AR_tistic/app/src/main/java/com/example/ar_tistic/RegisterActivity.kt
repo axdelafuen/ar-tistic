@@ -10,6 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.classlib.*
 import com.example.stub.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RegisterActivity: AppCompatActivity() {
     lateinit var manager:Manager
@@ -24,7 +27,14 @@ class RegisterActivity: AppCompatActivity() {
         }
 
         register.setOnClickListener{
-            check(manager.persistence)
+            CoroutineScope(Dispatchers.IO).launch{
+                kotlin.runCatching {
+                    check(manager.persistence)
+                }
+            }
+            runOnUiThread{
+                // chargmement pdnt execution
+            }
         }
     }
     fun check(pers:IPersistenceManager){//check errors when register button is press
@@ -40,33 +50,34 @@ class RegisterActivity: AppCompatActivity() {
         errMail.visibility= View.INVISIBLE
         errPswd.visibility= View.INVISIBLE
 
-        val users= pers.loadData().users
-
-        if(checkEmail(users,cttmail)){//used email
+        if(checkEmail(cttmail)){//used email
             errMail.visibility= View.VISIBLE
         }
-        else if (cttmail.trim().isEmpty()||cttPswd1.trim().isEmpty()||cttPswd2.trim().isEmpty()){//empty fields
-            Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
-        }
-        else{//unused mail
-            if(checkPswd()){//similar password
-                val usr1:User=createUser(cttmail,cttPswd1)
-                pers.createUser(usr1)
-                //Test -> creation of user
-                /*
+        else {
+
+            if (cttmail.trim().isEmpty() || cttPswd1.trim().isEmpty() || cttPswd2.trim().isEmpty()) {//empty fields
+                Toast.makeText(this,"l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG).show()
+            }
+            else {//unused mail
+                if (checkPswd()) {//similar password
+                    val usr1: User = createUser(cttmail, cttPswd1)
+                    pers.createUser(usr1)
+                    //Test -> creation of user
+                    /*
                 println("----------Test ajout----------")
                 for(usr in pers.userHashMap){
                     println(usr.value.name)
                 }
                  */
-                //
-                val intent = Intent(applicationContext,MapActivity::class.java)
-                intent.putExtra("manager", manager)
-                startActivity(intent)
-                finish()
-            }
-            else{
-                errPswd.visibility= View.VISIBLE
+                    //
+                    val intent = Intent(applicationContext, MapActivity::class.java)
+                    intent.putExtra("manager", manager)
+                    startActivity(intent)
+                    finish()
+                }
+                else {
+                    errPswd.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -77,9 +88,9 @@ class RegisterActivity: AppCompatActivity() {
         val cttPswd2=pswd2.text.toString()
         return cttPswd1.equals(cttPswd2)
     }
-    fun checkEmail(users:HashMap<Int,User>,email:String):Boolean{//return true if email is already used
-        for (usr in users.values) {//check if email already used
-            if(usr.email==email)return true
+    fun checkEmail(email:String):Boolean{//return true if email is already used
+        if(email== manager.persistence.getuserByNameOrEmail(email)!!.email || email == manager.persistence.getuserByNameOrEmail(email)!!.name ){
+            return true
         }
         return false
     }

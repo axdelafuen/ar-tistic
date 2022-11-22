@@ -27,11 +27,6 @@ class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
     val manager=Manager(ClientAPI())
     // Persistance loaded
-    lateinit var pers:com.example.classlib.Collection
-    var thread = Thread({
-        pers = manager.persistence.loadData()
-        //println(pers.users.get(2)!!.name)
-    }).start()
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -50,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         val log = findViewById<EditText>(R.id.LoginEdit)
         val mdp = findViewById<EditText>(R.id.MdpEdit)
         val err = findViewById<TextView>(R.id.ErrorLog)
-
-
 
         connect.setOnClickListener {
             err.visibility = View.GONE
@@ -80,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                                 checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                             ) {
                                 // Add user to pers once passed all verifications
-                                manager.usr = loadUser(cttLog, cttMdp)
+                                //manager.usr = loadUser(cttLog, cttMdp)
                                 val intent = Intent(applicationContext, MapActivity::class.java)
                                 intent.putExtra("manager", manager)
                                 startActivity(intent)
@@ -108,19 +101,9 @@ class MainActivity : AppCompatActivity() {
     /// FUNCTION
     /// Login and mdp exists
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        val users= pers.users
-        for (user in users.values){
-            if((user.name==name&&pswd==user.password) || (user.email==name&&pswd==user.password)){
-                manager.usr=user
-                return true
-            }
+        if(name == manager.persistence.findUserByLogPswd(name,pswd).name){
+            return true
         }
         return false
     }
-    /// FUNCTION
-    /// Load by the persistance by log & passwrd
-    private fun loadUser(log:String, pswd:String):User{// add user to the pers when
-        return manager.persistence.findUserByLogPswd(log, pswd)
-    }
-
 }
