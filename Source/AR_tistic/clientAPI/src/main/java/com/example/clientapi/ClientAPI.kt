@@ -20,8 +20,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     override fun getUserById(idUser: Int): User {
         var res = get(URL(url+"users"))
-        println(res);
-        return null!!
+        if(res=="" || res == null){
+            return null!!
+        }
+        return Gson().fromJson(res,User::class.java)
 
     }
 
@@ -49,7 +51,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     @Suppress("NewApi")
     private fun get(url: URL):String{
-        lateinit var jsonStr:String
+        var jsonStr: String? = null
         with(url.openConnection() as HttpURLConnection){
             requestMethod = "GET"
             inputStream.bufferedReader().use{
@@ -58,7 +60,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }
         //println(jsonStr)
         //println("\n")
-        return jsonStr
+        if(jsonStr==null){
+            return null!!
+        }
+        return jsonStr as String
     }
     private fun delete(url: URL){
         with(url.openConnection() as HttpURLConnection){

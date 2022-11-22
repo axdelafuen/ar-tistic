@@ -24,10 +24,18 @@ fun main() {
                     ctx.json(toDTO(data.userHashMap)!!)
                 }
                 get("/users/{user-id}") { ctx ->
-                    ctx.json(toDTO(data.getUserById(ctx.pathParam("user-id").toInt())!!))
+                    val res = data.getUserById(ctx.pathParam("user-id").toInt())
+                    if(res==null){
+                        ctx.json(Gson().toJson("notFound"))
+                    }
+                    ctx.json(toDTO(res))
                 }
                 get("/users/email/{content}"){ ctx ->
-                    ctx.json(toDTO(data.getuserByEmail(ctx.pathParam("content").toString())!!))
+                    val res = data.getuserByEmail(ctx.pathParam("context").toString())
+                    if(res==null){
+                        ctx.json(Gson().toJson("notFound"))
+                    }
+                    ctx.json(toDTO(res))
                 }
                 get("/users/idx/{idx}/{nb}") { ctx ->
                     ctx.json(
