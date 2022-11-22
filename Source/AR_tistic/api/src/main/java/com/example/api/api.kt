@@ -5,6 +5,7 @@ import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*
 
 import com.example.classlib.*
+import com.example.classlibdto.UserDTO
 import com.example.datacontract.toDTO
 import com.google.gson.Gson
 
@@ -26,16 +27,16 @@ fun main() {
                 get("/users/{user-id}") { ctx ->
                     val res = data.getUserById(ctx.pathParam("user-id").toInt())
                     if(res==null){
-                        ctx.json(Gson().toJson("notFound"))
+                        ctx.json(Gson().toJson(UserDTO(404,"notFound","notFound","notFound","notFound",Date(404,404,404), hashMapOf(),4040)))
                     }
                     else{
                         ctx.json(toDTO(res))
                     }
                 }
                 get("/users/email/{content}"){ ctx ->
-                    val res = data.getuserByEmail(ctx.pathParam("content").toString())
+                    val res = data.getuserByEmail(ctx.pathParam("contect").toString())
                     if(res==null){
-                        ctx.json(Gson().toJson("notFound"))
+                        ctx.json(Gson().toJson(UserDTO(404,"notFound","notFound","notFound","notFound",Date(404,404,404), hashMapOf(),4040)))
                     }
                     else{
                         ctx.json(toDTO(res))

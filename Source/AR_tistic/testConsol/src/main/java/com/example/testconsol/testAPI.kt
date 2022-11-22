@@ -29,8 +29,8 @@ fun main(){
     //println(gson.fromJson(get(URL(url+"loadData")), Collection::class.java).users.get(1)?.name)
 
     var api = ClientAPI()
-    if(api.getuserByEmail("alice@alaaaice.kt")==null){
-    }
+    println(api.getUserById(8795)?.name)
+    println(api.getuserByEmail("alicaaae@alice.kt")?.name)
 
     //println(u.name)
 

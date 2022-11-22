@@ -19,11 +19,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun getUserById(idUser: Int): User? {
-        val res = get(URL(url+"users"))
-        if(res=="notFound"){
-            return null
-        }
-        return Gson().fromJson(res,User::class.java)
+        return Gson().fromJson(get(URL(url+"users/"+idUser.toString())),User::class.java)
     }
 
     override fun getuserByEmail(content: String): User? {
