@@ -20,8 +20,6 @@ class RegisterActivity: AppCompatActivity() {
         val returnMain=findViewById<Button>(R.id.returnLogPageButton)
         val register=findViewById<Button>(R.id.registerB)
         returnMain.setOnClickListener{
-            val intent = Intent(applicationContext,MainActivity::class.java)
-            startActivity(intent)
             finish()
         }
 

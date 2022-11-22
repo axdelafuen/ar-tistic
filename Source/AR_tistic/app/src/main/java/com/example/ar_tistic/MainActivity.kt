@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext,RegisterActivity::class.java)
             intent.putExtra("manager", manager)
             startActivity(intent)
-            finish()
         }
     }
     private fun checkLogPswd() {
