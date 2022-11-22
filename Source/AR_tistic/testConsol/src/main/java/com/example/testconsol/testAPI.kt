@@ -30,7 +30,6 @@ fun main(){
 
     var api = ClientAPI()
     if(api.getuserByEmail("alice@alaaaice.kt")==null){
-        println("ftg aurélien")
     }
 
     //println(u.name)

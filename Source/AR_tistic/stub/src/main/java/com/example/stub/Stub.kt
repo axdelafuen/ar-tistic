@@ -104,9 +104,9 @@ class  Stub : IPersistenceManager {
     }
 
     override fun getuserByEmail(content: String): User? {
-        for(user in userHashMap){
-            if(content == user.value.email){
-                return user.value
+        for(user in userHashMap.values){
+            if(content.equals(user.email)){
+                return user
             }
         }
         return null

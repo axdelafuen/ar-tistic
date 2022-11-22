@@ -33,7 +33,7 @@ fun main() {
                     }
                 }
                 get("/users/email/{content}"){ ctx ->
-                    val res = data.getuserByEmail(ctx.pathParam("context").toString())
+                    val res = data.getuserByEmail(ctx.pathParam("content").toString())
                     if(res==null){
                         ctx.json(Gson().toJson("notFound"))
                     }
