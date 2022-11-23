@@ -1,20 +1,14 @@
 package com.example.database
 
-import com.example.classlib.Date
-import com.example.database.Collaborateds.references
-import com.example.database.Noteds.references
-import com.sun.xml.internal.stream.Entity.InternalEntity
-import kotlinx.datetime.LocalDate
+import org.jetbrains.exposed.dao.IntEntity
+import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.javatime.date
-import org.jetbrains.exposed.sql.javatime.datetime
 import org.jetbrains.exposed.sql.javatime.time
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalTime
-import java.time.temporal.Temporal
-import javax.swing.text.html.parser.Entity
 
 fun main() {
     Database.connect(
@@ -27,6 +21,7 @@ fun main() {
         addLogger(StdOutSqlLogger)
 
         // DROP TABLES
+
         SchemaUtils.drop(Collaborateds)
         SchemaUtils.drop(ActionsDone)
         SchemaUtils.drop(Relations)
@@ -64,7 +59,6 @@ object Users: IntIdTable(){
 object Draws: IntIdTable(){
     val vname: Column<String> = varchar("imageName",50)
     val vimage: Column<String> = varchar("image",100)
-    val vprofilePicture: Column<String> = varchar("profilePicture",100)
     val vlifetime: Column<LocalTime> = time("password")
     val vcreationdate: Column<java.time.LocalDate> = date("date")
     val vinterestpoint: Column<Int> = integer("interestPointCreation").references(InterestPoints.id)
@@ -106,10 +100,71 @@ object Collaborateds: IntIdTable() {
 object Commenteds: IntIdTable(){
     val vidUser: Column<Int> = integer("idUser").references(Users.id)
     val vidDraw: Column<Int> = integer("idDraw").references(Draws.id)
-    val date: Column<java.time.LocalDate> = date("dateCommentaire")
-    val msg: Column<String> = varchar("commentaire", 250)
+    val vdate: Column<java.time.LocalDate> = date("dateCommentaire")
+    val vmsg: Column<String> = varchar("commentaire", 250)
 }
 
 class User(id: EntityID<Int>) : IntEntity(id){
-
+    companion object : IntEntityClass<User>(Users)
+    var name by Users.vname
+    var email by Users.vemail
+    var profilePicture by Users.vprofilePicture
+    var password by Users.vpassword
+    var birthdate by Users.vbirthdate
 }
+
+class InterestPoint(id: EntityID<Int>) : IntEntity(id){
+    companion object : IntEntityClass<com.example.database.InterestPoint>(InterestPoints)
+    var name by InterestPoints.vname
+    var latitude by InterestPoints.vlatitude
+    var longitude by InterestPoints.vlongitude
+    var description by InterestPoints.vdescription
+    var image by InterestPoints.vimage
+}
+
+class Draw(id: EntityID<Int>) : IntEntity(id){
+    companion object : IntEntityClass<com.example.database.Draw>(Draws)
+    var name by Draws.vname
+    var creationDate by Draws.vcreationdate
+    var lifetime by Draws.vlifetime
+    var interestpoint by Draws.vinterestpoint
+    var image by Draws.vimage
+}
+
+class Relation(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<com.example.database.Relation>(Relations)
+    var iduser by Relations.vidUser
+    var idusercible by Relations.vidUserCible
+    var follow by Relations.vfollow
+}
+
+class Noted(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<com.example.database.Noted>(Noteds)
+    var iduser by Noteds.vidUser
+    var iddraw by Noteds.vidDraw
+    var note by Noteds.vnote
+}
+
+class Collaborated(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<com.example.database.Collaborated>(Collaborateds)
+    var iduser by Collaborateds.vidUser
+    var iddraw by Collaborateds.vidDraw
+}
+
+class Commented(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<com.example.database.Commented>(Commenteds)
+    var iduser by Commenteds.vidUser
+    var iddraw by Commenteds.vidDraw
+    var date by Commenteds.vdate
+    var msg by Commenteds.vmsg
+}
+
+class ActionDone(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<com.example.database.ActionDone>(ActionsDone)
+    var iduser by ActionsDone.vidUser
+    var iddraw by ActionsDone.vidDraw
+    var report by ActionsDone.vreport
+    var like by ActionsDone.vlike
+    var creator by ActionsDone.vcreator
+}
+
