@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classlib.Manager
 import com.example.stub.Stub
@@ -27,7 +29,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 class MapActivity : AppCompatActivity(){
-    lateinit var manager: Manager
+
+    lateinit var manager:Manager
     private lateinit var map:MapView
     @SuppressLint("WrongViewCast")
     @RequiresApi(Build.VERSION_CODES.M)
@@ -124,6 +127,10 @@ class MapActivity : AppCompatActivity(){
             intent.putExtra("manager", manager)
             startActivity(intent)
         }
+        val displayPopUp = findViewById<Button>(R.id.displayPopUp);
+        displayPopUp.setOnClickListener {
+            popUp();
+        }
     }
 
     override fun onResume() {
@@ -135,5 +142,18 @@ class MapActivity : AppCompatActivity(){
         super.onPause()
         map.onPause()
     }
+    fun popUp() {
+        val inflter = LayoutInflater.from(this)
+        val v = inflter.inflate(R.layout.activity_draw,null)
+        val addDialog = AlertDialog.Builder(this)
+        addDialog.setView(v)
+        addDialog.create()
+        addDialog.show()
+        addDialog.setNegativeButton("qshjduisqfuqisyfuisqdyfoiu"){
+            dialog,_->
+            dialog.dismiss()
+        }
+    }
+
 
 }
