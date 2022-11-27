@@ -8,11 +8,13 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classlib.Manager
 import com.example.stub.Stub
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -143,16 +145,24 @@ class MapActivity : AppCompatActivity(){
         map.onPause()
     }
     fun popUp() {
+
         val inflter = LayoutInflater.from(this)
         val v = inflter.inflate(R.layout.activity_draw,null)
         val addDialog = AlertDialog.Builder(this)
         addDialog.setView(v)
-        addDialog.create()
-        addDialog.show()
-        addDialog.setNegativeButton("qshjduisqfuqisyfuisqdyfoiu"){
+        addDialog.setPositiveButton("Ok"){
             dialog,_->
             dialog.dismiss()
+            Toast.makeText(this,"OK",Toast.LENGTH_LONG).show()
         }
+        addDialog.setNegativeButton("Cancel"){
+            dialog,_->
+            dialog.dismiss()
+            Toast.makeText(this,"Cancel",Toast.LENGTH_LONG).show()
+        }
+        addDialog.create()
+        addDialog.show()
+
     }
 
 

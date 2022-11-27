@@ -37,7 +37,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun findUserByLogPswd(log: String, psswrd: String): User {
         return Gson().fromJson(get(URL(url+"user/pwd/"+log+"/"+psswrd+"/")),User::class.java)
     }
-
+    override fun getUserByEmail(email: String): Boolean {
+        //TODO
+        return false
+    }
     /// http requests :
 
     @Suppress("NewApi")

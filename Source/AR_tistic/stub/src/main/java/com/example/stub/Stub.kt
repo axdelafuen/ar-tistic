@@ -119,6 +119,13 @@ class  Stub : IPersistenceManager {
         return User(0, "0", "0","0","0", Date(0,0,0), hashMapOf(),0 )//currrent User, transfert to other views no need to reload
     }
 
+    override fun getUserByEmail(email: String): Boolean {
+        for (usr in userHashMap.values) {//check if email already used
+            if(usr.email==email)return true
+        }
+        return false
+    }
+
     //DRAWS FUNCTIONS
     fun getInterestPointById(idPt:Int):InterestPoint?{
         return intPtsHashMap[idPt]

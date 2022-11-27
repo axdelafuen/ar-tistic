@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat
 import com.example.classlib.Date
 import com.example.classlib.Manager
 import com.example.classlib.User
-import com.example.clientapi.ClientAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
-    val manager=Manager(ClientAPI())
+    val manager=Manager(Stub())
     // Persistance loaded
     lateinit var pers:com.example.classlib.Collection
     var thread = Thread({
