@@ -61,7 +61,7 @@ object Draws: IntIdTable(){
     val vimage: Column<String> = varchar("image",100)
     val vlifetime: Column<LocalTime> = time("password")
     val vcreationdate: Column<java.time.LocalDate> = date("date")
-    val vinterestpoint: Column<Int> = integer("interestPointCreation").references(InterestPoints.id)
+    val vinterestpoint = reference("interestpoint", InterestPoints)
 }
 
 object InterestPoints: IntIdTable(){
@@ -73,33 +73,33 @@ object InterestPoints: IntIdTable(){
 }
 
 object Relations: IntIdTable(){
-    val vidUser: Column<Int> = integer("idUser").references(Users.id)
-    val vidUserCible: Column<Int> = integer("idUserCible").references(Users.id)
+    val vidUser = reference("iduser", Users)
+    val vidUserCible = reference("idusercible", Users)
     val vfollow: Column<Boolean> = bool("follow")
 }
 
 object ActionsDone: IntIdTable(){
-    val vidUser: Column<Int> = integer("idUser").references(Users.id)
-    val vidDraw: Column<Int> = integer("idDraw").references(Draws.id)
+    val vidUser = reference("iduser", Users)
+    val vidDraw = reference("iddraw", Draws)
     val vreport: Column<Boolean> = bool("report")
     val vlike: Column<Boolean> = bool("like")
     val vcreator: Column<Boolean> = bool("creator")
 }
 
 object Noteds: IntIdTable() {
-    val vidUser: Column<Int> = integer("idUser").references(Users.id)
-    val vidDraw: Column<Int> = integer("idDraw").references(Draws.id)
+    val vidUser = reference("iduser", Users)
+    val vidDraw = reference("iddraw",Draws)
     val vnote: Column<Float> = float("note")
 }
 
 object Collaborateds: IntIdTable() {
-    val vidUser: Column<Int> = integer("idUser").references(Users.id)
-    val vidDraw: Column<Int> = integer("idDraw").references(Draws.id)
+    val vidUser= reference("iduser", Users)
+    val vidDraw = reference("iddraw",Draws)
 }
 
 object Commenteds: IntIdTable(){
-    val vidUser: Column<Int> = integer("idUser").references(Users.id)
-    val vidDraw: Column<Int> = integer("idDraw").references(Draws.id)
+    val vidUser = reference("iduser", Users)
+    val vidDraw = reference("iddraw",Draws)
     val vdate: Column<java.time.LocalDate> = date("dateCommentaire")
     val vmsg: Column<String> = varchar("commentaire", 250)
 }
