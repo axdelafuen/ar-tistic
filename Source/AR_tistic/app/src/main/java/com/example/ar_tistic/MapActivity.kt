@@ -8,6 +8,7 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -162,6 +163,16 @@ class MapActivity : AppCompatActivity(){
         }
         addDialog.create()
         addDialog.show()
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.activity_draw, null)
+        val madeBy= dialogLayout.findViewById<TextView>(R.id.madeBy)
+
+        /*with(addDialog)
+        {
+            madeBy.text="OUIII"
+            show()
+        }*/
+        //addDialog.apply{madeBy.text="OUIII"}.show()
 
     }
 
