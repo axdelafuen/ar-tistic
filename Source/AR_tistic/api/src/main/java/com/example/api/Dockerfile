@@ -1,4 +1,4 @@
-FROM cirrusci/android-sdk as BUILD
+FROM thyrlian/android-sdk as BUILD
 
 COPY . /src
 WORKDIR /src
@@ -8,7 +8,7 @@ RUN ./gradlew classLibDTO:assemble
 RUN ./gradlew dataContract:assemble
 RUN ./gradlew api:assemble
 
-FROM cirrusci/android-sdk
+FROM thyrlian/android-sdk
 
 COPY --from=BUILD /src/api/build/libs/api.jar /bin/runner/run.jar
 WORKDIR /bin/runner
