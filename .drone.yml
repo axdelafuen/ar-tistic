@@ -31,22 +31,6 @@ steps:
   - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN}
   depends_on: [ build ]
 
-
-- name: generate-and-deploy-docs
-  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
-  volumes:
-    - name: docs
-      path: /docs
-  commands:
-    - /entrypoint.sh
-  when:
-    branch:
-      - main
-
-volumes:
-- name: docs
-  temp: {}
-
 kind: pipeline
 type: docker
 name: ARtisticCD
@@ -95,5 +79,30 @@ steps:
     OVERWRITE: true
   depends_on: [ container-api ]
 
-depends_on:
-  - ARtisticCI
+depends_on: [ ARtisticCI ]
+
+kind: pipeline
+type: docker
+name: ARtisticDoc
+
+trigger:
+    event: 
+      - push
+
+steps:
+
+- name: generate-and-deploy-docs
+  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
+  volumes:
+    - name: docs
+      path: /docs
+  commands:
+    - /entrypoint.sh
+  when:
+    branch:
+      - main
+
+volumes:
+- name: docs
+  temp: {}
+
