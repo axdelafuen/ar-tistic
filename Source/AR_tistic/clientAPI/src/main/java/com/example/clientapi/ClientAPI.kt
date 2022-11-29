@@ -4,6 +4,7 @@ import com.example.classlib.*
 import com.example.classlib.Collection
 import com.google.gson.Gson
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -12,14 +13,31 @@ import java.net.URL
 @Suppress("NewApi")
 class ClientAPI:IPersistenceManager,java.io.Serializable{
 
-    val url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
+    val url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/" // for release
+    //val url = "http://localhost:1705/" //for local
 
-    override fun loadData(): Collection {
-        return Gson().fromJson(get(URL(url+"loadData")),Collection::class.java)
+    fun loadData(): Collection? {
+        try{
+            return Gson().fromJson(get(URL(url+"loadData")),Collection::class.java)
+        }catch(e:IOException){
+            return null
+        }
     }
 
     override fun getUserById(idUser: Int): User? {
-        return Gson().fromJson(get(URL(url+"users")),User::class.java)
+        try{
+            return Gson().fromJson(get(URL(url+"users/"+idUser.toString())),User::class.java)
+        }catch(e: IOException){
+            return null
+        }
+    }
+
+    override fun getuserByEmail(content: String): User? {
+        try{
+            return Gson().fromJson(get(URL(url+"users/email/"+content)),User::class.java)
+        }catch(e:IOException){
+            return null
+        }
     }
 
     override fun createUser(usr: User) {
@@ -34,23 +52,25 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         delete(URL(url+"users"+id as String))
     }
 
-    override fun findUserByLogPswd(log: String, psswrd: String): User {
-        return Gson().fromJson(get(URL(url+"user/pwd/"+log+"/"+psswrd+"/")),User::class.java)
+    override fun findUserByLogPswd(log: String, psswrd: String): User? {
+        try{
+            return Gson().fromJson(get(URL(url+"user/pwd/"+log+"/"+psswrd+"/")),User::class.java)
+        }catch(e:IOException){
+            return null
+        }
     }
 
     /// http requests :
 
     @Suppress("NewApi")
     private fun get(url: URL):String{
-        lateinit var jsonStr:String
+        lateinit var jsonStr: String
         with(url.openConnection() as HttpURLConnection){
             requestMethod = "GET"
-            inputStream.bufferedReader().use{
-                it.lines().forEach{ line -> jsonStr = line }
+            inputStream.bufferedReader().use {
+                it.lines().forEach { line -> jsonStr = line }
             }
         }
-        //println(jsonStr)
-        //println("\n")
         return jsonStr
     }
     private fun delete(url: URL){

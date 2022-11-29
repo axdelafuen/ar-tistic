@@ -1,4 +1,4 @@
-FROM androidsdk/android-31 as BUILD
+FROM gradle:latest as BUILD
 
 COPY . /src
 WORKDIR /src
@@ -8,7 +8,7 @@ RUN ./gradlew classLibDTO:assemble
 RUN ./gradlew dataContract:assemble
 RUN ./gradlew api:assemble
 
-FROM androidsdk/android-31
+FROM openjdk:latest
 
 COPY --from=BUILD /src/api/build/libs/api.jar /bin/runner/run.jar
 WORKDIR /bin/runner

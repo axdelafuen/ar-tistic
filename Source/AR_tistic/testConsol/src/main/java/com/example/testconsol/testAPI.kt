@@ -15,8 +15,8 @@ import java.net.URL
 fun main(){
     println("API - Test Console : \n")
     var url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
-    var urlUserById0 = URL("http://localhost:7070/users/0/")
-    var urlUserById2 = URL("http://localhost:7070/users/2/")
+    var urlUserById0 = "http://localhost:1705/users/156789/"
+    var urlUserById2 = URL("http://localhost:7070/users/24567/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
     var urlUserById7 = URL("http://localhost:7070/users/7/")
 
@@ -26,10 +26,12 @@ fun main(){
     val gson = Gson()
     val jsonData = gson.toJson(user)
 
-    //println(gson.fromJson(get(URL(url+"loadData")), Collection::class.java).users.get(1)?.name)
+    //println(gson.fromJson(get(URL(urlUserById0)), User::class.java).email)
 
     var api = ClientAPI()
-    var u = api.findUserByLogPswd("1","1")
+    println(api.getUserById(133)?.name)
+    //println(api.getuserByEmail("alicaaae@alice.kt")?.name)
+
     //println(u.name)
 
     //println("\n"+jsonData+"\n")
@@ -64,6 +66,9 @@ fun get(url:URL):String{
     with(url.openConnection() as HttpURLConnection){
         requestMethod = "GET"
 
+        if(responseCode!=200){
+            return ""
+        }
         inputStream.bufferedReader().use{
             it.lines().forEach{ line -> jsonStr = line }
         }

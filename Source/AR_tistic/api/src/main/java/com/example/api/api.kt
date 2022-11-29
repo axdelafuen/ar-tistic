@@ -5,14 +5,16 @@ import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*
 
 import com.example.classlib.*
+import com.example.classlibdto.UserDTO
 import com.example.datacontract.toDTO
+import com.google.gson.Gson
 
 fun main() {
             val data = Stub();
 
             val app = Javalin.create().apply {
                 exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
-                error(404) { ctx -> ctx.json("not found :(") }
+                error(404) { ctx -> ctx.json("notFound") }
             }.start(1705)
 
             app.routes {
@@ -20,10 +22,25 @@ fun main() {
                 //USERS
 
                 get("/users") { ctx ->
-                    ctx.json(toDTO(data.userHashMap)!!)
+                    ctx.json(toDTO(data.userHashMap))
                 }
                 get("/users/{user-id}") { ctx ->
-                    ctx.json(toDTO(data.getUserById(ctx.pathParam("user-id").toInt())!!))
+                    val res = data.getUserById(ctx.pathParam("user-id").toInt())
+                    if(res==null){
+                        ctx.json("forbidden").status(403)
+                    }
+                    else{
+                        ctx.json(toDTO(res))
+                    }
+                }
+                get("/users/email/{content}"){ ctx ->
+                    val res = data.getuserByEmail(ctx.pathParam("content").toString())
+                    if(res==null){
+                        ctx.json("forbidden").status(403)
+                    }
+                    else{
+                        ctx.json(toDTO(res))
+                    }
                 }
                 get("/users/idx/{idx}/{nb}") { ctx ->
                     ctx.json(
@@ -31,19 +48,21 @@ fun main() {
                             data.loadUsersIndex(
                                 ctx.pathParam("idx").toInt(),
                                 ctx.pathParam("nb").toInt()
-                            )!!
+                            )
                         )
                     )
                 }
                 get("/user/pwd/{login}/{pwd}"){ctx ->
-                    ctx.json(
-                        toDTO(
-                            data.findUserByLogPswd(
-                                ctx.pathParam("login").toString(),
-                                ctx.pathParam("pwd").toString()
-                            )
-                        )
+                    val res = data.findUserByLogPswd(
+                        ctx.pathParam("login").toString(),
+                        ctx.pathParam("pwd").toString()
                     )
+                    if(res==null){
+                        ctx.json("forbidden").status(403)
+                    }
+                    else{
+                        ctx.json(toDTO(res))
+                    }
                 }
                 get("/loadData"){ctx ->
                     ctx.json(data.loadData())
