@@ -101,9 +101,6 @@ steps:
       path: /docs
   commands:
     - /entrypoint.sh
-  when:
-    branch:
-      - main
 
 volumes:
 - name: docs
