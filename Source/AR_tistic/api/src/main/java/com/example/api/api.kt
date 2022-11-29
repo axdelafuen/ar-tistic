@@ -27,16 +27,16 @@ fun main() {
                 get("/users/{user-id}") { ctx ->
                     val res = data.getUserById(ctx.pathParam("user-id").toInt())
                     if(res==null){
-                        ctx.json(Gson().toJson(UserDTO(404,"notFound","notFound","notFound","notFound",Date(404,404,404), hashMapOf(),4040)))
+                        ctx.json(Gson().toJson("forbidden")).status(403)
                     }
                     else{
                         ctx.json(toDTO(res))
                     }
                 }
                 get("/users/email/{content}"){ ctx ->
-                    val res = data.getuserByEmail(ctx.pathParam("contect").toString())
+                    val res = data.getuserByEmail(ctx.pathParam("content").toString())
                     if(res==null){
-                        ctx.json(Gson().toJson(UserDTO(404,"notFound","notFound","notFound","notFound",Date(404,404,404), hashMapOf(),4040)))
+                        ctx.json(Gson().toJson("forbidden")).status(403)
                     }
                     else{
                         ctx.json(toDTO(res))
@@ -58,7 +58,7 @@ fun main() {
                         ctx.pathParam("pwd").toString()
                     )
                     if(res==null){
-                        ctx.json(Gson().toJson("notFound"))
+                        ctx.json(Gson().toJson("forbidden")).status(403)
                     }
                     else{
                         ctx.json(toDTO(res))
