@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
                 kotlin.runCatching {
                         //check passwrd & log
                         if (!existLogPasswd(cttLog, cttMdp)) {// non equal
+                            println("DEBUG LOGIN")
                             err.visibility = View.VISIBLE
                         }
                     //found log & password
@@ -101,9 +102,7 @@ class MainActivity : AppCompatActivity() {
     /// FUNCTION
     /// Login and mdp exists
     private fun existLogPasswd(name:String, pswd:String):Boolean{
-        if(name.equals(manager.persistence.findUserByLogPswd(name,pswd)?.name) || name.equals(manager.persistence.findUserByLogPswd(name,pswd)?.email)){
-            return true
-        }
-        return false
+        val res = manager.persistence.findUserByLogPswd(name,pswd) ?: return false
+        return name.equals(res.name) || name.equals(res.email)
     }
 }

@@ -14,7 +14,7 @@ fun main() {
 
             val app = Javalin.create().apply {
                 exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
-                error(404) { ctx -> ctx.json(Gson().toJson("notFound")) }
+                error(404) { ctx -> ctx.json("notFound") }
             }.start(1705)
 
             app.routes {
@@ -27,7 +27,7 @@ fun main() {
                 get("/users/{user-id}") { ctx ->
                     val res = data.getUserById(ctx.pathParam("user-id").toInt())
                     if(res==null){
-                        ctx.json(Gson().toJson("forbidden")).status(403)
+                        ctx.json("forbidden").status(403)
                     }
                     else{
                         ctx.json(toDTO(res))
@@ -36,7 +36,7 @@ fun main() {
                 get("/users/email/{content}"){ ctx ->
                     val res = data.getuserByEmail(ctx.pathParam("content").toString())
                     if(res==null){
-                        ctx.json(Gson().toJson("forbidden")).status(403)
+                        ctx.json("forbidden").status(403)
                     }
                     else{
                         ctx.json(toDTO(res))
@@ -58,7 +58,7 @@ fun main() {
                         ctx.pathParam("pwd").toString()
                     )
                     if(res==null){
-                        ctx.json(Gson().toJson("forbidden")).status(403)
+                        ctx.json("forbidden").status(403)
                     }
                     else{
                         ctx.json(toDTO(res))

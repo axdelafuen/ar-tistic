@@ -47,6 +47,7 @@ class RegisterActivity: AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 if(checkEmail(cttmail)){//used email
+                    println("DEBUG REGISTER")
                     errMail.visibility= View.VISIBLE
                 }
 
@@ -88,10 +89,8 @@ class RegisterActivity: AppCompatActivity() {
         return cttPswd1.equals(cttPswd2)
     }
     fun checkEmail(email:String):Boolean{//return true if email is already used
-        if(email.equals(manager.persistence.getuserByEmail(email)?.email)){
-            return true
-        }
-        return false
+        val res = manager.persistence.getuserByEmail(email)?:return false
+        return true
     }
     fun createUser(email:String, pswd:String):User{// return new user with uniq id and the email and mdp giv in parameter
         var id=1//Id from manager
