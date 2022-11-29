@@ -31,6 +31,7 @@ steps:
   - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN}
   depends_on: [ build ]
 
+---
 kind: pipeline
 type: docker
 name: ARtisticCD
@@ -79,8 +80,10 @@ steps:
     OVERWRITE: true
   depends_on: [ container-api ]
 
-depends_on: [ ARtisticCI ]
+depends_on: 
+- ARtisticCI
 
+---
 kind: pipeline
 type: docker
 name: ARtisticDoc
