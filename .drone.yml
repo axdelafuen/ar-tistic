@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: ARtisticPipeline
+name: ARtisticCI
 
 trigger:
     event:
@@ -31,6 +31,32 @@ steps:
   - ./gradlew sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN}
   depends_on: [ build ]
 
+
+- name: generate-and-deploy-docs
+  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
+  volumes:
+    - name: docs
+      path: /docs
+  commands:
+    - /entrypoint.sh
+  when:
+    branch:
+      - main
+
+volumes:
+- name: docs
+  temp: {}
+
+kind: pipeline
+type: docker
+name: ARtisticCD
+
+trigger:
+    event:
+        - push
+
+steps:
+
 - name: deploy-container-mysql
   image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
   environment:
@@ -59,7 +85,6 @@ steps:
       from_secret: secret-registry-username
     password:
       from_secret: secret-registry-password
-  depends_on: [ build ]
   
 - name: deploy-api-containers
   image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
@@ -69,3 +94,6 @@ steps:
     COMMAND: create
     OVERWRITE: true
   depends_on: [ container-api ]
+
+depends_on:
+  - ARtisticCI
