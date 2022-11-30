@@ -12,9 +12,12 @@ import java.time.LocalTime
 
 fun createTable() {
     Database.connect(
-        url = System.getenv("DB_SERVER"),
+        url = "jdbc:mysql:"+System.getenv("DB_SERVER"),
         user = System.getenv("DB_USER"),
         password = System.getenv("DB_PASSWORD")
+        /*url = "jdbc:mysql://localhost:3306/sqlsaetest",
+        user = "root",
+        password = "root1234"*/
     )
 
     transaction {
@@ -22,14 +25,14 @@ fun createTable() {
 
         // DROP TABLES
 
-/*        SchemaUtils.drop(Collaborateds)
+        SchemaUtils.drop(Collaborateds)
         SchemaUtils.drop(ActionsDone)
         SchemaUtils.drop(Relations)
         SchemaUtils.drop(Commenteds)
         SchemaUtils.drop(Noteds)
         SchemaUtils.drop(Users)
         SchemaUtils.drop(Draws)
-        SchemaUtils.drop(InterestPoints)*/
+        SchemaUtils.drop(InterestPoints)
 
         //  CREATE TABLES
 

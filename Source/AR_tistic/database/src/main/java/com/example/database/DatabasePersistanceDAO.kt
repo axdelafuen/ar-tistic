@@ -15,10 +15,14 @@ import java.time.LocalDate
 
 class DatabasePersistanceDAO : IPersistenceManager{
 
-    val url = System.getenv("DB_SERVER")
+    val url = "jdbc:mysql:"+System.getenv("DB_SERVER")
     val user = System.getenv("DB_USER")
     val password = System.getenv("DB_PASSWORD")
-
+/*
+    val url = "jdbc:mysql://localhost:3306/sqlsaetest"
+    val user = "root"
+    val password = "root1234"
+*/
     fun loadData(): Collection {
         Database.connect(
             url = url,

@@ -3,6 +3,8 @@ package com.example.database
 import com.example.classlib.Date
 
 fun main(){
+    createTable()
+
     val newUser = com.example.classlib.User(
         id = 1,
         name = "test",
