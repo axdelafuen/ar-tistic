@@ -19,9 +19,6 @@ steps:
   - ./gradlew --no-daemon dataContract:assemble
   - ./gradlew --no-daemon database:assemble
   - ./gradlew --no-daemon api:assemble
-  when:
-      branch:
-        - master
 
 - name: code analysis
   image: androidsdk/android-31
