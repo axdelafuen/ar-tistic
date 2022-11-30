@@ -28,7 +28,7 @@ fun main() {
                         create()
                         ctx.json("Ok").status(200)
                     }catch(e:Exception){
-                        ctx.json("failed").status(417)
+                        ctx.json(e.printStackTrace().toString()).status(417)
                     }
                 }
 
