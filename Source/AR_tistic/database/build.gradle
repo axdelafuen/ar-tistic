@@ -3,16 +3,23 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
 }
 
-dependencies {
-    implementation 'org.ktorm:ktorm-core:3.2.0'
-    implementation project(':classLib')
-    implementation project(':stub')
+repositories{
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+dependencies {
+    implementation project(':classLib')
+    implementation project(':stub')
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.31'
+    implementation("org.jetbrains.exposed:exposed-core:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.40.1")
+    implementation("org.slf4j:slf4j-api:2.0.4")
 
-
+}
