@@ -14,7 +14,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
 class DatabasePersistanceDAO : IPersistenceManager{
-    override fun loadData(): Collection {
+    fun loadData(): Collection {
         Database.connect(
             url = "jdbc:mysql://localhost:3306/sqlsaetest",
             user = "root",
@@ -54,6 +54,10 @@ class DatabasePersistanceDAO : IPersistenceManager{
         }
 
        return userDataToUserClass(userList[0],hmsub, count.toInt(),true)
+    }
+
+    override fun getuserByEmail(content: String): User? {
+        TODO("Not yet implemented")
     }
 
     fun getUserByIdNoSubs(idUser: Int): com.example.classlib.User{
