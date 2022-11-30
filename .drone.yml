@@ -17,6 +17,7 @@ steps:
   - ./gradlew classLib:assemble
   - ./gradlew classLibDTO:assemble
   - ./gradlew dataContract:assemble
+  - ./gradlew database:assemble
   - ./gradlew api:assemble
 
 - name: code analysis
