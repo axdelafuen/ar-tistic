@@ -12,13 +12,13 @@ steps:
   image: androidsdk/android-31
   commands:
   - cd Source/AR_tistic
-  - ./gradlew :app:assembleDebug
-  - ./gradlew stub:assemble
-  - ./gradlew classLib:assemble
-  - ./gradlew classLibDTO:assemble
-  - ./gradlew dataContract:assemble
-  - ./gradlew database:assemble
-  - ./gradlew api:assemble
+  - ./gradlew --no-daemon :app:assembleDebug
+  - ./gradlew --no-daemon stub:assemble
+  - ./gradlew --no-daemon classLib:assemble
+  - ./gradlew --no-daemon classLibDTO:assemble
+  - ./gradlew --no-daemon dataContract:assemble
+  - ./gradlew --no-daemon database:assemble
+  - ./gradlew --no-daemon api:assemble
 
 - name: code analysis
   image: androidsdk/android-31
