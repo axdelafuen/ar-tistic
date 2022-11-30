@@ -4,6 +4,7 @@ COPY . /src
 WORKDIR /src
 RUN ./gradlew classLib:assemble
 RUN ./gradlew classLibDTO:assemble
+RUN ./gradlew stub:assemble
 RUN ./gradlew database:assemble
 RUN ./gradlew dataContract:assemble
 RUN ./gradlew api:assemble
