@@ -5,11 +5,12 @@ import io.javalin.apibuilder.ApiBuilder.*
 import com.example.stub.*
 
 import com.example.classlib.*
+import com.example.classlib.User
 import com.example.classlibdto.UserDTO
 import com.example.database.DatabasePersistanceDAO
 import com.example.datacontract.toDTO
 import com.google.gson.Gson
-import com.example.database.create
+import com.example.database.*
 
 fun main() {
             //val data = Stub()
@@ -25,7 +26,7 @@ fun main() {
 
                 get("/create"){ctx ->
                     try{
-                        create()
+                        createTable()
                         ctx.json("Ok").status(200)
                     }catch(e:Exception){
                         ctx.json(e.printStackTrace().toString()).status(417)

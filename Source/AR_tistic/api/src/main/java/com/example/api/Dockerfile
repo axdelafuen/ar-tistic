@@ -1,13 +1,13 @@
 FROM gradle:latest as BUILD
 
-COPY . /src
+COPY build.gradle gradle.properties settings.gradle /src
 WORKDIR /src
-RUN ./gradlew classLib:assemble
-RUN ./gradlew classLibDTO:assemble
-RUN ./gradlew stub:assemble
-RUN ./gradlew database:assemble
-RUN ./gradlew dataContract:assemble
-RUN ./gradlew api:assemble
+RUN ./gradlew --no-daemon classLib:assemble
+RUN ./gradlew --no-daemon classLibDTO:assemble
+RUN ./gradlew --no-daemon stub:assemble
+RUN ./gradlew --no-daemon database:assemble
+RUN ./gradlew --no-daemon dataContract:assemble
+RUN ./gradlew --no-daemon api:assemble
 
 FROM openjdk:latest
 

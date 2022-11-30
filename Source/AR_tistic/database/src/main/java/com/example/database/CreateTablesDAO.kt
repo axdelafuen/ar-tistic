@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.javatime.time
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalTime
 
-fun create() {
+fun createTable() {
     Database.connect(
         url = System.getenv("DB_SERVER"),
         user = System.getenv("DB_USER"),
