@@ -1,6 +1,6 @@
 FROM gradle:latest as BUILD
 
-COPY build.gradle gradle.properties settings.gradle /src
+COPY . /src
 WORKDIR /src
 RUN ./gradlew --no-daemon classLib:assemble
 RUN ./gradlew --no-daemon classLibDTO:assemble
