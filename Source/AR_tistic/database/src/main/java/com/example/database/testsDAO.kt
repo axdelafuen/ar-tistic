@@ -83,12 +83,12 @@ fun main(){
 
     print(datatest.getUserById(1)!!.email)
 
-/*    print("\n-------------------------------------------------\n")
+    print("\n-------------------------------------------------\n")
     print("Test Delete User 1\n")
-    datatest.deleteUser(1)*/
+    datatest.deleteUser(1)
 
     print("\nTest find by psswd & login user 2:\n")
     print(datatest.findUserByLogPswd("User2","psswd2").name)
-
+    print("\n")
     print(datatest.loadData().users)
 }
