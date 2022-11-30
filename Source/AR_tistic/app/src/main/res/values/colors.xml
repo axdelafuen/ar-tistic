@@ -15,6 +15,7 @@
     <color name="orange">#FF8000</color>
     <color name="lightBlue">#057EFF</color>
     <color name="middleBlue">#0958AE</color>
+    <color name="transparent">#000958AE</color>
 
     <color name="purplelight">#8067C6</color>
 

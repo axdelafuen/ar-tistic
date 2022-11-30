@@ -130,6 +130,18 @@ class MapActivity : AppCompatActivity(){
             intent.putExtra("manager", manager)
             startActivity(intent)
         }
+        val ratingBtn = findViewById<ImageButton>(R.id.leaderboardButton)
+        ratingBtn.setOnClickListener {
+            val intent = Intent(this, LeaderBoardActivity::class.java)
+            intent.putExtra("manager", manager)
+            startActivity(intent)
+        }
+        val mesageBtn = findViewById<ImageButton>(R.id.msgButton)
+        mesageBtn.setOnClickListener {
+            val intent = Intent(this, MessagesActivity::class.java)
+            intent.putExtra("manager", manager)
+            startActivity(intent)
+        }
         val displayPopUp = findViewById<Button>(R.id.displayPopUp);
         displayPopUp.setOnClickListener {
             popUp();
