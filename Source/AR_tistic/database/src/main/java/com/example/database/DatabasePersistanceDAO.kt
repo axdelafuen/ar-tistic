@@ -14,11 +14,16 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
 class DatabasePersistanceDAO : IPersistenceManager{
+
+    val url = System.getenv("DB_SERVER")
+    val user = System.getenv("DB_USER")
+    val password = System.getenv("DB_PASSWORD")
+
     fun loadData(): Collection {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
         var userHashmap:HashMap<Int, com.example.classlib.User> = hashMapOf()
         transaction {
@@ -31,9 +36,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     override fun getUserById(idUser: Int): User? {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
         var count: Long = 0
         var userList = ArrayList<com.example.database.User>()
@@ -62,9 +67,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     fun getUserByIdNoSubs(idUser: Int): com.example.classlib.User{
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
         var count: Long = 0
         var userList = ArrayList<com.example.database.User>()
@@ -84,9 +89,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
     override fun createUser(usr: User) {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
 
         transaction {
@@ -102,9 +107,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     fun userFollows(idUser: Int, idUserCible:Int){
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
 
         transaction {
@@ -118,9 +123,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     override fun updateUser(id: Int, usr: User) {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
 
         transaction {
@@ -136,9 +141,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     override fun deleteUser(id: Int) {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
 
         transaction {
@@ -156,9 +161,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     override fun findUserByLogPswd(log: String, psswrd: String): User {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
 
         var userList = ArrayList<com.example.database.User>()
@@ -173,9 +178,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
     fun userDataToUserClass(u: com.example.database.User, hmsub: HashMap<Int,com.example.classlib.User> = hashMapOf(), nbR: Int, subBool: Boolean):com.example.classlib.User {
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/sqlsaetest",
-            user = "root",
-            password = "root1234"
+            url = url,
+            user = user,
+            password = password
         )
         if (subBool) {
             val returnedUser = com.example.classlib.User(

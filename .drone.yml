@@ -78,6 +78,14 @@ steps:
     CONTAINERNAME: api-artistic
     COMMAND: create
     OVERWRITE: true
+    CODEFIRST_CLIENTDRONE_ENV_DB_SERVER:
+      from_secret: db_server
+    CODEFIRST_CLIENTDRONE_ENV_DB_USER:
+      from_secret: db_user
+    CODEFIRST_CLIENTDRONE_ENV_DB_PASSWORD:
+      from_secret: db_password
+    CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
+      from_secret: db_database
   depends_on: [ container-api ]
 
 depends_on: 

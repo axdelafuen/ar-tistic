@@ -6,11 +6,14 @@ import com.example.stub.*
 
 import com.example.classlib.*
 import com.example.classlibdto.UserDTO
+import com.example.database.DatabasePersistanceDAO
 import com.example.datacontract.toDTO
 import com.google.gson.Gson
+import com.example.database.create
 
 fun main() {
-            val data = Stub();
+            //val data = Stub()
+            val data = DatabasePersistanceDAO()
 
             val app = Javalin.create().apply {
                 exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
@@ -18,11 +21,21 @@ fun main() {
             }.start(1705)
 
             app.routes {
+                // BdD
+
+                get("/create"){ctx ->
+                    try{
+                        create()
+                        ctx.json("Ok").status(200)
+                    }catch(e:Exception){
+                        ctx.json("failed").status(417)
+                    }
+                }
 
                 //USERS
 
                 get("/users") { ctx ->
-                    ctx.json(toDTO(data.userHashMap))
+                    ctx.json(toDTO(data.loadData().users))
                 }
                 get("/users/{user-id}") { ctx ->
                     val res = data.getUserById(ctx.pathParam("user-id").toInt())
@@ -42,6 +55,7 @@ fun main() {
                         ctx.json(toDTO(res))
                     }
                 }
+                /*
                 get("/users/idx/{idx}/{nb}") { ctx ->
                     ctx.json(
                         toDTO(
@@ -51,7 +65,7 @@ fun main() {
                             )
                         )
                     )
-                }
+                }*/
                 get("/user/pwd/{login}/{pwd}"){ctx ->
                     val res = data.findUserByLogPswd(
                         ctx.pathParam("login").toString(),

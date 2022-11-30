@@ -12,9 +12,9 @@ import java.time.LocalTime
 
 fun create() {
     Database.connect(
-        url = "jdbc:mysql://localhost:3306/sqlsaetest",
-        user = "root",
-        password = "root1234"
+        url = System.getenv("DB_SERVER"),
+        user = System.getenv("DB_USER"),
+        password = System.getenv("DB_PASSWORD")
     )
 
     transaction {
