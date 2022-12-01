@@ -11,6 +11,8 @@ interface IPersistenceManager : Serializable {
     fun deleteUser(id:Int)
     fun findUserByLogPswd(log:String, psswrd:String):User
     fun getUserByEmail(email:String):Boolean
+    fun getLikes(id:Int):Int
+    fun getFollowers(id:Int):Int
     // DRAWS METHODS
 
     // INTERESTPOINTS METHODS

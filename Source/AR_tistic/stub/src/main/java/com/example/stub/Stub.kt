@@ -126,6 +126,14 @@ class  Stub : IPersistenceManager {
         return false
     }
 
+    override fun getLikes(id: Int): Int {
+        return 175
+    }
+
+    override fun getFollowers(id: Int): Int {
+        return 17
+    }
+
     //DRAWS FUNCTIONS
     fun getInterestPointById(idPt:Int):InterestPoint?{
         return intPtsHashMap[idPt]

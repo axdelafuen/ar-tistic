@@ -8,11 +8,13 @@ import android.widget.ImageButton
 
 class LeaderBoardActivity : AppCompatActivity() {
     lateinit var manager:Manager
+    lateinit var podium: List<User>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leader_board)
         manager = intent.getSerializableExtra("manager") as Manager
         createButtons()
+        getPodium()
     }
     fun createButtons(){
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
@@ -39,8 +41,19 @@ class LeaderBoardActivity : AppCompatActivity() {
         mapBtn.setOnClickListener {
             finish()
         }
+        val usr1 = findViewById<ImageButton>(R.id.btnAccess1)
+        usr1.setOnClickListener {
+            val intent = Intent(this, ProfilActivity::class.java)
+            intent.putExtra("manager", manager)
+            intent.putExtra("id_usr", manager)
+            startActivity(intent)
+            finish()
+        }
+        val usr2 = findViewById<ImageButton>(R.id.btnAccess2)
+        val usr3 = findViewById<ImageButton>(R.id.btnAccess3)
+
     }
-    fun podium(){
+    fun getPodium(){
 
     }
 }

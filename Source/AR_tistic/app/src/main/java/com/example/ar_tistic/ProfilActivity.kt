@@ -10,9 +10,8 @@ import com.example.classlib.*
 
 class ProfilActivity : AppCompatActivity() {
     lateinit var manager:Manager
-    lateinit var button: Button
     lateinit var imageView: ImageView
-
+    lateinit var selectedUsr: User
     companion object{
         val IMAGE_REQUEST_CODE = 100
     }
@@ -26,30 +25,19 @@ class ProfilActivity : AppCompatActivity() {
         retMap.setOnClickListener(){
             returnMap()
         }
-        var upload=findViewById<Button>(R.id.upload)
-        button.setOnClickListener{
-            pickImageGallery()
-            /*Press alt enter*/
-        }
-        upload.setOnClickListener(){
-            val intent = Intent()
-                .setType("*/*")
-                .setAction(Intent.ACTION_GET_CONTENT)
-            startActivityForResult(Intent.createChooser(intent, "Select a file"), 777)
-        }
     }
     fun getInfos(){
-        var email=findViewById<TextView>(R.id.emailTxtView)
+        selectedUsr= User(id = 4, name = "Louis", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 )
+        var nbAbo=findViewById<TextView>(R.id.followTxtView)
         var name=findViewById<TextView>(R.id.nameTxtView)
-        var birthDate=findViewById<TextView>(R.id.bdTxtView)
+        var nbLikes=findViewById<TextView>(R.id.likeTxtView)
         val intent = intent
         //Get manager
         manager = intent.getSerializableExtra("manager") as Manager
         var usr:User=manager.usr
-        email.text=usr.email
-        name.text=usr.name
-        birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
-        button=findViewById(R.id.upload)
+        nbAbo.text=manager.persistence.getFollowers(selectedUsr.id).toString()
+        name.text=selectedUsr.name
+        nbLikes.text=manager.persistence.getLikes(selectedUsr.id).toString()
         imageView=findViewById(R.id.imageView2)
     }
     fun returnMap(){

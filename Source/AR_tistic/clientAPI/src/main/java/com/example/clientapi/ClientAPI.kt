@@ -41,6 +41,14 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         //TODO
         return false
     }
+
+    override fun getLikes(id: Int): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun getFollowers(id: Int): Int {
+        TODO("Not yet implemented")
+    }
     /// http requests :
 
     @Suppress("NewApi")
