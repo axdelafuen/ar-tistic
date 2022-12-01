@@ -47,7 +47,6 @@ class LeaderBoardActivity : AppCompatActivity() {
             intent.putExtra("manager", manager)
             //intent.putExtra("id_usr", manager)
             startActivity(intent)
-            finish()
         }
         val usr2 = findViewById<ImageButton>(R.id.btnAccess2)
         val usr3 = findViewById<ImageButton>(R.id.btnAccess3)
