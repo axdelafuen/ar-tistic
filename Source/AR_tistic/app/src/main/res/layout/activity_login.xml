@@ -20,19 +20,18 @@
         app:layout_constraintVertical_bias="0.074" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_width="389dp"
+        android:layout_height="239dp"
         android:background="@drawable/shape_login_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652">
+        app:layout_constraintVertical_bias="0.65">
 
         <EditText
             android:id="@+id/LoginEdit"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Nom d'utilisateur / e-mail"
             android:inputType="textEmailAddress"
@@ -42,6 +41,8 @@
             android:textColorHint="@color/black"
             android:textColorLink="#689C27B0"
             android:visibility="visible"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
@@ -51,7 +52,7 @@
 
         <EditText
             android:id="@+id/MdpEdit"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Mot de passe"
             android:inputType="textPassword"
@@ -60,6 +61,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:visibility="visible"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
@@ -80,22 +83,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.484" />
-
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#F3F3F3"
-            android:text="Pas encore de compte ?"
-            android:textColor="#7A7A7A"
-            android:textSize="10sp"
-            app:cornerRadius="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.987"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MdpEdit"
-            app:layout_constraintVertical_bias="0.828" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,7 +108,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintVertical_bias="0.81" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#F3F3F3"
+        android:text="Créer un compte"
+        android:textColor="#7A7A7A"
+        android:textSize="10sp"
+        app:cornerRadius="50px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
