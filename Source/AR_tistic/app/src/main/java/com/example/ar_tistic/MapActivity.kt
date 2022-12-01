@@ -126,7 +126,7 @@ class MapActivity : AppCompatActivity(){
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {
-            val intent = Intent(this, ProfilActivity::class.java)
+            val intent = Intent(this, EditProfileActivity::class.java)
             intent.putExtra("manager", manager)
             startActivity(intent)
         }

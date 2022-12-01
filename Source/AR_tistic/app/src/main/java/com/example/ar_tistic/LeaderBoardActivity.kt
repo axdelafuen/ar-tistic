@@ -45,7 +45,7 @@ class LeaderBoardActivity : AppCompatActivity() {
         usr1.setOnClickListener {
             val intent = Intent(this, ProfilActivity::class.java)
             intent.putExtra("manager", manager)
-            intent.putExtra("id_usr", manager)
+            //intent.putExtra("id_usr", manager)
             startActivity(intent)
             finish()
         }
