@@ -29,7 +29,8 @@ fun main() {
                         createTable()
                         ctx.json("Ok").status(200)
                     }catch(e:Exception){
-                        ctx.json(e.printStackTrace().toString()).status(417)
+                        //ctx.json(e.printStackTrace().toString()).status(417)
+                        ctx.json(e.toString()).status(417)
                     }
                 }
 
