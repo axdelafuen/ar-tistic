@@ -2,14 +2,9 @@ package com.example.api
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
-import com.example.stub.*
-
-import com.example.classlib.*
 import com.example.classlib.User
-import com.example.classlibdto.UserDTO
 import com.example.database.DatabasePersistanceDAO
 import com.example.datacontract.toDTO
-import com.google.gson.Gson
 import com.example.database.*
 
 fun main() {

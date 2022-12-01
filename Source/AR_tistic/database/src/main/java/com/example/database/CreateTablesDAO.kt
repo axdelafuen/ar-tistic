@@ -12,7 +12,7 @@ import java.time.LocalTime
 
 fun createTable() {
     Database.connect(
-        url = "jdbc:mysql:"+System.getenv("DB_SERVER"),
+        url = "jdbc:mysql://"+System.getenv("DB_SERVER"),
         user = System.getenv("DB_USER"),
         password = System.getenv("DB_PASSWORD")
         /*url = "jdbc:mysql://localhost:3306/sqlsaetest",
