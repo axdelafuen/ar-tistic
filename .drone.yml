@@ -73,6 +73,8 @@ steps:
     CONTAINERNAME: api-artistic
     COMMAND: create
     OVERWRITE: true
+    CODEFIRST_CLIENTDRONE_ENV_DB_ROOT_PASSWORD:    
+        from_secret: db_root_password
     CODEFIRST_CLIENTDRONE_ENV_DB_SERVER:
       from_secret: db_server
     CODEFIRST_CLIENTDRONE_ENV_DB_USER:
