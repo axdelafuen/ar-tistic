@@ -4,42 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="@drawable/background_blur">
+
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="220dp"
+        android:layout_height="247dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.128"
+        app:srcCompat="@drawable/white_logo" />
 
     <TextView
         android:id="@+id/Welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome on AR-tistic"
-        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.074" />
-
-    <ImageView
-        android:id="@+id/Logo"
-        android:layout_width="239dp"
-        android:layout_height="290dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117"
-        app:srcCompat="@drawable/at_tistic_logo_framed_reverse" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/shape_login_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652">
+        app:layout_constraintVertical_bias="0.74">
 
 
         <EditText
@@ -49,11 +55,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginRight="16dp"
+            android:backgroundTint="@color/purple_700"
             android:filterTouchesWhenObscured="true"
             android:hint="Nom d'utilisateur / e-mail"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/purple_700"
             android:textColorHighlight="#519C27B0"
             android:textColorHint="@color/purple_700"
             android:textColorLink="#689C27B0"
@@ -68,11 +75,12 @@
             android:layout_height="45dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:backgroundTint="@color/purple_700"
             android:hint="Mot de passe"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingLeft="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/purple_700"
             android:textColorHint="@color/purple_700"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/confirmPsswd"
@@ -89,11 +97,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/purple_700"
             android:hint="Confirmer votre mot de passe"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingLeft="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/purple_700"
             android:textColorHint="@color/purple_700"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -108,6 +117,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:text="Veuillez entrer deux mots de passe égaux"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/orangeWarning"
+            android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,25 +130,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
+            android:textStyle="bold"
             android:text="Cet e-mail est déja utilisé"
+            android:textColor="@color/orangeWarning"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/registerB"
-        android:layout_width="191dp"
-        android:layout_height="60dp"
-        android:text="S'inscrire"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.63" />
 
     <Button
         android:id="@+id/returnLogPageButton"
@@ -152,5 +154,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toStartOf="parent"  />
+
+    <Button
+        android:id="@+id/registerB"
+        android:layout_width="191dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="84dp"
+        android:text="S'inscrire"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
