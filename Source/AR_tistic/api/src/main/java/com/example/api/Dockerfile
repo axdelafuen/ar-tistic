@@ -2,12 +2,7 @@ FROM gradle:latest as BUILD
 
 COPY . /src
 WORKDIR /src
-RUN ./gradlew --no-daemon classLib:assemble
-RUN ./gradlew --no-daemon classLibDTO:assemble
-RUN ./gradlew --no-daemon stub:assemble
-RUN ./gradlew --no-daemon database:assemble
-RUN ./gradlew --no-daemon dataContract:assemble
-RUN ./gradlew --no-daemon api:assemble
+RUN ./gradlew --no-daemon classLib:assemble classLibDTO:assemble stub:assemble database:assemble dataContract:assemble api:assemble
 
 FROM openjdk:latest
 
