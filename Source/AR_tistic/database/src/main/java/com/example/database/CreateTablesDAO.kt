@@ -10,11 +10,15 @@ import org.jetbrains.exposed.sql.javatime.time
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalTime
 
-fun create() {
+fun createTable() {
     Database.connect(
-        url = "jdbc:mysql://localhost:3306/sqlsaetest",
+        url = "jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE"),
+        user = "root",
+        password = System.getenv("DB_ROOT_PASSWORD")
+        /*url = "jdbc:mysql://localhost:3306/sqlsaetest",
         user = "root",
         password = "root1234"
+        test*/
     )
 
     transaction {
@@ -22,14 +26,14 @@ fun create() {
 
         // DROP TABLES
 
-/*        SchemaUtils.drop(Collaborateds)
+        SchemaUtils.drop(Collaborateds)
         SchemaUtils.drop(ActionsDone)
         SchemaUtils.drop(Relations)
         SchemaUtils.drop(Commenteds)
         SchemaUtils.drop(Noteds)
         SchemaUtils.drop(Users)
         SchemaUtils.drop(Draws)
-        SchemaUtils.drop(InterestPoints)*/
+        SchemaUtils.drop(InterestPoints)
 
         //  CREATE TABLES
 

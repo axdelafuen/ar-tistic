@@ -13,7 +13,7 @@ const config = {
   title: 'My Documentation',
   tagline: 'My tagline',
   url: 'https://codefirst.iut.uca.fr',
-  baseUrl: '/documentation/$REPO_OWNER/docusaurus/$REPO_NAME/',
+  baseUrl: '/documentation/ARTeam/docusaurus/AR-tistic/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -21,8 +21,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: '$REPO_OWNER', // Usually your GitHub org/user name.
-  projectName: '$REPO_NAME', // Usually your repo name.
+  organizationName: 'ARTeal', // Usually your GitHub org/user name.
+  projectName: 'AR-tistic', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want

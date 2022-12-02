@@ -8,7 +8,8 @@ dependencies {
     api project(':classLib')
     api project(':classLibDTO')
     api project(':classLibDTO')
-    api project(':dataContract');
+    api project(':dataContract')
+    api project(':database')
     implementation("io.javalin:javalin:4.6.4")
     implementation("org.slf4j:slf4j-simple:2.0.4")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")

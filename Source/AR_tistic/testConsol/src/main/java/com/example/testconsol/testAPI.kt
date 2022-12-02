@@ -15,8 +15,9 @@ import java.net.URL
 fun main(){
     println("API - Test Console : \n")
     var url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
+    var urlLoc = "http://localhost:1705/"
     var urlUserById0 = "http://localhost:1705/users/156789/"
-    var urlUserById2 = URL("http://localhost:7070/users/24567/")
+    var urlUserById2 = URL("http://localhost:1705/users/2/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
     var urlUserById7 = URL("http://localhost:7070/users/7/")
 
@@ -29,9 +30,18 @@ fun main(){
     //println(gson.fromJson(get(URL(urlUserById0)), User::class.java).email)
 
     var api = ClientAPI()
-    println(api.getUserById(133)?.name)
+    //println(api.getUserById(133)?.name)
     //println(api.getuserByEmail("alicaaae@alice.kt")?.name)
-
+    /*
+    try{
+        //println(get(URL(urlLoc+"create")))
+        println(get(urlUserById2))
+    }catch(e:Exception){
+        println(e.toString())
+    }
+    */
+    //post(URL(url+"users"),jsonData)
+    api.createUser(userDTO);
     //println(u.name)
 
     //println("\n"+jsonData+"\n")
