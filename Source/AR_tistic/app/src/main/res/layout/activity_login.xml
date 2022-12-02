@@ -38,6 +38,7 @@
         android:layout_height="240dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:minWidth="600dp"
         android:background="@drawable/shape_login_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
