@@ -65,17 +65,21 @@ class RegisterActivity: AppCompatActivity() {
                     } else {//unused mail
                         CoroutineScope(Dispatchers.IO).launch {
                             runCatching {
-                                if (checkPswd()) {//similar password
-                                    val usr1: User = createUser(cttmail, cttPswd1)
-                                    manager.persistence.createUser(usr1)
-                                    //Test -> creation of user
-                                    val intent = Intent(applicationContext, MapActivity::class.java)
-                                    intent.putExtra("manager", manager)
-                                    startActivity(intent)
-                                    finish()
-                                } else {
-                                    errPswd.visibility = View.VISIBLE
+                                if (checkEmail(cttmail)) {//used email
+                                    errMail.visibility = View.VISIBLE
+                                } else {//unused mail
+                                    if (checkPswd()) {//similar password
+                                        val usr1: User = createUser(cttmail, cttPswd1)
+                                        pers.createUser(usr1)
+                                        val intent = Intent(applicationContext, MapActivity::class.java)
+                                        intent.putExtra("manager", manager)
+                                        startActivity(intent)
+                                        finish()
+                                    } else {
+                                        errPswd.visibility = View.VISIBLE
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -85,30 +89,6 @@ class RegisterActivity: AppCompatActivity() {
                 }
             }
         }
-        //----------------------------------------------------
-        // TESTS
-        if (cttmail.trim().isEmpty() || cttPswd1.trim().isEmpty() || cttPswd2.trim()
-                .isEmpty()
-        ) {//empty fields
-            Toast.makeText(this, "l'Email ou le mot de passe ne peut etre vide", Toast.LENGTH_LONG)
-                .show()
-        } else {
-            if (checkEmail(cttmail)) {//used email
-                errMail.visibility = View.VISIBLE
-            } else {//unused mail
-                if (checkPswd()) {//similar password
-                    val usr1: User = createUser(cttmail, cttPswd1)
-                    pers.createUser(usr1)
-                    val intent = Intent(applicationContext, MapActivity::class.java)
-                    intent.putExtra("manager", manager)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    errPswd.visibility = View.VISIBLE
-                }
-            }
-        }
-
     }
 
     fun checkPswd(): Boolean {//return true if the 2 password are equal
