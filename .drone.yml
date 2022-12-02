@@ -8,13 +8,7 @@ trigger:
 
 steps:
   
-- name: build
-  image: androidsdk/android-31
-  commands:
-  - cd Source/AR_tistic
-  - ./gradlew --no-daemon :app:assembleDebug stub:assemble classLib:assemble classLibDTO:assemble dataContract:assemble database:assemble api:assemble
-
-- name: code analysis
+- name: build & analysis
   image: androidsdk/android-31
   environment:
       SONAR_TOKEN:
@@ -23,8 +17,7 @@ steps:
       sources: ./Source
   commands:
   - cd Source/AR_tistic
-  - ./gradlew --no-daemon sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN}
-  depends_on: [ build ]
+  - ./gradlew --no-daemon :app:assembleDebug stub:assemble classLib:assemble classLibDTO:assemble dataContract:assemble database:assemble api:assemble sonarqube -Dsonar.projectKey=ARTeam-SAE-3.01 -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$${SONAR_TOKEN} 
 
 ---
 kind: pipeline
