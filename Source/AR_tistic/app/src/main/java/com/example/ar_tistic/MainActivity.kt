@@ -103,6 +103,6 @@ class MainActivity : AppCompatActivity() {
     /// Login and mdp exists
     private fun existLogPasswd(name:String, pswd:String):Boolean{
         val res = manager.persistence.findUserByLogPswd(name,pswd) ?: return false
-        return name.equals(res.name) || name.equals(res.email)
+        return name.equals(res.email) || name.equals(res.name)
     }
 }
