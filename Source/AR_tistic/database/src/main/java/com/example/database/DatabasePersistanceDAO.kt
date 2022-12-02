@@ -175,7 +175,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
         var userList = ArrayList<com.example.database.User>()
         transaction {
-            val usr = com.example.database.User.find { (Users.vname eq log) and (Users.vpassword eq psswrd) }.forEach{
+            val usr = com.example.database.User.find { (Users.vemail eq log) and (Users.vpassword eq psswrd) }.forEach{
                 userList.add(it)
             }
         }
