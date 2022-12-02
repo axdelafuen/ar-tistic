@@ -32,15 +32,16 @@ fun main(){
     var api = ClientAPI()
     //println(api.getUserById(133)?.name)
     //println(api.getuserByEmail("alicaaae@alice.kt")?.name)
-
+    /*
     try{
         //println(get(URL(urlLoc+"create")))
         println(get(urlUserById2))
     }catch(e:Exception){
         println(e.toString())
     }
-
-
+    */
+    //post(URL(url+"users"),jsonData)
+    api.createUser(userDTO);
     //println(u.name)
 
     //println("\n"+jsonData+"\n")

@@ -14,7 +14,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
 class DatabasePersistanceDAO : IPersistenceManager{
-    val url = "jdbc:mysql:"+System.getenv("DB_SERVER")
+    val url = "jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE")
     val user = "root"
     val password = System.getenv("DB_ROOT_PASSWORD")
 
