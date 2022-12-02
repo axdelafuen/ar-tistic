@@ -7,7 +7,6 @@
     android:background="@drawable/background_blur"
     tools:context=".MainActivity">
 
-
     <ImageView
         android:id="@+id/Logo"
         android:layout_width="220dp"
@@ -37,15 +36,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/shape_login_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.743"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        >
+        app:layout_constraintVertical_bias="0.75">
 
         <EditText
             android:id="@+id/LoginEdit"
@@ -53,15 +51,13 @@
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:paddingLeft="10dp"
+            android:backgroundTint="@color/purple_700"
             android:hint="Nom d'utilisateur / e-mail"
             android:inputType="textEmailAddress"
-
+            android:paddingLeft="10dp"
             android:textColor="@color/purple_700"
-            android:backgroundTint="@color/purple_700"
-            android:textColorHint="@color/purple_700"
             android:textColorHighlight="@color/purple_200"
-
+            android:textColorHint="@color/purple_700"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,13 +75,10 @@
             android:backgroundTint="@color/purple_700"
             android:hint="Mot de passe"
             android:inputType="textPassword"
-            android:minHeight="48dp"
-
             android:paddingLeft="10dp"
             android:textColor="@color/purple_700"
             android:textColorHighlight="@color/purple_200"
             android:textColorHint="@color/purple_700"
-
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,10 +93,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textStyle="bold"
-            android:textSize="16dp"
             android:text="Mot de passe ou idantifiant incorrect"
             android:textColor="@color/orangeWarning"
+            android:textSize="16dp"
+            android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/LoginEdit"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,9 +107,9 @@
 
     <Button
         android:id="@+id/LoginButton"
-        android:layout_width="179dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="70dp"
         android:text="Se connecter"
         android:textColor="@color/white"
         android:textColorLink="#9C27B0"
@@ -136,7 +129,7 @@
         app:cornerRadius="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent" />
 
 

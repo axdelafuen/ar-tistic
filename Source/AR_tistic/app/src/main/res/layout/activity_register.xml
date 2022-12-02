@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
-    android:background="@drawable/background_blur">
+    android:background="@drawable/background_blur"
+    tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/Logo"
@@ -37,8 +37,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/shape_login_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="40dp"
             android:backgroundTint="@color/purple_700"
-            android:hint="Confirmer votre mot de passe"
+            android:hint="Confirmer mot de passe"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingLeft="10dp"
@@ -116,10 +116,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:textSize="16dp"
             android:text="Veuillez entrer deux mots de passe égaux"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/orangeWarning"
+            android:textSize="16dp"
             android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,20 +148,20 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#F3F3F3"
-        android:text="Créer un compte"
+        android:text="Se connecter"
         android:textColor="#7A7A7A"
         android:textSize="10sp"
         app:cornerRadius="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"  />
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/registerB"
-        android:layout_width="191dp"
+        android:layout_width="190dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="70dp"
         android:text="S'inscrire"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
