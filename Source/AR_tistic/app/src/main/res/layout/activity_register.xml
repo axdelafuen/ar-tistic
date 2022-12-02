@@ -39,7 +39,7 @@
         android:layout_height="280dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:minWidth="700dp"
+        android:minWidth="1700dp"
         android:background="@drawable/shape_login_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
