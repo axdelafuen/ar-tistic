@@ -4,121 +4,168 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="@drawable/background_blur">
 
-    <Button
-        android:id="@+id/registerB"
-        android:layout_width="191dp"
-        android:layout_height="60dp"
-        android:text="S'inscrire"
-        android:textSize="18sp"
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="220dp"
+        android:layout_height="247dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:background="@color/gray"
-        android:hint="e-mail"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="10dp"
-        android:textColor="@color/purple_500"
-        android:textColorHint="@color/purple_500"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443" />
-
-    <EditText
-        android:id="@+id/psswd"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="280dp"
-        android:background="@color/gray"
-        android:hint="Mot de passe"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:paddingLeft="10dp"
-        android:textColor="@color/purple_500"
-        android:textColorHint="@color/purple_500"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.754"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/confirmPsswd"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="176dp"
-        android:background="@color/gray"
-        android:hint="Confirmer votre mot de passe"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:paddingLeft="10dp"
-        android:textColor="@color/purple_500"
-        android:textColorHint="@color/purple_500"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/psswd"
-        app:layout_constraintVertical_bias="0.657"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintVertical_bias="0.128"
+        app:srcCompat="@drawable/white_logo" />
 
     <TextView
-        android:id="@+id/returnLogPage"
+        android:id="@+id/Welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginBottom="28dp"
-        android:text="Déja on compte?"
+        android:text="Welcome on AR-tistic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_login_panel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74">
+
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/purple_700"
+            android:filterTouchesWhenObscured="true"
+            android:hint="Nom d'utilisateur / e-mail"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="10dp"
+            android:textColor="@color/purple_700"
+            android:textColorHighlight="#519C27B0"
+            android:textColorHint="@color/purple_700"
+            android:textColorLink="#689C27B0"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/psswd"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/purple_700"
+            android:hint="Mot de passe"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/purple_700"
+            android:textColorHint="@color/purple_700"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/confirmPsswd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            app:layout_constraintVertical_bias="0.472"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/confirmPsswd"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/purple_700"
+            android:hint="Confirmer votre mot de passe"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/purple_700"
+            android:textColorHint="@color/purple_700"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/unequalPswd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:textSize="16dp"
+            android:text="Veuillez entrer deux mots de passe égaux"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/orangeWarning"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/emailused"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Cet e-mail est déja utilisé"
+            android:textColor="@color/orangeWarning"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/returnLogPageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#00FFFFFF"
-        android:text="Se connecter"
-        android:textColor="@color/purple_500"
+        android:backgroundTint="#F3F3F3"
+        android:text="Créer un compte"
+        android:textColor="#7A7A7A"
+        android:textSize="10sp"
+        app:cornerRadius="50px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/returnLogPage" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"  />
 
-    <TextView
-        android:id="@+id/emailused"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="16dp"
-        android:text="Cet e-mail est déja utilisé"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/unequalPswd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="16dp"
-        android:text="Veuillez entrer deux mots de passe égaux"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/email"
+    <Button
+        android:id="@+id/registerB"
+        android:layout_width="191dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="80dp"
+        android:text="S'inscrire"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

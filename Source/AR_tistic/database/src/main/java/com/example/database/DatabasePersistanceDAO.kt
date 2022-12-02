@@ -183,6 +183,14 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return getUserById(userList[0].id.value)!!
     }
 
+    override fun getLikes(id: Int): Int {
+        return 1//TODO
+    }
+
+    override fun getFollowers(id: Int): Int {
+        return 1//TODO
+    }
+
     fun userDataToUserClass(u: com.example.database.User, hmsub: HashMap<Int,com.example.classlib.User> = hashMapOf(), nbR: Int, subBool: Boolean):com.example.classlib.User {
         Database.connect(
             url = url,

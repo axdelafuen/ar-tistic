@@ -60,6 +60,13 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }
     }
 
+    override fun getLikes(id: Int): Int {
+        return 1
+    }
+
+    override fun getFollowers(id: Int): Int {
+        return 1
+    }
     /// http requests :
 
     @Suppress("NewApi")

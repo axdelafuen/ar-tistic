@@ -5,12 +5,17 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classlib.Manager
 import com.example.stub.Stub
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -27,7 +32,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 class MapActivity : AppCompatActivity(){
-    lateinit var manager: Manager
+
+    lateinit var manager:Manager
     private lateinit var map:MapView
     @SuppressLint("WrongViewCast")
     @RequiresApi(Build.VERSION_CODES.M)
@@ -117,12 +123,29 @@ class MapActivity : AppCompatActivity(){
         paintBtn.setOnClickListener {
             val intent = Intent(this, PaintActivity::class.java)
             startActivity(intent)
+
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {
-            val intent = Intent(this, ProfilActivity::class.java)
+            val intent = Intent(this, EditProfileActivity::class.java)
             intent.putExtra("manager", manager)
             startActivity(intent)
+        }
+        val ratingBtn = findViewById<ImageButton>(R.id.leaderboardButton)
+        ratingBtn.setOnClickListener {
+            val intent = Intent(this, LeaderBoardActivity::class.java)
+            intent.putExtra("manager", manager)
+            startActivity(intent)
+        }
+        val mesageBtn = findViewById<ImageButton>(R.id.msgButton)
+        mesageBtn.setOnClickListener {
+            val intent = Intent(this, MessagesActivity::class.java)
+            intent.putExtra("manager", manager)
+            startActivity(intent)
+        }
+        val displayPopUp = findViewById<Button>(R.id.displayPopUp);
+        displayPopUp.setOnClickListener {
+            popUp();
         }
     }
 
@@ -135,5 +158,36 @@ class MapActivity : AppCompatActivity(){
         super.onPause()
         map.onPause()
     }
+    fun popUp() {
+
+        val inflter = LayoutInflater.from(this)
+        val v = inflter.inflate(R.layout.activity_draw,null)
+        val addDialog = AlertDialog.Builder(this)
+        addDialog.setView(v)
+        addDialog.setPositiveButton("Ok"){
+            dialog,_->
+            dialog.dismiss()
+            Toast.makeText(this,"OK",Toast.LENGTH_LONG).show()
+        }
+        addDialog.setNegativeButton("Cancel"){
+            dialog,_->
+            dialog.dismiss()
+            Toast.makeText(this,"Cancel",Toast.LENGTH_LONG).show()
+        }
+        addDialog.create()
+        addDialog.show()
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.activity_draw, null)
+        val madeBy= dialogLayout.findViewById<TextView>(R.id.madeBy)
+
+        /*with(addDialog)
+        {
+            madeBy.text="OUIII"
+            show()
+        }*/
+        //addDialog.apply{madeBy.text="OUIII"}.show()
+
+    }
+
 
 }
