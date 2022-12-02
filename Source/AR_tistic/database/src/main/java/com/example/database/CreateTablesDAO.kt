@@ -17,7 +17,8 @@ fun createTable() {
         password = System.getenv("DB_ROOT_PASSWORD")
         /*url = "jdbc:mysql://localhost:3306/sqlsaetest",
         user = "root",
-        password = "root1234"*/
+        password = "root1234"
+        test*/
     )
 
     transaction {
