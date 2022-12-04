@@ -109,8 +109,7 @@ class RegisterActivity: AppCompatActivity() {
         email: String,
         pswd: String
     ): User {// return new user with uniq id and the email and mdp giv in parameter
-        var id = 1//Id from manager
         val ppDefault = "/img/ppDefault"
-        return User(id, "User" + id, "", email, pswd, Date(1999, 2, 2), hashMapOf(), 0)
+        return User(1, "Username", "", email, Util.hashPassword(pswd), Date(1999, 2, 2), hashMapOf(), 0)
     }
 }
