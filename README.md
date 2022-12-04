@@ -6,33 +6,35 @@
 
 <br />
 <div align="center">
-    <img src="./Source/images/AT-tistic_Logo.png" alt="Logo" width="200" height="200">
-  </a>
+<img src="./Source/images/AT-tistic_Logo.png" alt="Logo" width="200" height="200">
 
-  <h1 align="center">AR - tistic</h1>
+<h1 align="center">AR - tistic</h1>
 
-  <p align="center">
-AR-tistic est une application mobile basée sur de la réalité augmentée. L'idée est de concevoir un "réseau social" en AR. L'application permettrait d'être localisé en temps réel. Lorsque les utilisateurs approcheront des points d'intérêts, ils seront autorisés à utiliser de l'AR pour dessiner autour d'eux. Les utilisateurs pourraient donc partager leurs œuvres d'arts, et contempler celles des autres, sur les points d'intérêts disponibles sur l'application.
-    <br />
-    <br />
-    <br />
-    <a href="https://codefirst.iut.uca.fr/git/ARTeam/SAE-3.01/wiki">Wiki</a>
-    ·
+<br />
+<a href="https://codefirst.iut.uca.fr/git/ARTeam/SAE-3.01/wiki">Wiki</a>
+·
+<a href="https://codefirst.iut.uca.fr/documentation/ARTeam/docusaurus/AR-tistic/">Documentation</a>
+·
+<a href="#">Swagger</a>
+·
+<a href="#">Download</a>
 
-  </p>
 </div>
 
 About the project
 ===
 
-.....
+  <p>
+AR-tistic est une application mobile basée sur de la réalité augmentée. L'idée est de concevoir un "réseau social" en AR. L'application permettrait d'être localisé en temps réel. Lorsque les utilisateurs approcheront des points d'intérêts, ils seront autorisés à utiliser de l'AR pour dessiner autour d'eux. Les utilisateurs pourraient donc partager leurs œuvres d'arts, et contempler celles des autres, sur les points d'intérêts disponibles sur l'application.
+  </p>
 
-.....
 
 
 Getting started
 ===
 
-.....
+Clone the repository :
 
-.....
+```
+git clone https://codefirst.iut.uca.fr/git/ARTeam/AR-tistic.git
+```
