@@ -15,7 +15,7 @@
 ·
 <a href="https://codefirst.iut.uca.fr/documentation/ARTeam/docusaurus/AR-tistic/">Documentation</a>
 ·
-<a href="#">Swagger</a>
+<a href="https://app.swaggerhub.com/apis/axdelafuen/AR-tistic/1.0.0">Swagger</a>
 ·
 <a href="#">Download</a>
 
