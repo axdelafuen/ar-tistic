@@ -1,0 +1,83 @@
+openapi: 3.0.0
+servers: []
+info:
+  description: Web API for AR-tistic
+  version: "1.0.0"
+  title: AR-tistic API
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: get all users
+      operationId: searchInventory
+      parameters: 
+      responses:
+        '200':
+          description: get all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '403':
+          description: forbidden
+        '404':
+          description: not found 
+    get:
+      tags:
+        - usersById
+      summary: get user by id
+      responses:
+        '200':
+          description: get a user by his id
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '403':
+          description: forbidden
+        '404':
+          description: nor found
+
+
+
+components:
+  schemas:
+    Date:
+      type: object
+      properties:
+        Day:
+          type: integer
+          format: int64
+        Month:
+          type: integer
+          format: int64
+        Year:
+          type: integer
+          format: int64
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        profilePicture:
+          type: string
+          format: base64
+        name:
+          type: string
+        password:
+          type: string
+        birthDate:
+          $ref: '#/components/schemas/Date'
+        subscribes:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        nbReport:
+          type: integer

@@ -1,0 +1,218 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ ],
+  "info" : {
+    "description" : "Web API for AR-tistic",
+    "version" : "1.0.0",
+    "title" : "AR-tistic API"
+  },
+  "paths" : {
+    "/users" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "get all users",
+        "operationId" : "searchInventory",
+        "responses" : {
+          "200" : {
+            "description" : "get all users",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "forbidden"
+          },
+          "404" : {
+            "description" : "not found"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Add a new user",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Created"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a user",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Updated"
+          }
+        }
+      }
+    },
+    "/users/{id}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "get user by id",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "Numeric ID of the user to get"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "get a user by his id",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "forbidden"
+          },
+          "404" : {
+            "description" : "nor found"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a user by his id",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "Numeric ID of the user to get"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Deleted"
+          }
+        }
+      }
+    },
+    "/users/{email}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "get user by email",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "email",
+          "schema" : {
+            "type" : "string"
+          },
+          "required" : true,
+          "description" : "email of the user to get"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "get a user by his email",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "forbidden"
+          },
+          "404" : {
+            "description" : "not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Date" : {
+        "type" : "object",
+        "properties" : {
+          "Day" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "Month" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "Year" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "User" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "profilePicture" : {
+            "type" : "string",
+            "format" : "base64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "birthDate" : {
+            "$ref" : "#/components/schemas/Date"
+          },
+          "subscribes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/User"
+            }
+          },
+          "nbReport" : {
+            "type" : "integer"
+          }
+        }
+      }
+    }
+  }
+}
