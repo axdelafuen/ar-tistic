@@ -69,7 +69,20 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
 
     override fun getuserByEmail(content: String): User? {
-        TODO("Not yet implemented")
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var userList = ArrayList<com.example.database.User>()
+        transaction {
+            val usr = com.example.database.User.find { (Users.vemail eq content) }.forEach{
+                userList.add(it)
+            }
+        }
+
+        return getUserById(userList[0].id.value)!!
     }
 
     fun getUserByIdNoSubs(idUser: Int): com.example.classlib.User{

@@ -102,7 +102,9 @@ class MainActivity : AppCompatActivity() {
         val res = manager.persistence.getuserByEmail(name)
         if (res != null) {
             if(name == res.email || name == res.name){
+                println("FIND USER")
                 if(res.password == Util.hashPassword(pswd)){
+                    println("GOOD PASSWORD")
                     return true
                 }
             }
