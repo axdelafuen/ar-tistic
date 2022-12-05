@@ -5,11 +5,8 @@ import com.example.classlib.Date
 import com.example.classlib.IPersistenceManager
 import com.example.classlib.User
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
@@ -69,7 +66,25 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
 
     override fun getuserByEmail(content: String): User? {
-        TODO("Not yet implemented")
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var userList = ArrayList<com.example.classlib.User>()
+        transaction {
+            com.example.database.User.find { Users.vemail eq content }.forEach {
+                val usr = getUserById(it.id.value)
+                if(usr != null){
+                    userList.add(usr)
+                }
+            }
+        }
+        if(userList[0] != null){
+            return userList[0]
+        }
+        return null
     }
 
     fun getUserByIdNoSubs(idUser: Int): com.example.classlib.User{
@@ -175,7 +190,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
         var userList = ArrayList<com.example.database.User>()
         transaction {
-            val usr = com.example.database.User.find { (Users.vemail eq log) and (Users.vpassword eq psswrd) }.forEach{
+            val usr = com.example.database.User.find { (Users.vemail eq log) or (Users.vname eq log) and (Users.vpassword eq psswrd) }.forEach{
                 userList.add(it)
             }
         }
@@ -184,7 +199,21 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
 
     override fun getLikes(id: Int): Int {
-        return 1//TODO
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var count: Int = 0
+
+        transaction {
+            ActionDone.find{ (ActionsDone.vcreator eq true) and (ActionsDone.vidUser eq id)}.forEach{
+                var liked = ActionDone.find { (ActionsDone.vidDraw eq it.iddraw) and (ActionsDone.vlike eq true) }.count().toInt()
+                count += liked
+            }
+        }
+        return count
     }
 
     override fun getFollowers(id: Int): Int {
