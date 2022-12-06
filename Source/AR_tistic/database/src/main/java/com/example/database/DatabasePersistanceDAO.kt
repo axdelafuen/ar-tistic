@@ -247,7 +247,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return returnedUser
     }
 
-    override fun createDraw(draw: com.example.classlib.Draw, creatorId: Int) {
+    override fun createDraw(draw: com.example.classlib.Draw) {
         Database.connect(
             url = url,
             user = user,

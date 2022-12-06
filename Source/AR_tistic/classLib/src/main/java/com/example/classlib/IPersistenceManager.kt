@@ -13,10 +13,10 @@ interface IPersistenceManager : Serializable {
     fun getLikes(id:Int):Int
     fun getFollowers(id:Int):Int
     // DRAWS METHODS
-    fun getDrawById(idDraw: Int): com.example.classlib.Draw?
-    fun deleteDraw(d:com.example.classlib.Draw)
-    fun updateDraw(d: com.example.classlib.Draw)
-    fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>
-    fun createDraw(draw: com.example.classlib.Draw, creatorId: Int)
+    fun getDrawById(idDraw: Int): Draw?
+    fun deleteDraw(id:Int)
+    fun updateDraw(d: Draw)
+    fun createDraw(draw: Draw)
+    fun getDrawFromUser(userId:Int):HashMap<Int,Draw>?
     // INTERESTPOINTS METHODS
 }
