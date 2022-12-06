@@ -17,6 +17,6 @@ interface IPersistenceManager : Serializable {
     fun deleteDraw(d:com.example.classlib.Draw)
     fun updateDraw(d: com.example.classlib.Draw)
     fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>
-    fun createDraw(draw: com.example.classlib.Draw, creatorId: Int)
+    fun createDraw(draw: com.example.classlib.Draw)
     // INTERESTPOINTS METHODS
 }
