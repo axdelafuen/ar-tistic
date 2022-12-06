@@ -154,18 +154,27 @@ class  Stub : IPersistenceManager {
     }
 
     //DRAWS FUNCTIONS
-    fun getDrawById(idDraw:Int):Draw?{
+    override fun getDrawById(idDraw:Int):Draw?{
         return drawsHashMap[idDraw]
     }
-    fun createDraw(drw:Draw){// créé un nouveau
+    override fun createDraw(drw:Draw){// créé un nouveau
         val id=lastId.incrementAndGet()
         drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
     }
+
+    override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
+        TODO("Not yet implemented")
+    }
+
     fun updateDraw(id:Int,drw:Draw){// modify
         drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
     }
-    fun deleteDraw(id:Int){
+    override fun deleteDraw(id:Int){
         drawsHashMap.remove(id)
+    }
+
+    override fun updateDraw(d: Draw) {
+        TODO("Not yet implemented")
     }
 
 }

@@ -66,7 +66,9 @@ class RegisterActivity: AppCompatActivity() {
                         CoroutineScope(Dispatchers.IO).launch {
                             runCatching {
                                 if (checkEmail(cttmail)) {//used email
-                                    errMail.visibility = View.VISIBLE
+                                    runOnUiThread{
+                                        errMail.visibility = View.VISIBLE
+                                    }
                                 } else {//unused mail
                                     if (checkPswd()) {//similar password
                                         val usr1: User = createUser(cttmail, cttPswd1)
@@ -76,7 +78,9 @@ class RegisterActivity: AppCompatActivity() {
                                         startActivity(intent)
                                         finish()
                                     } else {
-                                        errPswd.visibility = View.VISIBLE
+                                        runOnUiThread{
+                                            errPswd.visibility = View.VISIBLE
+                                        }
                                     }
                                 }
 
