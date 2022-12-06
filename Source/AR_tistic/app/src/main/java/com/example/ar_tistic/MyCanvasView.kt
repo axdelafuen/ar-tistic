@@ -1,11 +1,10 @@
 package com.example.ar_tistic
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 
@@ -22,6 +21,6 @@ class MyCanvasView(context: Context) : View(context) {
     }
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawBitmap(extraBitmap, 0f, 0f, null)
+        canvas.drawBitmap(extraBitmap, 19f, 10f, null)
     }
 }

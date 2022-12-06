@@ -124,10 +124,8 @@ class MapActivity : AppCompatActivity(){
         paintBtn.setOnClickListener {
             /*val intent = Intent(this, PaintActivity::class.java)
             startActivity(intent)*/
-            val myCanvasView = MyCanvasView(this)
-            myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
-            myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
-            setContentView(myCanvasView)
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {
