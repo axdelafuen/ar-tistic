@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import com.example.stub.*
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -14,14 +13,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import com.example.classlib.Date
 import com.example.classlib.Manager
-import com.example.classlib.User
+import com.example.classlib.Util
 import com.example.clientapi.ClientAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
@@ -102,10 +99,14 @@ class MainActivity : AppCompatActivity() {
     /// FUNCTION
     /// Login and mdp exists
     private fun existLogPasswd(name:String, pswd:String): Boolean {
-        val res = manager.persistence.findUserByLogPswd(name,pswd)
+        val res = manager.persistence.getuserByEmail(name)
         if (res != null) {
             if(name == res.email || name == res.name){
-                return true
+                println("FIND USER")
+                if(res.password == Util.hashPassword(pswd)){
+                    println("GOOD PASSWORD")
+                    return true
+                }
             }
         }
         return false

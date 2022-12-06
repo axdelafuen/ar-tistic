@@ -1,9 +1,11 @@
 package com.example.testconsol
 import com.example.classlib.*
+import com.example.classlib.Date
 import com.example.stub.*
 import java.util.*
 
 fun main(){
+    /*
     var stub=Stub()
     println("----Load of all users")
     for(usr in stub.loadData().users){
@@ -32,7 +34,6 @@ fun main(){
     for(dra in idxDraw){
         println(dra.value.name)
     }
-    /*
     println("----get user by id")
     println(stub.getUserById(2))
     println("----post user")
@@ -48,5 +49,8 @@ fun main(){
     stub.deleteUser(2)
     println(stub.userHashMap.size)
     println(stub.getUserById(2))*/
-
+    var password = "aaaa123"
+    var u = User(id= 1, name = "PatPat", profilePicture = "./img/pp/Fredo.jpg", email = "patrick@gmail.kt", password=password, birthDate= Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 )
+    println(u.password)
+    println(Util.hashPassword(password))
 }

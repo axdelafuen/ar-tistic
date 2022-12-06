@@ -1,17 +1,14 @@
 package com.example.database
 
+import com.example.classlib.*
 import com.example.classlib.Collection
-import com.example.classlib.Date
-import com.example.classlib.IPersistenceManager
 import com.example.classlib.User
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
+import java.time.LocalTime
 
 class DatabasePersistanceDAO : IPersistenceManager{
     val url = "jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE")
@@ -69,7 +66,20 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
 
     override fun getuserByEmail(content: String): User? {
-        TODO("Not yet implemented")
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var userList = ArrayList<com.example.database.User>()
+        transaction {
+            val usr = com.example.database.User.find { (Users.vemail eq content) }.forEach{
+                userList.add(it)
+            }
+        }
+
+        return getUserById(userList[0].id.value)!!
     }
 
     fun getUserByIdNoSubs(idUser: Int): com.example.classlib.User{
@@ -89,7 +99,6 @@ class DatabasePersistanceDAO : IPersistenceManager{
             if (usr != null) {
                 userList.add(usr)
             }
-
         }
 
         return userDataToUserClass(userList[0], hashMapOf(), count.toInt(),false)
@@ -175,7 +184,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
         var userList = ArrayList<com.example.database.User>()
         transaction {
-            val usr = com.example.database.User.find { (Users.vemail eq log) and (Users.vpassword eq psswrd) }.forEach{
+            val usr = com.example.database.User.find { (Users.vemail eq log) or (Users.vname eq log) and (Users.vpassword eq psswrd) }.forEach{
                 userList.add(it)
             }
         }
@@ -184,7 +193,21 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
 
     override fun getLikes(id: Int): Int {
-        return 1//TODO
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var count: Int = 0
+
+        transaction {
+            ActionDone.find{ (ActionsDone.vcreator eq true) and (ActionsDone.vidUser eq id)}.forEach{
+                var liked = ActionDone.find { (ActionsDone.vidDraw eq it.iddraw) and (ActionsDone.vlike eq true) }.count().toInt()
+                count += liked
+            }
+        }
+        return count
     }
 
     override fun getFollowers(id: Int): Int {
@@ -224,4 +247,88 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return returnedUser
     }
 
+    override fun createDraw(draw: com.example.classlib.Draw, creatorId: Int) {
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        transaction {
+            com.example.database.Draw.new {
+                name = draw.name
+                image = draw.image
+                lifetime = LocalTime.of(draw.lifeTime.hours,draw.lifeTime.minutes,draw.lifeTime.seconds)
+                creationDate = LocalDate.of(draw.creationDate.year,draw.creationDate.month,draw.creationDate.day)
+                interestpoint = EntityID(draw.interestPoint[0]!!.id,InterestPoints)
+            }
+
+            com.example.database.ActionDone.new{
+                iduser = EntityID(creatorId,Users)
+                iddraw = EntityID(draw.id,Draws)
+                creator = true
+                report = false
+                like = false
+            }
+
+            Collaborated.new {
+                iduser = EntityID(creatorId,Users)
+                iddraw = EntityID(draw.id,Draws)
+            }
+        }
+    }
+
+    fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>{
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+        var authorsHash: HashMap<Int,com.example.classlib.User> = hashMapOf()
+        transaction {
+
+        }
+    }
+
+    override fun getDrawById(idDraw: Int): com.example.classlib.Draw? {
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+        var nbR: Int = 0
+        var drawsList = ArrayList<com.example.database.Draw>()
+        var authorsHash: HashMap<Int,com.example.classlib.User> = hashMapOf()
+        transaction {
+            val draw = com.example.database.Draw.findById(idDraw)
+            if (draw != null) {
+                drawsList.add(draw)
+            }
+            ActionDone.find { (ActionsDone.vidDraw eq idDraw) and (ActionsDone.vreport eq true) }.forEach {
+                nbR+=1
+            }
+        }
+
+        return drawDataToDrawClass(drawsList[0], nbR)
+    }
+
+    fun drawDataToDrawClass(d: com.example.database.Draw, nbReport: Int, authors: HashMap<Int,com.example.classlib.User>):com.example.classlib.Draw?{
+        if(d == null){return null}
+        return com.example.classlib.Draw(
+            name = d.name,
+            id = d.id.value,
+            lifeTime = Time(d.lifetime.hour,d.lifetime.minute,d.lifetime.second),
+            creationDate = Date(d.creationDate.year,d.creationDate.monthValue,d.creationDate.dayOfMonth),
+            image = d.image,
+            authors =
+        )
+    }
+
+    fun updateDraw(d: com.example.classlib.Draw){
+
+    }
+
+    fun deleteDraw(d:com.example.classlib.Draw){
+
+    }
 }

@@ -76,10 +76,8 @@ steps:
       from_secret: db_password
     CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
       from_secret: db_database
-  depends_on: [ container-api ]
-
-depends_on: 
-- ARtisticCI
+  depends_on: 
+    - container-api
 
 ---
 kind: pipeline

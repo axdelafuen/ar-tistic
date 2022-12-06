@@ -108,17 +108,13 @@ fun main() {
                     data.deleteUser(ctx.pathParam("user-id").toInt())
                     ctx.status(204)
                 }
-/*
         // DRAWS
-
+/*
         get("/draws") { ctx ->
-            ctx.json(drawDao.getDraws()!!)
+            ctx.json(data.loadData().draws)
         }
         get("/draws/{draw-id}") { ctx ->
             ctx.json(drawDao.getDrawsById(ctx.pathParam("draw-id").toInt())!!)
-        }
-        get("/draws/idx/{idx}/{nb}"){ctx->
-            ctx.json(drawDao.getDrawWithIndex(ctx.pathParam("idx").toInt(),ctx.pathParam("nb").toInt())!!)
         }
         post("/draws") { ctx ->
             val draw = ctx.bodyAsClass<Draw>()
