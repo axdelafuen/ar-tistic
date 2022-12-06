@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
+import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -121,9 +122,12 @@ class MapActivity : AppCompatActivity(){
         //BUTTONS
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
-            val intent = Intent(this, PaintActivity::class.java)
-            startActivity(intent)
-
+            /*val intent = Intent(this, PaintActivity::class.java)
+            startActivity(intent)*/
+            val myCanvasView = MyCanvasView(this)
+            myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
+            myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
+            setContentView(myCanvasView)
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
         profilBtn.setOnClickListener {
