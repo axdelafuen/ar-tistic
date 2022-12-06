@@ -338,7 +338,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return hashIP
     }
 
-    fun deleteDraw(idDraw: Int){
+    override fun deleteDraw(idDraw: Int){
         Database.connect(
             url = url,
             user = user,
@@ -407,5 +407,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
             picture = ip.image
         )
     }
+
+
 
 }
