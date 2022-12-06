@@ -147,6 +147,12 @@ class MapActivity : AppCompatActivity(){
         displayPopUp.setOnClickListener {
             popUp();
         }
+        val searchBtn = findViewById<ImageButton>(R.id.searchButton)
+        searchBtn.setOnClickListener{
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("manager", manager)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {

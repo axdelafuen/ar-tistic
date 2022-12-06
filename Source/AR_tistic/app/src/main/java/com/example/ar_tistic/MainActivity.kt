@@ -61,7 +61,9 @@ class MainActivity : AppCompatActivity() {
                         //check passwrd & log
                         if (!existLogPasswd(cttLog, cttMdp)) {// non equal
                             println("DEBUG LOGIN")
-                            err.visibility = View.VISIBLE
+                            runOnUiThread{
+                                err.visibility = View.VISIBLE
+                            }
                         }
                     //found log & password
                     else {
