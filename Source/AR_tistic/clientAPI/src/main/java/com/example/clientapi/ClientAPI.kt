@@ -24,6 +24,8 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }
     }
 
+    // USER
+
     override fun getUserById(idUser: Int): User? {
         try{
             return Gson().fromJson(get(URL(url+"users/"+idUser.toString())),User::class.java)
@@ -66,6 +68,36 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     override fun getFollowers(id: Int): Int {
         return 1
+    }
+
+    // DRAWS
+
+    override fun getDrawById(idDraw: Int): Draw? {
+        try{
+            return Gson().fromJson(get(URL(url+"draws/"+idDraw.toString())),Draw::class.java)
+        }catch(e: IOException) {
+            return null
+        }
+    }
+
+    override fun deleteDraw(id: Int) {
+        delete(URL(url+"draws"+id as String))
+    }
+
+    override fun updateDraw(d: Draw) {
+        put(URL(url+"draws"),Gson().toJson(d))
+    }
+
+    override fun createDraw(draw: Draw) {
+        post(URL(url+"/draws"),Gson().toJson(draw))
+    }
+
+    override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
+        try{
+            return Gson().fromJson(get(URL(url+"draws/fromUser/"+userId)),HashMap<Int,Draw>()::class.java)
+        }catch(e: IOException) {
+            return null
+        }
     }
     /// http requests :
 
