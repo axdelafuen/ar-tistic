@@ -122,7 +122,13 @@ class MapActivity : AppCompatActivity(){
         //BUTTONS
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
+<<<<<<< HEAD
             val intent = Intent(this, CanvaActivity::class.java)
+=======
+            /*val intent = Intent(this, PaintActivity::class.java)
+            startActivity(intent)*/
+            val intent = Intent(this, MainActivity2::class.java)
+>>>>>>> 857e57b8d6d8b993a9a042117cfc5a5d067ac4b9
             startActivity(intent)
         }
         val profilBtn = findViewById<ImageButton>(R.id.profileButton)
