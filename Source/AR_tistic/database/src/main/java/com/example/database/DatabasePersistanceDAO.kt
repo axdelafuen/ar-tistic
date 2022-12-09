@@ -275,10 +275,13 @@ class DatabasePersistanceDAO : IPersistenceManager{
                 like = false
             }
 
-            Collaborated.new {
-                iduser = EntityID(draw.authors.getValue(0).id,Users)
-                iddraw = EntityID(draw.id,Draws)
+            draw.authors.forEach {
+                Collaborated.new {
+                    iduser = EntityID(it.key,Users)
+                    iddraw = EntityID(draw.id,Draws)
+                }
             }
+
             CreatedOn.new {
                 idinterestpoint = EntityID(draw.interestPoint.getValue(0).id,InterestPoints)
                 iddraw = EntityID(draw.id,Draws)
@@ -287,7 +290,20 @@ class DatabasePersistanceDAO : IPersistenceManager{
     }
 
     override fun getDrawFromUser(userId: Int): HashMap<Int, com.example.classlib.Draw>? {
-        TODO("Not yet implemented")
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var userDraws:HashMap<Int, com.example.classlib.Draw>? = hashMapOf()
+        transaction {
+            ActionDone.find{ (ActionsDone.vidUser eq userId)}.forEach {
+                Draw.find { (Draws.id eq it.id) }.forEach {
+                    userDraws!!.put(it.id.value, getDrawById(it.id.value)!!)
+                }
+            }
+        }
     }
 
     override fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>{
@@ -360,9 +376,6 @@ class DatabasePersistanceDAO : IPersistenceManager{
         }
     }
 
-/*    override fun updateDraw(d: com.example.classlib.Draw) {
-        TODO("Not yet implemented")
-    }*/
 
 
     override fun updateDraw(d: com.example.classlib.Draw){
@@ -394,6 +407,35 @@ class DatabasePersistanceDAO : IPersistenceManager{
                     it.delete()
                 }
             }
+
+                var authorToUpdate = ActionDone.find { (ActionsDone.vidDraw eq d.id) and (ActionsDone.vidUser eq d.authors.keys.first()) and (ActionsDone.vcreator eq true) }
+                if(authorToUpdate.empty()){
+                    ActionDone.new {
+                        iddraw = EntityID(d.id,com.example.database.Draws)
+                        iduser = EntityID(d.authors.keys.first(),Users)
+                        creator = true
+                    }
+                }
+
+            var collaboratorsAlreadyDone:kotlin.collections.ArrayList<Int> = arrayListOf()
+            d.authors.forEach {
+                var collaboratorsTpUpdate = Collaborated.find { (Collaborateds.vidDraw eq d.id) and (Collaborateds.vidUser eq it.key)}
+                if(collaboratorsTpUpdate.empty()){
+                    Collaborated.new {
+                        iduser = EntityID(it.key, Users)
+                        iddraw = EntityID(d.id, Draws)
+                    }
+                }
+                collaboratorsAlreadyDone.add(it.key)
+            }
+
+            Collaborated.find { (Collaborateds.vidDraw eq d.id) }.forEach {
+                if(it.iduser.value !in collaboratorsAlreadyDone){
+                    it.delete()
+                }
+            }
+
+
         }
     }
 
