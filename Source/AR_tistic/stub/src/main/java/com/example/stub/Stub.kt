@@ -5,7 +5,7 @@ import com.example.classlib.Collection
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class  Stub : IPersistenceManager {
+class  Stub{
     var userHashMap=loadData().users
         get() {
             return field
@@ -99,11 +99,11 @@ class  Stub : IPersistenceManager {
     //USERS FUNCTIONS
 
 
-    override fun getUserById(idUser:Int):User?{
+    fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
     }
 
-    override fun getuserByEmail(content: String): User? {
+    fun getuserByEmail(content: String): User? {
         for(user in userHashMap.values){
             if(content.equals(user.email)){
                 return user
@@ -111,17 +111,17 @@ class  Stub : IPersistenceManager {
         }
         return null
     }
-    override fun createUser(usr:User){// créé un nouveau
+    fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    override fun updateUser(id:Int,usr:User){// modify
+    fun updateUser(id:Int,usr:User){// modify
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    override fun deleteUser(id:Int){
+    fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
-    override fun findUserByLogPswd(log: String, psswrd: String): User? {
+    fun findUserByLogPswd(log: String, psswrd: String): User? {
         for (user in userHashMap.values){
             if((user.name==log&&psswrd==user.password) || (user.email==log&&psswrd==user.password)){
                 return user
@@ -130,11 +130,11 @@ class  Stub : IPersistenceManager {
         return null
     }
 
-    override fun getLikes(id: Int): Int {
+    fun getLikes(id: Int): Int {
         return 175
     }
 
-    override fun getFollowers(id: Int): Int {
+    fun getFollowers(id: Int): Int {
         return 17
     }
 
@@ -154,27 +154,30 @@ class  Stub : IPersistenceManager {
     }
 
     //DRAWS FUNCTIONS
-    override fun getDrawById(idDraw:Int):Draw?{
+    fun getDrawById(idDraw:Int):Draw?{
         return drawsHashMap[idDraw]
     }
-    override fun createDraw(drw:Draw){// créé un nouveau
+    fun createDraw(drw:Draw){// créé un nouveau
         val id=lastId.incrementAndGet()
         drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
     }
 
-    override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
+    fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
         TODO("Not yet implemented")
     }
 
     fun updateDraw(id:Int,drw:Draw){// modify
         drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
     }
-    override fun deleteDraw(id:Int){
+    fun deleteDraw(id:Int){
         drawsHashMap.remove(id)
     }
 
-    override fun updateDraw(d: Draw) {
+    fun updateDraw(d: Draw) {
         TODO("Not yet implemented")
     }
 
+    fun getCollaborated(idDraw: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
+    }
 }

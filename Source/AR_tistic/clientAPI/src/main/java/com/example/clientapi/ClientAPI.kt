@@ -70,6 +70,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         return 1
     }
 
+    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
+        TODO("Not yet implemented")
+    }
+
     // DRAWS
 
     override fun getDrawById(idDraw: Int): Draw? {
@@ -98,6 +102,12 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }catch(e: IOException) {
             return null
         }
+
+
+    }
+
+    override fun getCollaborated(idDraw: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
     }
     /// http requests :
 

@@ -12,11 +12,13 @@ interface IPersistenceManager : Serializable {
     fun findUserByLogPswd(log:String, psswrd:String):User?
     fun getLikes(id:Int):Int
     fun getFollowers(id:Int):Int
+    fun patternRecognitionUsers(pattern: String): HashMap<Int,com.example.classlib.User>
     // DRAWS METHODS
     fun getDrawById(idDraw: Int): Draw?
     fun deleteDraw(id:Int)
     fun updateDraw(d: Draw)
     fun createDraw(draw: Draw)
     fun getDrawFromUser(userId:Int):HashMap<Int,Draw>?
+    fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>
     // INTERESTPOINTS METHODS
 }

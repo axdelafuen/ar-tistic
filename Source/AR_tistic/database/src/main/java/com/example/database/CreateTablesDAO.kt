@@ -65,7 +65,7 @@ object Draws: IntIdTable(){
     val vimage: Column<String> = varchar("image",100)
     val vlifetime: Column<LocalTime> = time("password")
     val vcreationdate: Column<java.time.LocalDate> = date("date")
-    val vinterestpoint = reference("interestpoint", InterestPoints)
+    val vnbviews :  Column<Int> = integer("nbViews")
 }
 
 object InterestPoints: IntIdTable(){
@@ -74,6 +74,11 @@ object InterestPoints: IntIdTable(){
     val vlatitude: Column<Double> = double("latitude")
     val vlongitude: Column<Double> = double("longitude")
     val vimage: Column<String> = varchar("interestPointImage",100)
+}
+
+object CreatedsOn: IntIdTable(){
+    val vidDraw = reference("idDraw",Draws)
+    val vInterestPoint = reference("idInterestPoint", InterestPoints)
 }
 
 object Relations: IntIdTable(){
@@ -131,8 +136,8 @@ class Draw(id: EntityID<Int>) : IntEntity(id){
     var name by Draws.vname
     var creationDate by Draws.vcreationdate
     var lifetime by Draws.vlifetime
-    var interestpoint by Draws.vinterestpoint
     var image by Draws.vimage
+    var nbViews by Draws.vnbviews
 }
 
 class Relation(id: EntityID<Int>) : IntEntity(id) {
@@ -170,5 +175,11 @@ class ActionDone(id: EntityID<Int>) : IntEntity(id) {
     var report by ActionsDone.vreport
     var like by ActionsDone.vlike
     var creator by ActionsDone.vcreator
+}
+
+class CreatedOn(id: EntityID<Int>) : IntEntity(id){
+    companion object : IntEntityClass<CreatedOn>(CreatedsOn)
+    var iddraw by CreatedsOn.vidDraw
+    var idinterestpoint by CreatedsOn.vInterestPoint
 }
 
