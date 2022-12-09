@@ -286,6 +286,10 @@ class DatabasePersistanceDAO : IPersistenceManager{
         }
     }
 
+    override fun getDrawFromUser(userId: Int): HashMap<Int, com.example.classlib.Draw>? {
+        TODO("Not yet implemented")
+    }
+
     override fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>{
         Database.connect(
             url = url,
