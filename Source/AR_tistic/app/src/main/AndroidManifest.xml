@@ -19,25 +19,7 @@
         tools:replace="android:allowBackup"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
             android:name=".CanvaActivity"
-=======
-            android:name=".MainActivity2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MyCanvasView"
->>>>>>> 857e57b8d6d8b993a9a042117cfc5a5d067ac4b9
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".DrawingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
