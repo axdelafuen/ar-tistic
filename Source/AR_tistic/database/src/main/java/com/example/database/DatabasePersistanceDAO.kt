@@ -304,6 +304,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
                 }
             }
         }
+        return userDraws
     }
 
     override fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>{
