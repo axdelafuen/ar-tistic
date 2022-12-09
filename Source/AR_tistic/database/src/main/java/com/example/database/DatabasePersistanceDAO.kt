@@ -2,6 +2,7 @@ package com.example.database
 
 import com.example.classlib.*
 import com.example.classlib.Collection
+import com.example.classlib.Date
 import com.example.classlib.User
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.*
@@ -9,6 +10,9 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 import java.time.LocalTime
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class DatabasePersistanceDAO : IPersistenceManager{
     val url = "jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE")
@@ -260,7 +264,6 @@ class DatabasePersistanceDAO : IPersistenceManager{
                 image = draw.image
                 lifetime = LocalTime.of(draw.lifeTime.hours,draw.lifeTime.minutes,draw.lifeTime.seconds)
                 creationDate = LocalDate.of(draw.creationDate.year,draw.creationDate.month,draw.creationDate.day)
-                interestpoint = EntityID(draw.interestPoint[0]!!.id,InterestPoints)
                 nbViews = 1
             }
 
@@ -317,7 +320,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
             }
         }
 
-        return drawDataToDrawClass(drawsList[0], nbR, getCollaborated(idDraw))
+        return drawDataToDrawClass(drawsList[0], nbR)
 
     }
 
@@ -353,6 +356,10 @@ class DatabasePersistanceDAO : IPersistenceManager{
         }
     }
 
+/*    override fun updateDraw(d: com.example.classlib.Draw) {
+        TODO("Not yet implemented")
+    }*/
+
 
     override fun updateDraw(d: com.example.classlib.Draw){
         Database.connect(
@@ -363,13 +370,30 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
         transaction {
             var drawToUpdate = Draw.findById(d.id)
-/*
-            drawToUpdate.name = Dra
-*/
+            drawToUpdate!!.name = d.name
+            drawToUpdate!!.image = d.image
+            drawToUpdate!!.creationDate = LocalDate.of(d.creationDate.year,d.creationDate.month,d.creationDate.day)
+            drawToUpdate!!.lifetime = LocalTime.of(d.lifeTime.hours,d.lifeTime.minutes,d.lifeTime.seconds)
+            drawToUpdate!!.nbViews = d.nbView
+        }
+
+        transaction {
+            d.interestPoint.forEach {
+                var createdOnToUpdate = CreatedOn.find { (CreatedsOn.vidDraw eq d.id) and (CreatedsOn.vInterestPoint eq it.key) }
+                if(createdOnToUpdate.empty()){
+                    CreatedOn.new {
+                        iddraw = EntityID(d.id,com.example.database.Draws)
+                        idinterestpoint = EntityID(it.key,InterestPoints)
+                    }
+                }
+                CreatedOn.find { (CreatedsOn.vidDraw neq d.id) and (CreatedsOn.vInterestPoint neq it.key)  }.forEach {
+                    it.delete()
+                }
+            }
         }
     }
 
-    private fun drawDataToDrawClass(d: com.example.database.Draw, nbReport: Int, authors: HashMap<Int,com.example.classlib.User>):com.example.classlib.Draw?{
+    private fun drawDataToDrawClass(d: com.example.database.Draw, nbReport: Int):com.example.classlib.Draw?{
         if(d == null){return null}
         return com.example.classlib.Draw(
             name = d.name,
@@ -408,6 +432,21 @@ class DatabasePersistanceDAO : IPersistenceManager{
         )
     }
 
+    override fun patternRecognitionUsers(pattern: String): HashMap<Int,com.example.classlib.User>{
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var hashUsers: HashMap<Int,com.example.classlib.User> = hashMapOf()
+        transaction {
+            com.example.database.User.find { Users.vname like ".*${pattern}.*" }.forEach {
+                hashUsers.put(it.id.value, getUserById(it.id.value)!!)
+            }
+        }
+        return hashUsers
+    }
 
 
 }

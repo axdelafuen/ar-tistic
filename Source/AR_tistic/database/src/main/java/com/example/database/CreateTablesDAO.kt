@@ -65,7 +65,6 @@ object Draws: IntIdTable(){
     val vimage: Column<String> = varchar("image",100)
     val vlifetime: Column<LocalTime> = time("password")
     val vcreationdate: Column<java.time.LocalDate> = date("date")
-    val vinterestpoint = reference("interestpoint", InterestPoints)
     val vnbviews :  Column<Int> = integer("nbViews")
 }
 
@@ -137,7 +136,6 @@ class Draw(id: EntityID<Int>) : IntEntity(id){
     var name by Draws.vname
     var creationDate by Draws.vcreationdate
     var lifetime by Draws.vlifetime
-    var interestpoint by Draws.vinterestpoint
     var image by Draws.vimage
     var nbViews by Draws.vnbviews
 }

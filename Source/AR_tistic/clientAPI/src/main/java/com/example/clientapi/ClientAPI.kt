@@ -67,6 +67,26 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun getFollowers(id: Int): Int {
         return 1
     }
+
+    override fun getDrawById(idDraw: Int): Draw? {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteDraw(idDraw: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateDraw(d: Draw) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCollaborated(idDraw: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun createDraw(draw: Draw) {
+        TODO("Not yet implemented")
+    }
     /// http requests :
 
     @Suppress("NewApi")
