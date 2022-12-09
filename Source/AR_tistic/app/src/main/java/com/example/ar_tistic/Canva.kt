@@ -1,8 +1,5 @@
 package com.example.ar_tistic
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
