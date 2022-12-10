@@ -19,10 +19,13 @@ class DrawPath @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
     private var paint : Paint?=null
     private var path: android.graphics.Path?=null
+    private var pathlist = ArrayList<PaintPath>()
+    private var undonePathList = ArrayList<PaintPath>()
+
     init {
         paint= Paint()
         path = android.graphics.Path()
-        paint!!.color= Color.RED
+        paint!!.color= Color.GREEN
         paint!!.strokeWidth=10f
         paint!!.style=Paint.Style.STROKE
         paint!!.isAntiAlias=true
@@ -41,7 +44,6 @@ class DrawPath @JvmOverloads constructor(
             }
             MotionEvent.ACTION_MOVE->{
                 path!!.lineTo(xPos,yPos)
-
             }
             MotionEvent.ACTION_UP->{
             }
