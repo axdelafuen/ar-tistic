@@ -20,6 +20,7 @@ class LeaderBoardActivity : AppCompatActivity() {
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
             val intent = Intent(this, CanvaActivity::class.java)
+            intent.putExtra("manager", manager)
             startActivity(intent)
             finish()
         }

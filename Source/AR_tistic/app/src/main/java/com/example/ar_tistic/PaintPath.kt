@@ -1,4 +1,6 @@
 package com.example.ar_tistic
 
-class PaintPath {
+import android.graphics.Path
+
+class PaintPath(var path:Path) {
 }

@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.moveTo
+import kotlin.math.abs
 
 
 class DrawPath @JvmOverloads constructor(
@@ -21,10 +22,13 @@ class DrawPath @JvmOverloads constructor(
     private var path: android.graphics.Path?=null
     private var pathlist = ArrayList<PaintPath>()
     private var undonePathList = ArrayList<PaintPath>()
+    private var mPath:android.graphics.Path?=null
+    private var mX:Float?=null
+    private var mY:Float?=null
+    private var TouchTolerance:Float? = 4f
 
     init {
         paint= Paint()
-        path = android.graphics.Path()
         paint!!.color= Color.GREEN
         paint!!.strokeWidth=10f
         paint!!.style=Paint.Style.STROKE
@@ -37,15 +41,16 @@ class DrawPath @JvmOverloads constructor(
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val xPos : Float=event!!.x
-        val yPos : Float=event!!.y
+        val yPos : Float=event.y
         when(event?.action){
             MotionEvent.ACTION_DOWN->{
-                path!!.moveTo(xPos,yPos)
+                touchStart(xPos,yPos)
             }
             MotionEvent.ACTION_MOVE->{
-                path!!.lineTo(xPos,yPos)
+                touchMove(xPos,yPos)
             }
             MotionEvent.ACTION_UP->{
+                touchUp()
             }
             else->{
 
@@ -53,5 +58,23 @@ class DrawPath @JvmOverloads constructor(
         }
         invalidate()
         return true
+    }
+    private fun touchStart(xPos: Float, yPos: Float) {
+        mPath=android.graphics.Path()
+        val paintPath=PaintPath(mPath!!)
+        pathlist.add(paintPath)
+        mPath!!.reset()
+        mPath!!.moveTo(xPos,yPos)
+        mX=xPos
+        mY=yPos
+    }
+    private fun touchMove(xPos: Float, yPos: Float) {
+        val dX:Float = abs(xPos-mX!!)
+        val dY:Float = abs(yPos-mY!!)
+
+    }
+
+    private fun touchUp(){
+
     }
 }
