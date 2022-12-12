@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.example.ar_tistic.DrawPath
-        android:id="@+id/drawPath"
+        android:id="@+id/PaintArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -34,6 +34,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/redo" />
+
+        <ImageView
+            android:id="@+id/ControlFlush"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bin" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

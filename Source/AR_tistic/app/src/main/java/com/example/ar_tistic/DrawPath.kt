@@ -34,9 +34,12 @@ class DrawPath @JvmOverloads constructor(
         paint!!.style=Paint.Style.STROKE
         paint!!.isAntiAlias=true
     }
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onDraw(canvas: Canvas?){
-        paint?.let { canvas!!.drawPath(path!!, it) }
+        if(pathlist.size>0){
+            for(path in pathlist){
+                paint?.let { canvas!!.drawPath(path.path, it) }
+            }
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -45,12 +48,15 @@ class DrawPath @JvmOverloads constructor(
         when(event?.action){
             MotionEvent.ACTION_DOWN->{
                 touchStart(xPos,yPos)
+                invalidate()
             }
             MotionEvent.ACTION_MOVE->{
                 touchMove(xPos,yPos)
+                invalidate()
             }
             MotionEvent.ACTION_UP->{
                 touchUp()
+                invalidate()
             }
             else->{
 
@@ -71,10 +77,37 @@ class DrawPath @JvmOverloads constructor(
     private fun touchMove(xPos: Float, yPos: Float) {
         val dX:Float = abs(xPos-mX!!)
         val dY:Float = abs(yPos-mY!!)
-
+        if(dX> TouchTolerance!! || dY>TouchTolerance!!){
+            mPath!!.quadTo(mX!!,mY!!,(xPos+mX!!)/2,(yPos+mY!!)/2)
+            mX=xPos
+            mY=yPos
+        }
     }
 
     private fun touchUp(){
-
+        mPath!!.lineTo(mX!!,mY!!)
+    }
+    fun setUndo(){
+        val size = pathlist.size
+        if(pathlist.size>0){
+            undonePathList.add(pathlist[size-1])
+            pathlist.removeAt(size-1)
+            invalidate()
+        }
+    }
+    fun setRedo(){
+        val size = undonePathList.size
+        if(size>0){
+            pathlist.add(undonePathList[size-1])
+            undonePathList.removeAt(size-1)
+            invalidate()
+        }
+    }
+    fun setDelete(){
+        if(pathlist.size>0){
+            pathlist.clear()
+            undonePathList.clear()
+            invalidate()
+        }
     }
 }

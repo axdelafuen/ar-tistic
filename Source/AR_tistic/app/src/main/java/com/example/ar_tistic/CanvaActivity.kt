@@ -16,9 +16,18 @@ class CanvaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_canva)
         createButtons()
         val ControlUndo = findViewById<ImageView>(R.id.ControlUndo)
-        ControlUndo.setOnClickListener{}
+        var PaintArea = findViewById<com.example.ar_tistic.DrawPath>(R.id.PaintArea)
+        ControlUndo.setOnClickListener{
+            PaintArea.setUndo()
+        }
         val ControlRedo = findViewById<ImageView>(R.id.ControlRedo)
-        ControlUndo.setOnClickListener{}
+        ControlRedo.setOnClickListener{
+            PaintArea.setRedo()
+        }
+        val ControlFlush = findViewById<ImageView>(R.id.ControlFlush)
+        ControlFlush.setOnClickListener{
+            PaintArea.setDelete()
+        }
     }
     fun createButtons(){
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
