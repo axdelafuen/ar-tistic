@@ -54,6 +54,7 @@ class RegisterActivity: AppCompatActivity() {
                     println("DEBUG REGISTER")
                     errMail.visibility = View.VISIBLE
                 } else {
+                    println("DEBUG REGISTER")
                     if (cttmail.trim().isEmpty() || cttPswd1.trim().isEmpty() || cttPswd2.trim()
                             .isEmpty()
                     ) {//empty fields
@@ -87,9 +88,6 @@ class RegisterActivity: AppCompatActivity() {
                             }
                         }
                     }
-                    runOnUiThread {
-                        ///
-                    }
                 }
             }
         }
@@ -105,7 +103,7 @@ class RegisterActivity: AppCompatActivity() {
     }
 
     fun checkEmail(email: String): Boolean {//return true if email is already used
-        val res = manager.persistence.getuserByEmail(email) ?: return false
+        manager.persistence.getuserByEmail(email) ?: return false
         return true
     }
 

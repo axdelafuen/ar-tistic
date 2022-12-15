@@ -52,6 +52,11 @@ fun main() {
                     ctx.json(toDTO(res))
                 }
             }
+            get("/users/findByPatern/{patern}"){ctx->
+                val res = data.patternRecognitionUsers(ctx.pathParam("patern").toString())
+                ctx.json(toDTO(res))
+            }
+
             /*
             get("/users/idx/{idx}/{nb}") { ctx ->
                 ctx.json(

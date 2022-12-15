@@ -14,7 +14,7 @@ import java.net.URL
 class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     val url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/" // for release
-    //val url = "http://localhost:1705/" //for locals
+    //val url = "http://localhost:1705/" //for local
 
     fun loadData(): Collection? {
         try{
@@ -71,7 +71,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
-        TODO("Not yet implemented")
+            return Gson().fromJson(get(URL(url+"/users/findByPatern/"+pattern+"/")),HashMap<Int,User>()::class.java)
     }
 
     // DRAWS
