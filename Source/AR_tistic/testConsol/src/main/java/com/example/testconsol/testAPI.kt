@@ -41,7 +41,8 @@ fun main(){
     }
     */
     //post(URL(url+"users"),jsonData)
-    api.createUser(userDTO);
+    //api.createUser(userDTO);
+    println(api.getuserByEmail("11"))
     //println(u.name)
 
     //println("\n"+jsonData+"\n")

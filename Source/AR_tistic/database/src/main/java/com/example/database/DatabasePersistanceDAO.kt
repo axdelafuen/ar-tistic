@@ -81,7 +81,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
             }
         }
 
-        return getUserById(userList[0].id.value)
+        return getUserById(userList[0].id.value)!!
     }
 
     fun getUserByIdNoSubs(idUser: Int): User{

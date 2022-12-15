@@ -19,7 +19,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     fun loadData(): Collection? {
         try{
             return Gson().fromJson(get(URL(url+"loadData")),Collection::class.java)
-        }catch(e:IOException){
+        }catch(e:Exception){
             return null
         }
     }
@@ -29,7 +29,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun getUserById(idUser: Int): User? {
         try{
             return Gson().fromJson(get(URL(url+"users/"+idUser.toString())),User::class.java)
-        }catch(e: IOException){
+        }catch(e: Exception){
             return null
         }
     }
@@ -37,7 +37,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun getuserByEmail(content: String): User? {
         try{
             return Gson().fromJson(get(URL(url+"users/email/"+content)),User::class.java)
-        }catch(e:IOException){
+        }catch(e:Exception){
             return null
         }
     }
@@ -57,7 +57,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun findUserByLogPswd(log: String, psswrd: String): User? {
         try{
             return Gson().fromJson(get(URL(url+"user/pwd/"+log+"/"+psswrd+"/")),User::class.java)
-        }catch(e:IOException){
+        }catch(e:Exception){
             return null
         }
     }
@@ -79,7 +79,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun getDrawById(idDraw: Int): Draw? {
         try{
             return Gson().fromJson(get(URL(url+"draws/"+idDraw.toString())),Draw::class.java)
-        }catch(e: IOException) {
+        }catch(e: Exception) {
             return null
         }
     }
@@ -99,7 +99,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
         try{
             return Gson().fromJson(get(URL(url+"draws/fromUser/"+userId)),HashMap<Int,Draw>()::class.java)
-        }catch(e: IOException) {
+        }catch(e: Exception) {
             return null
         }
 
