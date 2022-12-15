@@ -71,7 +71,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
-            return Gson().fromJson(get(URL(url+"/users/findByPatern/"+pattern+"/")),HashMap<Int,User>()::class.java)
+            return Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern+"/")),HashMap<Int,User>()::class.java)
     }
 
     // DRAWS
@@ -93,7 +93,7 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun createDraw(draw: Draw) {
-        post(URL(url+"/draws"),Gson().toJson(draw))
+        post(URL(url+"draws"),Gson().toJson(draw))
     }
 
     override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {

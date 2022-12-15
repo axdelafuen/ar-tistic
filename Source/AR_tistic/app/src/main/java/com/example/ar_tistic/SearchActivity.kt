@@ -41,7 +41,7 @@ class SearchActivity: AppCompatActivity() {
             recycler.layoutManager = LinearLayoutManager(this)
 
             GlobalScope.launch {
-                val data = searchUsers().await()
+                val data = searchUsers(findViewById<EditText>(R.id.searchInput).text.toString()).await()
                 runOnUiThread {
                     val adapter = UserAdapter(data)
                     recycler.adapter = adapter
@@ -53,13 +53,15 @@ class SearchActivity: AppCompatActivity() {
 
     }
 
-    suspend fun searchUsers()= GlobalScope.async{
+    suspend fun searchUsers(pattern:String)= GlobalScope.async{
         runOnUiThread{
             findViewById<TextView>(R.id.loading).visibility = View.VISIBLE
         }
         val data = ArrayList<User>()
-        val api = ClientAPI()
-        var users = api.loadData()!!.users
+        //var users =  manager.persistence.patternRecognitionUsers(pattern)
+        val api = ClientAPI() // temp => waiting for database request working
+        var users = api.loadData()?.users
+
         if (users != null) {
             for(user in users){
                 println(user.value.email)

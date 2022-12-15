@@ -93,4 +93,9 @@ fun main(){
     print(datatest.findUserByLogPswd("User2","psswd2").name)
     print("\n")
     print(datatest.loadData().users)
+
+
+    println("Test : pattern :")
+    println(datatest.patternRecognitionUsers("aaaa"))
+    println(datatest.patternRecognitionUsers("test"))
 }
