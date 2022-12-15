@@ -11,7 +11,7 @@ interface IPersistenceManager : Serializable {
     fun deleteUser(id:Int)
     fun findUserByLogPswd(log:String, psswrd:String):User?
     fun getLikes(id:Int):Int
-    fun getFollowers(id:Int):Int
+    fun getFollowers(id:Int): HashMap<Int, User>
     fun patternRecognitionUsers(pattern: String): HashMap<Int,com.example.classlib.User>
     // DRAWS METHODS
     fun getDrawById(idDraw: Int): Draw?
@@ -21,4 +21,6 @@ interface IPersistenceManager : Serializable {
     fun getDrawFromUser(userId:Int):HashMap<Int,Draw>?
     fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>
     // INTERESTPOINTS METHODS
+    fun getInterestPointById(idIP: Int): InterestPoint
+    fun getInterestPointsByRange(rayon: Double, latitude: Double, longitude: Double): HashMap<Int, InterestPoint>
 }

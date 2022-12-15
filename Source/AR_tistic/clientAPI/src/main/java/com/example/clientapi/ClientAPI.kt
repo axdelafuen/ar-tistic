@@ -66,8 +66,8 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         return 1
     }
 
-    override fun getFollowers(id: Int): Int {
-        return 1
+    override fun getFollowers(id: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
     }
 
     override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
@@ -107,6 +107,14 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun getCollaborated(idDraw: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getInterestPointById(idIP: Int): InterestPoint {
+        TODO("Not yet implemented")
+    }
+
+    override fun getInterestPointsByRange(rayon: Double, latitude: Double, longitude: Double): HashMap<Int, InterestPoint> {
         TODO("Not yet implemented")
     }
     /// http requests :
