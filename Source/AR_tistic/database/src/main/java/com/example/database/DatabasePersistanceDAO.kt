@@ -17,14 +17,12 @@ class DatabasePersistanceDAO : IPersistenceManager{
     val user = "root"
     val password = System.getenv("DB_ROOT_PASSWORD")
 
-    /*
-        val url = "jdbc:mysql:"+System.getenv("DB_SERVER")
+/*        val url = "jdbc:mysql:"+System.getenv("DB_SERVER")
         val user = System.getenv("DB_USER")
-        val password = System.getenv("DB_PASSWORD")
-        val url = "jdbc:mysql://localhost:3306/sqlsaetest"
+        val password = System.getenv("DB_PASSWORD")*/
+/*        val url = "jdbc:mysql://localhost:3306/sqlsaetest"
         val user = "root"
-        val password = "root1234"
-    */
+        val password = "root1234"*/
     fun loadData(): Collection {
         Database.connect(
             url = url,
@@ -511,7 +509,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
 
         val hashUsers: HashMap<Int, User> = hashMapOf()
         transaction {
-            t_User.find { t_Users.vname like ".*${pattern}.*" }.forEach {
+            t_User.find { t_Users.vname like "%${pattern}%" }.forEach {
                 hashUsers.put(it.id.value, getUserById(it.id.value)!!)
             }
         }
