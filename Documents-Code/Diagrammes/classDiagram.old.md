@@ -1,4 +1,4 @@
-Class Diagram : (class library)
+Class Diagram :
 ===
 
 ```mermaid
@@ -12,7 +12,6 @@ class User{
         +String password
         +Date birthDate
         +Int nbReport
-        +hashPassword()
     }
 
 class InterestPoint{
@@ -34,40 +33,34 @@ class Draw{
         +Int nbReport
 }
 
-class Manager{
-    
+class Comment{
+        +Int id
+        +String content
 }
 
-class IPersistanceManager{
-    getUserById(idUser:Int):User?
-    getuserByEmail(content:String):User?
-    createUser(usr:User)
-    updateUser(id:Int,usr:User)
-    deleteUser(id:Int)
-    getDrawById(idDraw: Int): Draw?
-    deleteDraw(id:Int)
-    updateDraw(d: Draw)
-    createDraw(draw: Draw)
-    getInterestPointById(idIP: Int): InterestPoint
-    ....()
+class Evaluation{
+        +Int id
+        +Int grade
 }
 
-class Stub{
-    
-}
-
-class ClientAPI{
-    
-}
-Manager --> InterestPoint
-Manager --> Draw
-Manager --> User
-Manager --> IPersistanceManager : persistance
-IPersistanceManager <|-- Stub
-IPersistanceManager <|-- ClientAPI
+Comment <|-- Evaluation
+User <-- Comment : User author
+Draw <-- Comment : Draw draw
 User <-- User : HashMap< Int,User > subscribes
 Draw <-- User : HashMap< Int,User > authors
 InterestPoint <-- Draw : HashMap< Int,InterestPoint > interestPoints
 
+class Conversation{
+        +Int id
+}
+
+class Message{
+        +Int id
+        +String content
+        +Date date
+}
+User <-- Conversation : HashMap< Int,User > participant
+Message <-- Conversation : HashMap< Int,Message > messages
+User <-- Message : User sender
 ```
 
