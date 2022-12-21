@@ -16,13 +16,15 @@ import androidx.core.app.ActivityCompat
 import com.example.classlib.Manager
 import com.example.classlib.Util
 import com.example.clientapi.ClientAPI
+import com.example.stub.Stub
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
-    val manager=Manager(ClientAPI())
+    //val manager=Manager(ClientAPI())
+    val manager=Manager(Stub())
     // Persistance loaded
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
