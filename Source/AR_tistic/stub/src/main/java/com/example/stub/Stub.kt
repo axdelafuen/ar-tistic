@@ -5,7 +5,7 @@ import com.example.classlib.Collection
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
-class  Stub{
+class  Stub:IPersistenceManager{
     var userHashMap=loadData().users
         get() {
             return field
@@ -99,11 +99,11 @@ class  Stub{
     //USERS FUNCTIONS
 
 
-    fun getUserById(idUser:Int):User?{
+    override fun getUserById(idUser:Int):User?{
         return userHashMap[idUser]
     }
 
-    fun getuserByEmail(content: String): User? {
+    override fun getuserByEmail(content: String): User? {
         for(user in userHashMap.values){
             if(content.equals(user.email)){
                 return user
@@ -111,37 +111,44 @@ class  Stub{
         }
         return null
     }
-    fun createUser(usr:User){// créé un nouveau
+    override fun createUser(usr:User){// créé un nouveau
         val id=lastId.incrementAndGet()
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun updateUser(id:Int,usr:User){// modify
+    override fun updateUser(id:Int, usr:User){// modify
         userHashMap.put(id,User(id,usr.name, usr.profilePicture, usr.email, usr.password, usr.birthDate, usr.subscribes, usr.nbReport))
     }
-    fun deleteUser(id:Int){
+    override fun deleteUser(id:Int){
         userHashMap.remove(id)
     }
-    fun findUserByLogPswd(log: String, psswrd: String): User? {
-        for (user in userHashMap.values){
-            if((user.name==log&&psswrd==user.password) || (user.email==log&&psswrd==user.password)){
-                return user
-            }
-        }
-        return null
+
+    override fun findUserByLogPswd(log: String, psswrd: String): User? {
+        TODO("Not yet implemented")
     }
 
-    fun getLikes(id: Int): Int {
-        return 175
+    override fun getLikes(id: Int): Int {
+        TODO("Not yet implemented")
     }
 
-    fun getFollowers(id: Int): Int {
-        return 17
+    override fun getFollowers(id: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
+        TODO("Not yet implemented")
     }
 
     //DRAWS FUNCTIONS
-    fun getInterestPointById(idPt:Int):InterestPoint?{
-        return intPtsHashMap[idPt]
+
+    override fun getInterestPointsByRange(
+        rayon: Double,
+        latitude: Double,
+        longitude: Double
+    ): HashMap<Int, InterestPoint> {
+        TODO("Not yet implemented")
     }
+
     fun createInterestPoint(intPt:InterestPoint){// créé un nouveau
         val id=lastId.incrementAndGet()
         intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))
@@ -158,7 +165,7 @@ class  Stub{
         return drawsHashMap[idDraw]
     }
 
-    override fun deleteDraw(d: Draw) {
+    override fun deleteDraw(id: Int) {
         TODO("Not yet implemented")
     }
 
@@ -166,35 +173,21 @@ class  Stub{
         TODO("Not yet implemented")
     }
 
+    override fun createDraw(draw: Draw) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
+        TODO("Not yet implemented")
+    }
+
     override fun getCollaborated(idDraw: Int): HashMap<Int, User> {
         TODO("Not yet implemented")
     }
 
-    override fun createDraw(draw: Draw, creatorId: Int) {
+    override fun getInterestPointById(idIP: Int): InterestPoint {
         TODO("Not yet implemented")
     }
 
-    fun createDraw(drw:Draw){// créé un nouveau
-        val id=lastId.incrementAndGet()
-        drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
-    }
 
-    fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
-        TODO("Not yet implemented")
-    }
-
-    fun updateDraw(id:Int,drw:Draw){// modify
-        drawsHashMap.put(id,Draw(id,drw.name,drw.image,drw.interestPoint,drw.creationDate,drw.lifeTime,drw.authors,drw.nbView,drw.nbReport))
-    }
-    fun deleteDraw(id:Int){
-        drawsHashMap.remove(id)
-    }
-
-    fun updateDraw(d: Draw) {
-        TODO("Not yet implemented")
-    }
-
-    fun getCollaborated(idDraw: Int): HashMap<Int, User> {
-        TODO("Not yet implemented")
-    }
 }

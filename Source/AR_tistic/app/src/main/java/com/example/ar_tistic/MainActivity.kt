@@ -16,15 +16,13 @@ import androidx.core.app.ActivityCompat
 import com.example.classlib.Manager
 import com.example.classlib.Util
 import com.example.clientapi.ClientAPI
-import com.example.stub.Stub
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
-    //val manager=Manager(ClientAPI())
-    val manager=Manager(Stub())
+    val manager=Manager(ClientAPI())
     // Persistance loaded
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 CoroutineScope(Dispatchers.IO).launch {
-                kotlin.runCatching {
+                    kotlin.runCatching {
                         //check passwrd & log
                         if (!existLogPasswd(cttLog, cttMdp)) {// non equal
                             println("DEBUG LOGIN")
@@ -67,32 +65,32 @@ class MainActivity : AppCompatActivity() {
                                 err.visibility = View.VISIBLE
                             }
                         }
-                    //found log & password
-                    else {
-                        //Permissions localisation
-                        if (Build.VERSION.SDK_INT >= 23) {
-                            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                                checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                            ) {
-                                // Add user to pers once passed all verifications
-                                //manager.usr = loadUser(cttLog, cttMdp)
-                                val intent = Intent(applicationContext, MapActivity::class.java)
-                                intent.putExtra("manager", manager)
-                                startActivity(intent)
-                                //finish()
-                            } else {
-                                ActivityCompat.requestPermissions(
-                                    this@MainActivity,
-                                    arrayOf(
-                                        Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION
-                                    ),
-                                    1
-                                )
+                        //found log & password
+                        else {
+                            //Permissions localisation
+                            if (Build.VERSION.SDK_INT >= 23) {
+                                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                                    checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                                ) {
+                                    // Add user to pers once passed all verifications
+                                    //manager.usr = loadUser(cttLog, cttMdp)
+                                    val intent = Intent(applicationContext, MapActivity::class.java)
+                                    intent.putExtra("manager", manager)
+                                    startActivity(intent)
+                                    //finish()
+                                } else {
+                                    ActivityCompat.requestPermissions(
+                                        this@MainActivity,
+                                        arrayOf(
+                                            Manifest.permission.ACCESS_FINE_LOCATION,
+                                            Manifest.permission.ACCESS_COARSE_LOCATION
+                                        ),
+                                        1
+                                    )
+                                }
                             }
                         }
                     }
-                }
                 }
                 runOnUiThread {
                     //lancer un logo chargement
@@ -116,3 +114,4 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 }
+
