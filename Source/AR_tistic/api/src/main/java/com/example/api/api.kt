@@ -32,7 +32,13 @@ fun main() {
             //USERS
 
             get("/users") { ctx ->
-                ctx.json(toDTO(data.loadData().users))
+                val res = data.loadData().users
+                if(res==null){
+                    ctx.json("forbidden").status(403)
+                }
+                else{
+                    ctx.json(toDTO(res))
+                }
             }
             get("/users/{user-id}") { ctx ->
                 val res = data.getUserById(ctx.pathParam("user-id").toInt())
