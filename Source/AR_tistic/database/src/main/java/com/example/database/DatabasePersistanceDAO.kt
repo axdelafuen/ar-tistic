@@ -500,19 +500,19 @@ class DatabasePersistanceDAO : IPersistenceManager{
         )
     }
 
-    override fun patternRecognitionUsers(pattern: String): Array<User> {
+    override fun patternRecognitionUsers(pattern: String): ArrayList<User> {
         Database.connect(
             url = url,
             user = user,
             password = password
         )
 
-        val hashUsers: Array<User> = arrayOf()
+        val hashUsers: ArrayList<User> = ArrayList()
         transaction {
             //t_User.find { t_Users.vname like "%${pattern}%" }.forEach {
             t_User.find { t_Users.vemail like "%${pattern}%" }.forEach {
-                   //hashUsers.set(it.id.value, getUserById(it.id.value)!!)
-                    hashUsers.plus(getUserById(it.id.value)!!)
+                   //hashUsers.put(it.id.value, getUserById(it.id.value)!!)
+                    hashUsers.add(getUserById(it.id.value)!!)
                 }
             }
         return hashUsers
