@@ -135,7 +135,7 @@ class  Stub:IPersistenceManager{
     }
 
 
-    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
+    override fun patternRecognitionUsers(pattern: String): Array<User>? {
         TODO("Not yet implemented")
     }
 

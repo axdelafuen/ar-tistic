@@ -58,14 +58,14 @@ class SearchActivity: AppCompatActivity() {
             findViewById<TextView>(R.id.loading).visibility = View.VISIBLE
         }
         val data = ArrayList<User>()
-        var users =  manager.persistence.patternRecognitionUsers(pattern)
-        //val api = ClientAPI() // temp => waiting for database request working
+        //var users =  manager.persistence.patternRecognitionUsers(pattern)
+        val api = ClientAPI() // temp => waiting for database request working
         //var users = api.loadData()?.users
-
+        var users = api.patternRecognitionUsers(pattern)
         if (users != null) {
             for(user in users){
-                println(user.value.email)
-                data.add(user.value)
+                println(user.name)
+                //data.add(user.value)
             }
         }
         return@async data
