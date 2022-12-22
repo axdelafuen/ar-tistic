@@ -77,11 +77,15 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     override fun patternRecognitionUsers(pattern: String): ArrayList<User>{
         try{
-            var users = Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern)),java.util.HashMap::class.java)
-            for(user in users){
-                //println(Gson().fromJson(user.value.toString(),User::class.java).name)
+            val res = Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern)),Array<User>::class.java)
+            if(res==null || res.isEmpty()){
+                return ArrayList()
             }
-            return ArrayList()
+            var users:ArrayList<User> = ArrayList()
+            for(u in res){
+                users.add(u)
+            }
+            return users
         }catch(e:Exception){
             println(e)
             return ArrayList()
