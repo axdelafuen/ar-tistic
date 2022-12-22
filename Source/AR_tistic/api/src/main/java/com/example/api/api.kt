@@ -60,7 +60,7 @@ fun main() {
             }
             get("/users/findByPattern/{pattern}"){ctx->
                 val res = data.patternRecognitionUsers(ctx.pathParam("pattern").toString())
-                ctx.json(toDTO(res))
+                ctx.json(toDTO(res!!))
             }
 
             /*

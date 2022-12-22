@@ -16,9 +16,9 @@ fun toDTO(users:HashMap<Int,User>):HashMap<Int,UserDTO>{
     return res;
 }
 
-fun toDTO(users:Array<User>?):Array<UserDTO>{
+fun toDTO(users:Array<User>):Array<UserDTO>{
     lateinit var res:Array<UserDTO>
-    for(user in users!!) {
+    for(user in users) {
         res.set(user.id, toDTO(user))
     }
     return res;
