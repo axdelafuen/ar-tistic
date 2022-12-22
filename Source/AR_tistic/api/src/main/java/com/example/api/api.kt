@@ -38,7 +38,7 @@ fun main() {
                     ctx.json("forbidden").status(403)
                 }
                 else{
-                    ctx.json(res)
+                    ctx.json(toDTO(res))
                 }
             }
             get("/users/{user-id}") { ctx ->
@@ -61,7 +61,7 @@ fun main() {
             }
             get("/users/findByPattern/{pattern}"){ctx->
                 val res = data.patternRecognitionUsers(ctx.pathParam("pattern").toString())
-                //ctx.json(toDTO(res!!))
+                ctx.json(res!!)
             }
 
             /*
