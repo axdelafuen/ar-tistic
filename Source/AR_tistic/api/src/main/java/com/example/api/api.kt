@@ -9,8 +9,8 @@ import com.example.database.*
 import com.example.stub.Stub
 
 fun main() {
-        val data = Stub()
-        //val data = DatabasePersistanceDAO()
+        //val data = Stub()
+        val data = DatabasePersistanceDAO()
 
         val app = Javalin.create().apply {
             exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
@@ -33,8 +33,8 @@ fun main() {
             //USERS
 
             get("/users") { ctx ->
-                //val res = data.loadData().users
-                val res = data.usersArray
+                val res = data.loadData().users
+                //val res = data.usersArray
                 if(res==null){
                     ctx.json("forbidden").status(403)
                 }
