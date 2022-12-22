@@ -6,6 +6,18 @@ import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
 class  Stub:IPersistenceManager{
+    var usersArray = loadUsersArray()
+
+    fun loadUsersArray():Array<User>{
+        return arrayOf(
+            User(id = 0, name = "SALLLPPPPPP", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password ="1234", birthDate = Date(1999,2,2) , subscribes = hashMapOf(), nbReport = 0 ),
+            User(id = 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            User(id = 2, name = "Patrick", profilePicture = "./img/pp/Fredo.jpg", email = "patrick@gmail.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            User(id = 3, name = "Nina", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            User(id = 4, name = "Louis", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ),
+            )
+    }
+
     var userHashMap=loadData().users
         get() {
             return field
@@ -135,7 +147,7 @@ class  Stub:IPersistenceManager{
     }
 
 
-    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User>? {
+    override fun patternRecognitionUsers(pattern: String): Array<User>? {
         TODO("Not yet implemented")
     }
 

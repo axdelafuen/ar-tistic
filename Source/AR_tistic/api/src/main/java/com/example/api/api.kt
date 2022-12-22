@@ -6,6 +6,7 @@ import com.example.classlib.User
 import com.example.database.DatabasePersistanceDAO
 import com.example.datacontract.toDTO
 import com.example.database.*
+import com.example.stub.Stub
 
 fun main() {
         //val data = Stub()
@@ -37,7 +38,7 @@ fun main() {
                     ctx.json("forbidden").status(403)
                 }
                 else{
-                    ctx.json(toDTO(res))
+                    ctx.json(res)
                 }
             }
             get("/users/{user-id}") { ctx ->
@@ -60,7 +61,7 @@ fun main() {
             }
             get("/users/findByPattern/{pattern}"){ctx->
                 val res = data.patternRecognitionUsers(ctx.pathParam("pattern").toString())
-                ctx.json(toDTO(res!!))
+                //ctx.json(toDTO(res!!))
             }
 
             /*

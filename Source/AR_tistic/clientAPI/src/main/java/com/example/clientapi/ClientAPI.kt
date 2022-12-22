@@ -2,13 +2,18 @@ package com.example.clientapi
 
 import com.example.classlib.*
 import com.example.classlib.Collection
+import com.fasterxml.jackson.databind.JsonDeserializer
 import com.google.gson.Gson
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.reflect.cast
 
 @Suppress("NewApi")
 class ClientAPI:IPersistenceManager,java.io.Serializable{
@@ -70,10 +75,15 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         TODO("Not yet implemented")
     }
 
-    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User>?{
+    override fun patternRecognitionUsers(pattern: String): Array<User>? {
         try{
-            return Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern)),HashMap<Int,User>()::class.java)
+            var users = Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern)),java.util.HashMap::class.java)
+            for(user in users){
+                //println(Gson().fromJson(user.value.toString(),User::class.java).name)
+            }
+            return null
         }catch(e:Exception){
+            println(e)
             return null
         }
     }
