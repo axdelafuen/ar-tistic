@@ -16,13 +16,6 @@ fun toDTO(users:HashMap<Int,User>):HashMap<Int,UserDTO>{
     return res;
 }
 
-fun toDTO(users:Array<User>):Array<UserDTO>{
-    lateinit var res:Array<UserDTO>
-    for(user in users) {
-        res.set(user.id, toDTO(user))
-    }
-    return res;
-}
 fun toDTO(draw:Draw): DrawDTO {
     return DrawDTO(draw.id,draw.name, draw.image,draw.interestPoint,draw.creationDate, draw.lifeTime, draw.authors,draw.nbView,draw.nbReport);
 }

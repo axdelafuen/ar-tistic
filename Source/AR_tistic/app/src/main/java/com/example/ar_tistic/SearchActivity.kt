@@ -64,7 +64,7 @@ class SearchActivity: AppCompatActivity() {
         var users = api.patternRecognitionUsers(pattern)
         if (users != null) {
             for(user in users){
-                println(user.name)
+                println(user.value)
                 //data.add(user.value)
             }
         }

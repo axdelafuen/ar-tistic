@@ -70,9 +70,9 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         TODO("Not yet implemented")
     }
 
-    override fun patternRecognitionUsers(pattern: String): Array<User>?{
+    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User>?{
         try{
-            return Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern)),Array<User>::class.java)
+            return Gson().fromJson(get(URL(url+"users/findByPattern/"+pattern)),HashMap<Int,User>()::class.java)
         }catch(e:Exception){
             return null
         }
