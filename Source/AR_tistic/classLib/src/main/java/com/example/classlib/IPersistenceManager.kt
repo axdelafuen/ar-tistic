@@ -13,6 +13,7 @@ interface IPersistenceManager : Serializable {
     fun getLikes(id:Int):Int
     fun getFollowers(id:Int): HashMap<Int, User>
     fun patternRecognitionUsers(pattern: String): ArrayList<User>
+    fun getNbFollowers(id:Int):Int
     // DRAWS METHODS
     fun getDrawById(idDraw: Int): Draw?
     fun deleteDraw(id:Int)

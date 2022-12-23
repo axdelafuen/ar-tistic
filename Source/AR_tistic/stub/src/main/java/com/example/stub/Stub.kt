@@ -150,6 +150,10 @@ class  Stub:IPersistenceManager{
         TODO("Not yet implemented")
     }
 
+    override fun getNbFollowers(id: Int): Int {
+        return 232
+    }
+
     //DRAWS FUNCTIONS
 
     override fun getInterestPointsByRange(
