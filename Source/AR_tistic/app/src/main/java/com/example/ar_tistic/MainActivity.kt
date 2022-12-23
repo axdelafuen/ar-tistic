@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
@@ -62,11 +63,13 @@ class MainActivity : AppCompatActivity() {
                         if (!existLogPasswd(cttLog, cttMdp)) {// non equal
                             println("DEBUG LOGIN")
                             runOnUiThread{
+                                findViewById<ProgressBar>(R.id.LoginLoading).visibility = View.INVISIBLE
                                 err.visibility = View.VISIBLE
                             }
                         }
                         //found log & password
                         else {
+                            findViewById<ProgressBar>(R.id.LoginLoading).visibility = View.INVISIBLE
                             //Permissions localisation
                             if (Build.VERSION.SDK_INT >= 23) {
                                 if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 runOnUiThread {
-                    //lancer un logo chargement
+                    findViewById<ProgressBar>(R.id.LoginLoading).visibility = View.VISIBLE
                 }
             }
         }
