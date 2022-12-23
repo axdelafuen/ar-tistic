@@ -149,6 +149,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     override fun getInterestPointsByRange(rayon: Double, latitude: Double, longitude: Double): HashMap<Int, InterestPoint> {
         TODO("Not yet implemented")
     }
+
+    override fun userFollows(idUser: Int, idUserCible: Int) {
+        TODO("Not yet implemented")
+    }
     /// http requests :
 
     @Suppress("NewApi")
