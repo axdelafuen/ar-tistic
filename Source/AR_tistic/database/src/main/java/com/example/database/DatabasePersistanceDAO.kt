@@ -121,7 +121,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
         }
     }
 
-    fun userFollows(idUser: Int, idUserCible:Int){
+    override fun userFollows(idUser: Int, idUserCible:Int){
         Database.connect(
             url = url,
             user = user,
