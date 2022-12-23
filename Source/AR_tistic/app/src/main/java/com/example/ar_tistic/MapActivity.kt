@@ -2,15 +2,14 @@ package com.example.ar_tistic
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -166,7 +165,6 @@ class MapActivity : AppCompatActivity(){
         map.onPause()
     }
     fun popUp() {
-
         val inflter = LayoutInflater.from(this)
         val v = inflter.inflate(R.layout.activity_draw,null)
         val addDialog = AlertDialog.Builder(this)
