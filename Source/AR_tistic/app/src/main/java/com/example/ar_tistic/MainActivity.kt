@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import com.example.classlib.Manager
+import com.example.classlib.User
 import com.example.classlib.Util
 import com.example.clientapi.ClientAPI
 import kotlinx.coroutines.CoroutineScope
@@ -60,7 +61,8 @@ class MainActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     kotlin.runCatching {
                         //check passwrd & log
-                        if (!existLogPasswd(cttLog, cttMdp)) {// non equal
+                        val tmp=existLogPasswd(cttLog, cttMdp)
+                        if (tmp==null) {// non equal
                             println("DEBUG LOGIN")
                             runOnUiThread{
                                 findViewById<ProgressBar>(R.id.LoginLoading).visibility = View.INVISIBLE
@@ -69,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         //found log & password
                         else {
+                            manager.usr=tmp
                             findViewById<ProgressBar>(R.id.LoginLoading).visibility = View.INVISIBLE
                             //Permissions localisation
                             if (Build.VERSION.SDK_INT >= 23) {
@@ -103,18 +106,18 @@ class MainActivity : AppCompatActivity() {
     }
     /// FUNCTION
     /// Login and mdp exists
-    private fun existLogPasswd(name:String, pswd:String): Boolean {
+    private fun existLogPasswd(name:String, pswd:String): User? {
         val res = manager.persistence.getuserByEmail(name)
         if (res != null) {
             if(name == res.email || name == res.name){
                 println("FIND USER")
                 if(res.password == Util.hashPassword(pswd)){
                     println("GOOD PASSWORD")
-                    return true
+                    return res
                 }
             }
         }
-        return false
+        return null
     }
 }
 
