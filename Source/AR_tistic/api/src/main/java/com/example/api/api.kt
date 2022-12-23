@@ -64,7 +64,12 @@ fun main() {
                 val res = data.patternRecognitionUsers(ctx.pathParam("pattern").toString())
                 ctx.json(res)
             }
-
+            get("/users/getLikes/{id}"){ctx->
+                ctx.json(data.getLikes(ctx.pathParam("id").toInt()))
+            }
+            get("/users/getNbFollows/{id}"){ctx->
+                ctx.json(data.getNbFollowers(ctx.pathParam("id").toInt()))
+            }
             /*
             get("/users/idx/{idx}/{nb}") { ctx ->
                 ctx.json(

@@ -67,10 +67,6 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }
     }
 
-    override fun getLikes(id: Int): Int {
-        return 556
-    }
-
     override fun getFollowers(id: Int): HashMap<Int, User> {
         TODO("Not yet implemented")
     }
@@ -90,6 +86,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
             println(e)
             return ArrayList()
         }
+    }
+
+    override fun getLikes(id: Int): Int {
+        return 556
     }
 
     override fun getNbFollowers(id: Int): Int {
