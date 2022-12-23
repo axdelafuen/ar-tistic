@@ -52,11 +52,11 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun updateUser(id: Int, usr: User) {
-        put(URL(url+"users"+id as String),Gson().toJson(usr))
+        put(URL(url+"users/"+id.toString()),Gson().toJson(usr))
     }
 
     override fun deleteUser(id: Int) {
-        delete(URL(url+"users"+id as String))
+        delete(URL(url+"users/"+id.toString()))
     }
 
     override fun findUserByLogPswd(log: String, psswrd: String): User? {
@@ -117,15 +117,15 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun deleteDraw(id: Int) {
-        delete(URL(url+"draws"+id as String))
+        delete(URL(url+"draws/"+id.toString()))
     }
 
     override fun updateDraw(d: Draw) {
-        put(URL(url+"draws"),Gson().toJson(d))
+        put(URL(url+"draws/"),Gson().toJson(d))
     }
 
     override fun createDraw(draw: Draw) {
-        post(URL(url+"draws"),Gson().toJson(draw))
+        post(URL(url+"draws/"),Gson().toJson(draw))
     }
 
     override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
