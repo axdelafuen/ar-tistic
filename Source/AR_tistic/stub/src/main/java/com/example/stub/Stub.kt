@@ -164,6 +164,10 @@ class  Stub:IPersistenceManager{
         TODO("Not yet implemented")
     }
 
+    override fun userFollows(idUser: Int, idUserCible: Int) {
+        TODO("Not yet implemented")
+    }
+
     fun createInterestPoint(intPt:InterestPoint){// créé un nouveau
         val id=lastId.incrementAndGet()
         intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))

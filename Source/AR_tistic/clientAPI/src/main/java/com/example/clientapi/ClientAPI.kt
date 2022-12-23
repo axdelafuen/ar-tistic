@@ -67,10 +67,6 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }
     }
 
-    override fun getLikes(id: Int): Int {
-        return 556
-    }
-
     override fun getFollowers(id: Int): HashMap<Int, User> {
         TODO("Not yet implemented")
     }
@@ -92,8 +88,22 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         }
     }
 
+    override fun getLikes(id: Int): Int {
+        try {
+            return Gson().fromJson(get(URL(url + "users/getLikes/" + id)), Int::class.java)
+        }catch(e:Exception){
+            println(e)
+            return -1;
+        }
+    }
+
     override fun getNbFollowers(id: Int): Int {
-        return 523;
+        try {
+            return Gson().fromJson(get(URL(url + "users/getNbFollows/" + id)), Int::class.java)
+        }catch(e:Exception){
+            println(e)
+            return -1;
+        }
     }
 
     // DRAWS
@@ -138,6 +148,14 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     override fun getInterestPointsByRange(rayon: Double, latitude: Double, longitude: Double): HashMap<Int, InterestPoint> {
         TODO("Not yet implemented")
+    }
+
+    override fun userFollows(idUser: Int, idUserCible: Int) {
+        try{
+            put(URL(url+"users/addFollow/"+idUser+"/"+idUserCible),"")
+        }catch(e:Exception){
+            println(e)
+        }
     }
     /// http requests :
 
