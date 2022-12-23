@@ -6,8 +6,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.util.Base64.DEFAULT
-import android.util.Base64.encodeToString
+import android.util.Base64
+import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -60,28 +60,24 @@ class EditProfileActivity : AppCompatActivity() {
         name.text=usr.name
         birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
         button=findViewById(R.id.upload)
-        pp=findViewById(R.id.imageView2)
-        //pp.setImageResource(R.drawable.at_tistic_logo_framed_reverse) set thye srce
 
-        //var drawable = R.drawable.at_tistic_logo_framed_reverse
-        val drawable = "Baeldung"
-        val encodedString: String = Base64.getEncoder().encodeToString(drawable.toString().toByteArray())
-
-        /*val byteArrayOutputStream = ByteArrayOutputStream()
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.at_tistic_logo_framed_reverse)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        var imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
-        val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-        imageBytes = Base64.decode(imageString, Base64.DEFAULT)
-        */
-
-        val decodedB64= Base64.getDecoder().decode(encodedString)
-        val decodedImage = BitmapFactory.decodeByteArray(decodedB64, 0, decodedB64.size)
-        //email.text=decodedImage.toString()
-        pp.setImageBitmap(decodedImage)
     }
     fun returnMap(){
         finish()
+    }
+    fun convertImgToX64():String{
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.background_blur)//edit this path
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        var imageBytes = byteArrayOutputStream.toByteArray()
+        val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return imageString
+    }
+    fun convertX64toImg(imageString:String){
+        pp=findViewById(R.id.imageView2)
+        var imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        pp.setImageBitmap(decodedImage)
     }
     fun pickImageGallery(){
         val intent = Intent(Intent.ACTION_PICK)
