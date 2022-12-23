@@ -96,6 +96,9 @@ fun main() {
             get("/loadData"){ctx ->
                 ctx.json(data.loadData())
             }
+            put("/users/addFollow/{idUser}/{idUserCible}"){ctx->
+                data.userFollows(ctx.pathParam("idUser").toInt(),ctx.pathParam("idUserCible").toInt())
+            }
             post("/users") { ctx ->
                 val user = ctx.bodyAsClass<User>()
                 println(user)

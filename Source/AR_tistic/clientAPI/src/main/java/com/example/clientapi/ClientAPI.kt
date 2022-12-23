@@ -151,7 +151,11 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun userFollows(idUser: Int, idUserCible: Int) {
-        TODO("Not yet implemented")
+        try{
+            put(URL(url+"users/addFollow/"+idUser+"/"+idUserCible),"")
+        }catch(e:Exception){
+            println(e)
+        }
     }
     /// http requests :
 
