@@ -11,7 +11,7 @@ import com.example.classlib.*
 class EditProfileActivity : AppCompatActivity() {
     lateinit var manager:Manager
     lateinit var button: Button
-    lateinit var imageView: ImageView
+    lateinit var pp: ImageView
 
     companion object{
         val IMAGE_REQUEST_CODE = 100
@@ -50,7 +50,8 @@ class EditProfileActivity : AppCompatActivity() {
         name.text=usr.name
         birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
         button=findViewById(R.id.upload)
-        imageView=findViewById(R.id.imageView2)
+        pp=findViewById(R.id.imageView2)
+        pp.setImageResource(R.drawable.at_tistic_logo_framed_reverse)
     }
     fun returnMap(){
         finish()
@@ -64,7 +65,7 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode== IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
-            imageView.setImageURI(data?.data)
+            pp.setImageURI(data?.data)
         }
     }
 }
