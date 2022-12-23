@@ -46,7 +46,7 @@ class LeaderBoardActivity : AppCompatActivity() {
         usr1.setOnClickListener {
             val intent = Intent(this, ProfilActivity::class.java)
             intent.putExtra("manager", manager)
-            //intent.putExtra("id_usr", manager)
+            intent.putExtra("id_usr", 0)
             startActivity(intent)
         }
         val usr2 = findViewById<ImageButton>(R.id.btnAccess2)

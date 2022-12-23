@@ -12,11 +12,12 @@ class ProfilActivity : AppCompatActivity() {
     lateinit var manager:Manager
     lateinit var imageView: ImageView
     lateinit var selectedUsr: User
+    var idUsr=0
+
     companion object{
         val IMAGE_REQUEST_CODE = 100
     }
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
@@ -34,25 +35,13 @@ class ProfilActivity : AppCompatActivity() {
         val intent = intent
         //Get manager
         manager = intent.getSerializableExtra("manager") as Manager
-        var usr:User=manager.usr
-        nbAbo.text=manager.persistence.getFollowers(selectedUsr.id).toString()
-        name.text=selectedUsr.name
-        nbLikes.text=manager.persistence.getLikes(selectedUsr.id).toString()
+        idUsr = intent.getSerializableExtra("id_usr") as Int
+        name.text=manager.persistence.getUserById(0)?.name
+        nbAbo.text=manager.persistence.getUserById(0)?.subscribes.toString()
+        nbLikes.text=manager.persistence.getUserById(0)?.nbReport.toString()
         imageView=findViewById(R.id.imageView2)
     }
     fun returnMap(){
         finish()
-    }
-    fun pickImageGallery(){
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type="image/*"
-        startActivityForResult(intent, IMAGE_REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode== IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
-            imageView.setImageURI(data?.data)
-        }
     }
 }
