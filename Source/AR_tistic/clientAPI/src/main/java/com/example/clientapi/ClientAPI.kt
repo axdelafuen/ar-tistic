@@ -89,11 +89,21 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
     }
 
     override fun getLikes(id: Int): Int {
-        return 556
+        try {
+            return Gson().fromJson(get(URL(url + "users/getLikes/" + id)), Int::class.java)
+        }catch(e:Exception){
+            println(e)
+            return -1;
+        }
     }
 
     override fun getNbFollowers(id: Int): Int {
-        return 523;
+        try {
+            return Gson().fromJson(get(URL(url + "users/getNbFollows/" + id)), Int::class.java)
+        }catch(e:Exception){
+            println(e)
+            return -1;
+        }
     }
 
     // DRAWS
