@@ -35,7 +35,6 @@ class EditProfileActivity : AppCompatActivity() {
             openGallery()
         }
     }
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getInfos(){
         var email=findViewById<TextView>(R.id.emailTxtView)
         var name=findViewById<TextView>(R.id.nameTxtView)
