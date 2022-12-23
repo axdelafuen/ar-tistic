@@ -226,7 +226,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return returnedHashmap
     }
 
-    override fun getNbFollows(id:Int) : Int{
+    override fun getNbFollowers(id:Int) : Int{
         return getFollowers(id).count()
     }
 
@@ -520,10 +520,6 @@ class DatabasePersistanceDAO : IPersistenceManager{
                 }
             }
         return hashUsers
-    }
-
-    override fun getNbFollowers(id: Int): Int {
-        return 356
     }
 
 }
