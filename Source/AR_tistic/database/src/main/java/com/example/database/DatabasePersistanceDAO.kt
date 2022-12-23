@@ -226,6 +226,10 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return returnedHashmap
     }
 
+    override fun getNbFollows(id:Int) : Int{
+        return getFollowers(id).count()
+    }
+
     fun userDataToUserClass(u: t_User, hmsub: HashMap<Int, User> = hashMapOf(), nbR: Int, subBool: Boolean): User {
         Database.connect(
             url = url,
