@@ -51,7 +51,7 @@ class EditProfileActivity : AppCompatActivity() {
         birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
         button=findViewById(R.id.upload)
         pp=findViewById(R.id.imageView2)
-        pp.setImageResource(R.drawable.at_tistic_logo_framed_reverse)
+        //pp.setImageResource(R.drawable.at_tistic_logo_framed_reverse) set thye srce
     }
     fun returnMap(){
         finish()
