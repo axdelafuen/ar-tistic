@@ -24,7 +24,9 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
-    val manager=Manager(ClientAPI())
+    companion object{
+        val manager=Manager(ClientAPI())
+    }
     // Persistance loaded
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)

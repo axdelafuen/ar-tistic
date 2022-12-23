@@ -3,6 +3,7 @@ package com.example.testconsol
 import com.example.classlib.Collection
 import com.example.classlib.Date
 import com.example.classlib.User
+import com.example.classlib.Util
 import com.example.classlibdto.UserDTO
 import com.example.clientapi.ClientAPI
 import com.google.gson.Gson
@@ -24,7 +25,7 @@ fun main(){
 
     val userDTO = User(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", password="1233", email = "alice@alice.kt", birthDate = Date(1999, 12 ,12), subscribes = hashMapOf(), nbReport = 0 )
     val user = UserDTO(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
-    val user1 = User(id=3,email="1",name="Username", profilePicture = "aiuhcapucba", password="1", birthDate = Date(1999,2,2), subscribes = hashMapOf(), nbReport = 0)
+    val user1 = User(id=3,email="1",name="Username", profilePicture = "aiuhcapucba", password=Util.hashPassword("1"), birthDate = Date(1999,2,2), subscribes = hashMapOf(), nbReport = 0)
     val gson = Gson()
     val jsonData = gson.toJson(user)
 

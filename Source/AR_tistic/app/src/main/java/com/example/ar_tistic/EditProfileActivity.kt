@@ -9,13 +9,14 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
 
 class EditProfileActivity : AppCompatActivity() {
-    lateinit var manager:Manager
+    //lateinit var manager:Manager
     lateinit var pp: ImageView
 
     private val GALLERY_REQUEST_CODE = 1
@@ -38,7 +39,7 @@ class EditProfileActivity : AppCompatActivity() {
         var birthDate=findViewById<TextView>(R.id.bdTxtView)
         val intent = intent
         //Get manager
-        manager = intent.getSerializableExtra("manager") as Manager
+        //manager = intent.getSerializableExtra("manager") as Manager
         var usr:User=manager.usr
         email.text=usr.email
         name.text=usr.name
@@ -50,9 +51,6 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
     fun returnMap(){
-        val intent = Intent(applicationContext, MapActivity::class.java)
-        intent.putExtra("manager", manager)
-        startActivity(intent)
         finish()
     }
     fun convertImgToX64(bitmap: Bitmap):String{
@@ -82,6 +80,7 @@ class EditProfileActivity : AppCompatActivity() {
             val x64=convertImgToX64(bitmap)
             manager.usr.profilePicture=x64
             //manager.persistence.updateUser(manager.usr.id,manager.usr)
+            //{AXEL} : ca crash prck il faut le passer en thread (je pense)
             val img=convertX64toImg(x64)
             imageView.setImageBitmap(img)
         }
