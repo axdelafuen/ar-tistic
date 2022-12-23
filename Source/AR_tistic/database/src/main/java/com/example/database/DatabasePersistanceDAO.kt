@@ -518,4 +518,8 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return hashUsers
     }
 
+    override fun getNbFollowers(id: Int): Int {
+        return 356
+    }
+
 }
