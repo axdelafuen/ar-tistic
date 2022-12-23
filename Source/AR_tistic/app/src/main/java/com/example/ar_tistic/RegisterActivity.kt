@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.example.classlib.*
@@ -68,24 +69,30 @@ class RegisterActivity: AppCompatActivity() {
                             runCatching {
                                 if (checkEmail(cttmail)) {//used email
                                     runOnUiThread{
+                                        findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.INVISIBLE
                                         errMail.visibility = View.VISIBLE
                                     }
                                 } else {//unused mail
                                     if (checkPswd()) {//similar password
                                         val usr1: User = createUser(cttmail, cttPswd1)
                                         pers.createUser(usr1)
+                                        findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.INVISIBLE
                                         val intent = Intent(applicationContext, MapActivity::class.java)
                                         intent.putExtra("manager", manager)
                                         startActivity(intent)
                                         finish()
                                     } else {
                                         runOnUiThread{
+                                            findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.INVISIBLE
                                             errPswd.visibility = View.VISIBLE
                                         }
                                     }
                                 }
 
                             }
+                        }
+                        runOnUiThread {
+                            findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.VISIBLE
                         }
                     }
                 }

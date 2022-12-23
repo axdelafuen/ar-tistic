@@ -14,8 +14,8 @@ import java.net.URL
 
 fun main(){
     println("API - Test Console : \n")
-    var url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
-    var urlLoc = "http://localhost:1705/"
+    //var url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
+    var url = "http://localhost:1705/"
     var urlUserById0 = "http://localhost:1705/users/156789/"
     var urlUserById2 = URL("http://localhost:1705/users/2/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
@@ -32,7 +32,10 @@ fun main(){
     var api = ClientAPI()
     //println(api.getUserById(133)?.name)
     //println(api.getuserByEmail("alicaaae@alice.kt")?.name)
-    /*
+    //println(api.createUser(userDTO))
+    println(api.getUserById(1)?.name)
+    println(get(URL(url+"users/findByPattern/a")))
+/*
     try{
         //println(get(URL(urlLoc+"create")))
         println(get(urlUserById2))
@@ -42,15 +45,15 @@ fun main(){
     */
     //post(URL(url+"users"),jsonData)
     //api.createUser(userDTO);
-    println(api.getuserByEmail("11"))
+    //println(api.getuserByEmail("11"))
     //println(u.name)
 
     //println("\n"+jsonData+"\n")
 
-    //println(get(URL(urlAllUsers+"users/")))
+    //println(get(URL(url+"users/1")))
+
 
 /*
-    println(get(urlAllUsers))
     println("//////////////")
     post(urlAllUsers,jsonData)
     println("//////////////")
@@ -71,21 +74,14 @@ fun main(){
     get(urlAllUsers)
     */
 }
-
-fun get(url:URL):String{
-    lateinit var jsonStr:String
+private fun get(url: URL): String {
+    lateinit var jsonStr: String
     with(url.openConnection() as HttpURLConnection){
         requestMethod = "GET"
-
-        if(responseCode!=200){
-            return ""
-        }
-        inputStream.bufferedReader().use{
-            it.lines().forEach{ line -> jsonStr = line }
+        inputStream.bufferedReader().use {
+            it.lines().forEach { line -> jsonStr = line }
         }
     }
-    //println(jsonStr)
-    //println("\n")
     return jsonStr
 }
 fun delete(url:URL){

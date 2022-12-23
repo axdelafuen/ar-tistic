@@ -6,6 +6,17 @@ import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
 
 class  Stub:IPersistenceManager{
+    var usersArray = loadUsersArray()
+
+    fun loadUsersArray():ArrayList<User>{
+        val res:ArrayList<User> = ArrayList()
+
+        res.add(User(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password ="1234", birthDate = Date(1999,2,2) , subscribes = hashMapOf(), nbReport = 0 ))
+        res.add( User(id = 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ))
+
+        return res
+    }
+
     var userHashMap=loadData().users
         get() {
             return field
@@ -135,7 +146,7 @@ class  Stub:IPersistenceManager{
     }
 
 
-    override fun patternRecognitionUsers(pattern: String): HashMap<Int, User> {
+    override fun patternRecognitionUsers(pattern: String): ArrayList<User> {
         TODO("Not yet implemented")
     }
 
