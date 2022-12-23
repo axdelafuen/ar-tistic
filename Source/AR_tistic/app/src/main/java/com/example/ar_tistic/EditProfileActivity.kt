@@ -1,16 +1,13 @@
 package com.example.ar_tistic
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Base64
-import android.view.View
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classlib.*
 import java.io.ByteArrayOutputStream
@@ -46,25 +43,31 @@ class EditProfileActivity : AppCompatActivity() {
         email.text=usr.email
         name.text=usr.name
         birthDate.text=usr.birthDate.day.toString()+"-"+usr.birthDate.month.toString()+"-"+usr.birthDate.year.toString()
+        if(manager.usr.profilePicture!=""){
+            val imageView = findViewById<ImageView>(R.id.imageView2)
+            var img=convertX64toImg(manager.usr.profilePicture)
+            imageView.setImageBitmap(img)
+        }
     }
     fun returnMap(){
+        val intent = Intent(applicationContext, MapActivity::class.java)
+        intent.putExtra("manager", manager)
+        startActivity(intent)
         finish()
     }
-    fun convertImgToX64():String{
+    fun convertImgToX64(bitmap: Bitmap):String{
         val byteArrayOutputStream = ByteArrayOutputStream()
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.background_blur)//edit this path
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         var imageBytes = byteArrayOutputStream.toByteArray()
         val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return imageString
     }
-    fun convertX64toImg(imageString:String){
-        pp=findViewById(R.id.imageView2)
+    fun convertX64toImg(imageString:String):Bitmap{
         var imageBytes = Base64.decode(imageString, Base64.DEFAULT)
         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-        pp.setImageBitmap(decodedImage)
+        return decodedImage
     }
-        private fun openGallery() {
+    fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
@@ -75,7 +78,12 @@ class EditProfileActivity : AppCompatActivity() {
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri = data.data
             val imageView = findViewById<ImageView>(R.id.imageView2)
-            imageView.setImageURI(selectedImageUri)
+            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
+            val x64=convertImgToX64(bitmap)
+            manager.usr.profilePicture=x64
+            //manager.persistence.updateUser(manager.usr.id,manager.usr)
+            val img=convertX64toImg(x64)
+            imageView.setImageBitmap(img)
         }
     }
 }

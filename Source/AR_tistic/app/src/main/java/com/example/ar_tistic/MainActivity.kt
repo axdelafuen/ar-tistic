@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                                     val intent = Intent(applicationContext, MapActivity::class.java)
                                     intent.putExtra("manager", manager)
                                     startActivity(intent)
-                                    //finish()
+                                    finish()
                                 } else {
                                     ActivityCompat.requestPermissions(
                                         this@MainActivity,
