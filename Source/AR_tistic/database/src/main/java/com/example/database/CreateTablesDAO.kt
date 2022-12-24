@@ -7,6 +7,7 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.javatime.date
 import org.jetbrains.exposed.sql.javatime.time
+import org.jetbrains.exposed.sql.statements.api.ExposedBlob
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalTime
 
@@ -55,7 +56,7 @@ fun createTable() {
 object t_Users: IntIdTable(){
     val vname: Column<String> = varchar("username",50)
     val vemail: Column<String> = varchar("email",100)
-    val vprofilePicture: Column<String> = text("profilePicture")
+    val vprofilePicture: Column<ExposedBlob> = blob("profilePicture")
     val vpassword: Column<String> = varchar("password", 50)
     val vbirthdate: Column<java.time.LocalDate> = date("date")
 }
