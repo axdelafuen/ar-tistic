@@ -25,14 +25,14 @@ fun main(){
 
     val userDTO = User(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", password="1233", email = "alice@alice.kt", birthDate = Date(1999, 12 ,12), subscribes = hashMapOf(), nbReport = 0 )
     val user = UserDTO(0,"API_TEST","./img/api.png","api.test@gmail.com","1234", Date(1989,10,5), hashMapOf(0 to userDTO),0 )
-    val user1 = User(id=3,email="1",name="Username", profilePicture = "aiuhcapucba", password=Util.hashPassword("1"), birthDate = Date(1999,2,2), subscribes = hashMapOf(), nbReport = 0)
+    val user1 = User(id=2,email="2",name="Usernameeee", profilePicture = "aiuhcapucba", password=Util.hashPassword("2"), birthDate = Date(1999,2,2), subscribes = hashMapOf(), nbReport = 0)
     val gson = Gson()
     val jsonData = gson.toJson(user)
 
     //println(gson.fromJson(get(URL(urlUserById0)), User::class.java).email)
 
     var api = ClientAPI()
-    api.updateUser(3,user1)
+    api.updateUser(user1.id,user1)
     println("OK")
     //println(api.getUserById(133)?.name)
     //println(api.getuserByEmail("alicaaae@alice.kt")?.name)

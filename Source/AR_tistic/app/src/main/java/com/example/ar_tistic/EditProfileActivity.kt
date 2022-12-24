@@ -11,6 +11,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.*
+import com.example.clientapi.ClientAPI
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -79,8 +82,21 @@ class EditProfileActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
             val x64=convertImgToX64(bitmap)
             manager.usr.profilePicture=x64
-            //manager.persistence.updateUser(manager.usr.id,manager.usr)
-            //{AXEL} : ca crash prck il faut le passer en thread (je pense)
+            GlobalScope.launch {
+                //println(manager.usr.id)
+                manager.usr.name = "Franck"
+                println("ID = "+manager.usr.id)
+                println("Name = "+manager.usr.name)
+                println("email = "+manager.usr.email)
+                println("pp = "+manager.usr.profilePicture)
+                println("password = "+manager.usr.password)
+                println("nb report = "+manager.usr.nbReport)
+                println("birth year = "+manager.usr.birthDate.year)
+
+                //manager.persistence.updateUser(manager.usr.id,manager.usr)
+                println("Done")
+                //{AXEL} : ca crash prck il faut le passer en thread (je pense)
+            }
             val img=convertX64toImg(x64)
             imageView.setImageBitmap(img)
         }
