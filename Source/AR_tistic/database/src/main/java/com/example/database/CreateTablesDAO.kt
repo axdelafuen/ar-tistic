@@ -56,7 +56,7 @@ fun createTable() {
 object t_Users: IntIdTable(){
     val vname: Column<String> = varchar("username",50)
     val vemail: Column<String> = varchar("email",100)
-    val vprofilePicture: Column<ExposedBlob> = blob("profilePicture")
+    val vprofilePicture: Column<String> = largeText("profilePicture")
     val vpassword: Column<String> = varchar("password", 50)
     val vbirthdate: Column<java.time.LocalDate> = date("date")
 }
