@@ -63,7 +63,7 @@ object t_Users: IntIdTable(){
 
 object t_Draws: IntIdTable(){
     val vname: Column<String> = varchar("imageName",50)
-    val vimage: Column<String> = largeText("image",100)
+    val vimage: Column<String> = largeText("image")
     val vlifetime: Column<LocalTime> = time("password")
     val vcreationdate: Column<java.time.LocalDate> = date("date")
     val vnbviews :  Column<Int> = integer("nbViews")
@@ -74,7 +74,7 @@ object t_InterestPoints: IntIdTable(){
     val vdescription: Column<String> = varchar("description",100)
     val vlatitude: Column<Double> = double("latitude")
     val vlongitude: Column<Double> = double("longitude")
-    val vimage: Column<String> = largeText("interestPointImage",100)
+    val vimage: Column<String> = largeText("interestPointImage")
 }
 
 object t_CreatedsOn: IntIdTable(){
