@@ -83,19 +83,8 @@ class EditProfileActivity : AppCompatActivity() {
             val x64=convertImgToX64(bitmap)
             manager.usr.profilePicture=x64
             GlobalScope.launch {
-                //println(manager.usr.id)
-                manager.usr.name = "Franck"
-                println("ID = "+manager.usr.id)
-                println("Name = "+manager.usr.name)
-                println("email = "+manager.usr.email)
-                println("pp = "+manager.usr.profilePicture)
-                println("password = "+manager.usr.password)
-                println("nb report = "+manager.usr.nbReport)
-                println("birth year = "+manager.usr.birthDate.year)
-
-                //manager.persistence.updateUser(manager.usr.id,manager.usr)
+                manager.persistence.updateUser(manager.usr.id,manager.usr)
                 println("Done")
-                //{AXEL} : ca crash prck il faut le passer en thread (je pense)
             }
             val img=convertX64toImg(x64)
             imageView.setImageBitmap(img)
