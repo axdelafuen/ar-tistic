@@ -10,18 +10,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.Manager
 import com.example.classlib.User
 import com.example.clientapi.ClientAPI
 import kotlinx.coroutines.*
 
 class SearchActivity: AppCompatActivity() {
-    lateinit var manager:Manager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_users)
-        manager = intent.getSerializableExtra("manager") as Manager
         createButtons()
     }
     fun createButtons(){

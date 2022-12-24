@@ -6,14 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
+import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.Manager
 
 class CanvaActivity : AppCompatActivity() {
-    lateinit var manager: Manager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        manager=intent.getSerializableExtra("manager") as Manager
         setContentView(R.layout.activity_canva)
         createButtons()
         val ControlUndo = findViewById<ImageView>(R.id.ControlUndo)

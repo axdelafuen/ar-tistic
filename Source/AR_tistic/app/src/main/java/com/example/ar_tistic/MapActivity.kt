@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.Manager
 import com.example.stub.Stub
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,7 +34,6 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 class MapActivity : AppCompatActivity(){
 
-    lateinit var manager:Manager
     private lateinit var map:MapView
     @SuppressLint("WrongViewCast")
     @RequiresApi(Build.VERSION_CODES.M)
@@ -46,7 +46,6 @@ class MapActivity : AppCompatActivity(){
         )
         //Get manager
         //
-        manager=intent.getSerializableExtra("manager") as Manager
         // LOAD LAYOUT
         setContentView(R.layout.activity_map)
         // MAP Initialization

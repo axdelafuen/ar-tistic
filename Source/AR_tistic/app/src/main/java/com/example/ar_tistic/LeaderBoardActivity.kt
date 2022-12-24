@@ -5,14 +5,13 @@ import android.os.Bundle
 import com.example.classlib.*
 import android.content.Intent
 import android.widget.ImageButton
+import com.example.ar_tistic.MainActivity.Companion.manager
 
 class LeaderBoardActivity : AppCompatActivity() {
-    lateinit var manager:Manager
     lateinit var podium: List<User>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leader_board)
-        manager = intent.getSerializableExtra("manager") as Manager
         createButtons()
         getPodium()
     }

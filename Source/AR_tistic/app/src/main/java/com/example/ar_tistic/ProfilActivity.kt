@@ -6,10 +6,10 @@ import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.*
 
 class ProfilActivity : AppCompatActivity() {
-    lateinit var manager:Manager
     lateinit var imageView: ImageView
     var idUsr=1
 
@@ -32,7 +32,6 @@ class ProfilActivity : AppCompatActivity() {
         var nbLikes=findViewById<TextView>(R.id.likeTxtView)
         val intent = intent
         //Get manager
-        manager = intent.getSerializableExtra("manager") as Manager
         idUsr = intent.getSerializableExtra("id_usr") as Int
         name.text=manager.persistence.getUserById(idUsr)?.name.toString()
         nbAbo.text=manager.persistence.getNbFollowers(idUsr)?.toString()

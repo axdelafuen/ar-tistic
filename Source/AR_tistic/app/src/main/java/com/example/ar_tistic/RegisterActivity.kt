@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.*
 import com.example.stub.*
 import kotlinx.coroutines.CoroutineScope
@@ -17,9 +18,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class RegisterActivity: AppCompatActivity() {
-    lateinit var manager: Manager
     override fun onCreate(savedInstanceState: Bundle?) {
-        manager = intent.getSerializableExtra("manager") as Manager
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val returnMain = findViewById<Button>(R.id.returnLogPageButton)
@@ -29,11 +28,11 @@ class RegisterActivity: AppCompatActivity() {
         }
 
         register.setOnClickListener {
-            check(manager.persistence)
+            check()
         }
     }
 
-    fun check(pers: IPersistenceManager) {//check errors when register button is press
+    fun check() {//check errors when register button is press
         //variables
         val email = findViewById<EditText>(R.id.email)
         val pswd1 = findViewById<EditText>(R.id.psswd)
@@ -52,8 +51,10 @@ class RegisterActivity: AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 if (checkEmail(cttmail)) {//used email
-                    println("DEBUG REGISTER")
-                    errMail.visibility = View.VISIBLE
+                    runOnUiThread {
+                        findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.INVISIBLE
+                        errMail.visibility = View.VISIBLE
+                    }
                 } else {
                     println("DEBUG REGISTER")
                     if (cttmail.trim().isEmpty() || cttPswd1.trim().isEmpty() || cttPswd2.trim()
@@ -74,8 +75,8 @@ class RegisterActivity: AppCompatActivity() {
                                     }
                                 } else {//unused mail
                                     if (checkPswd()) {//similar password
-                                        val usr1: User = createUser(cttmail, cttPswd1)
-                                        pers.createUser(usr1)
+                                        manager.usr = createUser(cttmail, cttPswd1)
+                                        manager.persistence.createUser(manager.usr)
                                         findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.INVISIBLE
                                         val intent = Intent(applicationContext, MapActivity::class.java)
                                         intent.putExtra("manager", manager)
@@ -97,6 +98,9 @@ class RegisterActivity: AppCompatActivity() {
                     }
                 }
             }
+        }
+        runOnUiThread {
+            findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.VISIBLE
         }
     }
 
