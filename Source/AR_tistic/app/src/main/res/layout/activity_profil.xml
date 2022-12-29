@@ -177,8 +177,8 @@
 
     <ImageView
         android:id="@+id/likeImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@+id/likeTxtView"
         app:layout_constraintHorizontal_bias="0.419"
@@ -188,11 +188,11 @@
 
     <ImageView
         android:id="@+id/followImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@+id/followTxtView"
-        app:layout_constraintHorizontal_bias="0.419"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/likeImg"
         app:srcCompat="@drawable/follower" />

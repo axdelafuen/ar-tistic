@@ -165,7 +165,6 @@ class MapActivity : AppCompatActivity(){
     }
     fun popUp() {
         val intent = Intent(this, DrawsVisualisation::class.java)
-        intent.putExtra("manager", manager)
         startActivity(intent)
     }
 
