@@ -164,33 +164,9 @@ class MapActivity : AppCompatActivity(){
         map.onPause()
     }
     fun popUp() {
-        val inflter = LayoutInflater.from(this)
-        val v = inflter.inflate(R.layout.activity_draw,null)
-        val addDialog = AlertDialog.Builder(this)
-        addDialog.setView(v)
-        addDialog.setPositiveButton("Ok"){
-            dialog,_->
-            dialog.dismiss()
-            Toast.makeText(this,"OK",Toast.LENGTH_LONG).show()
-        }
-        addDialog.setNegativeButton("Cancel"){
-            dialog,_->
-            dialog.dismiss()
-            Toast.makeText(this,"Cancel",Toast.LENGTH_LONG).show()
-        }
-        addDialog.create()
-        addDialog.show()
-        val inflater = layoutInflater
-        val dialogLayout = inflater.inflate(R.layout.activity_draw, null)
-        val madeBy= dialogLayout.findViewById<TextView>(R.id.madeBy)
-
-        /*with(addDialog)
-        {
-            madeBy.text="OUIII"
-            show()
-        }*/
-        //addDialog.apply{madeBy.text="OUIII"}.show()
-
+        val intent = Intent(this, DrawsVisualisation::class.java)
+        intent.putExtra("manager", manager)
+        startActivity(intent)
     }
 
 
