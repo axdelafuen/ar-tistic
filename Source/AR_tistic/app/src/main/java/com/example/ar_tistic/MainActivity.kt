@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
                     println("GOOD PASSWORD")
                     return res
                 }
+                return res // to remove when using the api
             }
         }
         return null

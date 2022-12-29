@@ -13,6 +13,7 @@ class  Stub:IPersistenceManager{
 
         res.add(User(id = 0, name = "Alice", profilePicture = "./img/pp/Alice.jpg", email = "alice@alice.kt", password ="1234", birthDate = Date(1999,2,2) , subscribes = hashMapOf(), nbReport = 0 ))
         res.add( User(id = 1, name = "Fredo", profilePicture = "./img/pp/Fredo.jpg", email = "fred@fred.kt", password ="aaaa123", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ))
+        res.add(User(id = 5, name = "1", profilePicture = "./img/pp/Fredo.jpg", email = "2", password ="1", birthDate = Date(2003,1,1), subscribes = hashMapOf(), nbReport = 0 ))
 
         return res
     }
@@ -116,7 +117,7 @@ class  Stub:IPersistenceManager{
 
     override fun getuserByEmail(content: String): User? {
         for(user in userHashMap.values){
-            if(content.equals(user.email)){
+            if(content.equals(user.email)||content.equals(user.name)){
                 return user
             }
         }
@@ -201,6 +202,10 @@ class  Stub:IPersistenceManager{
     }
 
     override fun getCollaborated(idDraw: Int): HashMap<Int, User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDrawsInInterestPoint(idInterestPoint: Int): ArrayList<Draw> {
         TODO("Not yet implemented")
     }
 

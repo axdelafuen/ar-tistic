@@ -29,6 +29,7 @@ class CanvaActivity : AppCompatActivity() {
             PaintArea.setDelete()
         }
     }
+    @SuppressLint("SuspiciousIndentation")
     fun createButtons(){
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {

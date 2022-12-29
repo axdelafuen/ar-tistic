@@ -142,6 +142,10 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
         TODO("Not yet implemented")
     }
 
+    override fun getDrawsInInterestPoint(idInterestPoint: Int): ArrayList<Draw> {
+        TODO("Not yet implemented")
+    }
+
     override fun getInterestPointById(idIP: Int): InterestPoint {
         TODO("Not yet implemented")
     }
