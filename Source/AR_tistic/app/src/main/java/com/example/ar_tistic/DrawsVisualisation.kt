@@ -25,8 +25,10 @@ class DrawsVisualisation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_draws_visualisation)
         createButtons()
+        val id=0
+        interestPoint= manager.persistence.getInterestPointById(id)
         draws=manager.persistence.getDrawsInInterestPoint(interestPoint.id)
-
+        //buttons
         val previous = findViewById<ImageView>(R.id.previous)
         val nextt = findViewById<ImageView>(R.id.next)
         val add = findViewById<ImageView>(R.id.addDrawing)
@@ -50,7 +52,7 @@ class DrawsVisualisation : AppCompatActivity() {
     }
 
 
-    fun createButtons() {
+    fun createButtons() {//create navbar buttons
         val paintBtn = findViewById<ImageButton>(R.id.drawButton)
         paintBtn.setOnClickListener {
             val intent = Intent(this, CanvaActivity::class.java)
@@ -85,6 +87,7 @@ class DrawsVisualisation : AppCompatActivity() {
     }
     fun add(){
         openGallery()
+        setImages()
     }
     fun report(){
         return
@@ -103,20 +106,22 @@ class DrawsVisualisation : AppCompatActivity() {
             val selectedImageUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
             val x64=convertImgToX64(bitmap)
-            draws.add(Draw(0,
-                "draw",
-                x64,
-                hashMapOf(0 to interestPoint),
-                Date(0,0,0),
-                Time(99,99,99),
-                hashMapOf(0 to manager.usr),
-                0,
-                0
-            ))
-            GlobalScope.launch {
-                manager.persistence.updateUser(manager.usr.id,manager.usr)
+            //GlobalScope.launch {//add the draw in pers
+                manager.persistence.createDraw(Draw(0,
+                    "draw",
+                    x64,
+                    hashMapOf(0 to interestPoint),
+                    Date(0,0,0),
+                    Time(99,99,99),
+                    hashMapOf(manager.usr.id to manager.usr),
+                    0,
+                    0
+                ))
                 println("Done")
-            }
+            //}
+            //GlobalScope.launch {//get draw from pers
+                draws=manager.persistence.getDrawsInInterestPoint(interestPoint.id)
+            //}
         }
     }
     fun convertImgToX64(bitmap: Bitmap):String{
@@ -128,7 +133,20 @@ class DrawsVisualisation : AppCompatActivity() {
     }
     fun convertX64toImg(imageString:String): Bitmap {
         var imageBytes = Base64.decode(imageString, Base64.DEFAULT)
-        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)!!
         return decodedImage
+    }
+    fun setImages(){
+        println("\n Taille :"+draws.size)/*
+        if (draws.size==1){
+            println("rtentre la")
+            val mainDraw=findViewById<ImageView>(R.id.mainDraw)
+            mainDraw.setImageBitmap(convertX64toImg(draws[0].image))
+        }
+        else if(draws.size>1){
+            val mainDraw=findViewById<ImageView>(R.id.mainDraw)
+            val leftDraw=findViewById<ImageView>(R.id.leftDraw)
+            val rightDraw=findViewById<ImageView>(R.id.rightDraw)
+        }*/
     }
 }

@@ -194,7 +194,6 @@ class  Stub:IPersistenceManager{
     }
 
     override fun createDraw(draw: Draw) {
-        TODO("Not yet implemented")
     }
 
     override fun getDrawFromUser(userId: Int): HashMap<Int, Draw>? {
@@ -206,11 +205,13 @@ class  Stub:IPersistenceManager{
     }
 
     override fun getDrawsInInterestPoint(idInterestPoint: Int): ArrayList<Draw> {
-        TODO("Not yet implemented")
+        var drawssss:ArrayList<Draw>  = ArrayList()
+        drawssss.add(Draw(0,"Peinture bleu sur fond bleu", "./img/draw/0.jpg",  hashMapOf(),  Date(1999,2,2), Time(24,10,10), hashMapOf(), 60, 0 ))
+        return drawssss
     }
 
     override fun getInterestPointById(idIP: Int): InterestPoint {
-        TODO("Not yet implemented")
+        return InterestPoint(id=0,name="IUT", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png")
     }
 
 
