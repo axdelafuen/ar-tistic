@@ -16,10 +16,9 @@ fun createTable() {
         url = "jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE"),
         user = "root",
         password = System.getenv("DB_ROOT_PASSWORD")
-        /*url = "jdbc:mysql://localhost:3306/sqlsaetest",
+/*        url = "jdbc:mysql://localhost:3306/sqlsaetest",
         user = "root",
-        password = "root1234"
-        test*/
+        password = "root1234"*/
     )
 
     transaction {
@@ -27,6 +26,7 @@ fun createTable() {
 
         // DROP TABLES
 
+        SchemaUtils.drop(t_CreatedsOn)
         SchemaUtils.drop(t_Collaborateds)
         SchemaUtils.drop(t_ActionsDone)
         SchemaUtils.drop(t_Relations)
@@ -46,6 +46,7 @@ fun createTable() {
         SchemaUtils.create(t_Relations)
         SchemaUtils.create(t_Collaborateds)
         SchemaUtils.create(t_ActionsDone)
+        SchemaUtils.create(t_CreatedsOn)
 
 
     }

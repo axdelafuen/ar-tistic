@@ -25,4 +25,7 @@ interface IPersistenceManager : Serializable {
     fun getInterestPointById(idIP: Int): InterestPoint
     fun getInterestPointsByRange(rayon: Double, latitude: Double, longitude: Double): HashMap<Int, InterestPoint>
     fun userFollows(idUser: Int, idUserCible: Int)
+    fun userLikesDrawing(idUser: Int, idDraw: Int)
+    fun createInterestPoint(ip: InterestPoint)
+    fun getDrawsByInterestPoint(idIP: Int): HashMap<Int, Draw>
 }

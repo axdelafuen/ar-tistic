@@ -157,6 +157,18 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
             println(e)
         }
     }
+
+    override fun userLikesDrawing(idUser: Int, idDraw: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun createInterestPoint(ip: InterestPoint) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDrawsByInterestPoint(idIP: Int): HashMap<Int, Draw> {
+        TODO("Not yet implemented")
+    }
     /// http requests :
 
     @Suppress("NewApi")

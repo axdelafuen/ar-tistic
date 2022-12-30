@@ -3,11 +3,8 @@ package com.example.database
 import com.example.classlib.*
 import com.example.classlib.Collection
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.or
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 import java.time.LocalTime
@@ -17,12 +14,9 @@ class DatabasePersistanceDAO : IPersistenceManager{
     val user = "root"
     val password = System.getenv("DB_ROOT_PASSWORD")
 
-/*        val url = "jdbc:mysql:"+System.getenv("DB_SERVER")
-        val user = System.getenv("DB_USER")
-        val password = System.getenv("DB_PASSWORD")*/
-/*        val url = "jdbc:mysql://localhost:3306/sqlsaetest"
-        val user = "root"
-        val password = "root1234"*/
+/*    val url = "jdbc:mysql://localhost:3306/sqlsaetest"
+    val user = "root"
+    val password = "root1234"*/
     fun loadData(): Collection {
         Database.connect(
             url = url,
@@ -210,6 +204,33 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return count
     }
 
+    override fun userLikesDrawing(idUser: Int, idDraw: Int){
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        transaction {
+            var result = t_ActionDone.find { (t_ActionsDone.vidUser eq idUser) and (t_ActionsDone.vidDraw eq idDraw)}
+
+            if( result.count().toInt() == 0){
+                t_ActionDone.new {
+                    iduser = EntityID(idUser,t_Users)
+                    iddraw = EntityID(idDraw,t_Draws)
+                    report = false
+                    like = true
+                    creator = false
+                }
+            }
+            else{
+                result.forEach {
+                    it.like = true
+                }
+            }
+        }
+    }
+
     override fun getFollowers(id: Int): HashMap<Int, User> {
         Database.connect(
             url = url,
@@ -270,7 +291,7 @@ class DatabasePersistanceDAO : IPersistenceManager{
         )
 
         transaction {
-            t_Draw.new {
+            var newdraw =  t_Draw.new {
                 name = draw.name
                 image = draw.image
                 lifetime = LocalTime.of(draw.lifeTime.hours,draw.lifeTime.minutes,draw.lifeTime.seconds)
@@ -279,8 +300,8 @@ class DatabasePersistanceDAO : IPersistenceManager{
             }
 
             t_ActionDone.new{
-                iduser = EntityID(draw.authors.getValue(0).id,t_Users)
-                iddraw = EntityID(draw.id,t_Draws)
+                iduser = EntityID(draw.authors.keys.first(),t_Users)
+                iddraw = EntityID(newdraw.id.value,t_Draws)
                 creator = true
                 report = false
                 like = false
@@ -289,13 +310,13 @@ class DatabasePersistanceDAO : IPersistenceManager{
             draw.authors.forEach {
                 t_Collaborated.new {
                     iduser = EntityID(it.key,t_Users)
-                    iddraw = EntityID(draw.id,t_Draws)
+                    iddraw = EntityID(newdraw.id.value,t_Draws)
                 }
             }
 
             t_CreatedOn.new {
-                idinterestpoint = EntityID(draw.interestPoint.getValue(0).id,t_InterestPoints)
-                iddraw = EntityID(draw.id,t_Draws)
+                idinterestpoint = EntityID(draw.interestPoint.keys.first(),t_InterestPoints)
+                iddraw = EntityID(newdraw.id.value,t_Draws)
              }
         }
     }
@@ -465,6 +486,23 @@ class DatabasePersistanceDAO : IPersistenceManager{
         )
     }
 
+    override fun createInterestPoint(ip: InterestPoint){
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        transaction {
+            t_InterestPoint.new {
+                name = ip.name
+                description = ip.desc
+                image = ip.picture
+                latitude = ip.latitude
+                longitude = ip.longitude
+            }
+        }
+    }
     override fun getInterestPointById(idIP: Int): InterestPoint{
         Database.connect(
             url = url,
@@ -491,6 +529,23 @@ class DatabasePersistanceDAO : IPersistenceManager{
             }
         }
         return returnedHashmap
+    }
+
+    override fun getDrawsByInterestPoint(idIP: Int) : HashMap<Int, Draw>{
+        Database.connect(
+            url = url,
+            user = user,
+            password = password
+        )
+
+        var hmDraws:HashMap<Int, Draw> = hashMapOf()
+        transaction {
+            t_CreatedOn.find { t_CreatedsOn.vInterestPoint eq idIP }.forEach {
+                hmDraws.put(it.iddraw.value, getDrawById(it.iddraw.value)!!)
+            }
+        }
+
+        return hmDraws
     }
 
     private fun interestPointDataToInterestPointClass(ip: t_InterestPoint): InterestPoint{

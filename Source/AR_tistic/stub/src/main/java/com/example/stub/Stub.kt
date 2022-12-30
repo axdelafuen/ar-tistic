@@ -168,10 +168,19 @@ class  Stub:IPersistenceManager{
         TODO("Not yet implemented")
     }
 
-    fun createInterestPoint(intPt:InterestPoint){// créé un nouveau
+    override fun userLikesDrawing(idUser: Int, idDraw: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun createInterestPoint(intPt:InterestPoint){// créé un nouveau
         val id=lastId.incrementAndGet()
         intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))
     }
+
+    override fun getDrawsByInterestPoint(idIP: Int): HashMap<Int, Draw> {
+        TODO("Not yet implemented")
+    }
+
     fun updateInterestPoint(id:Int,intPt:InterestPoint){// modify
         intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))
     }
