@@ -21,6 +21,7 @@ interface IPersistenceManager : Serializable {
     fun createDraw(draw: Draw)
     fun getDrawFromUser(userId:Int):HashMap<Int,Draw>?
     fun getCollaborated(idDraw: Int): HashMap<Int,com.example.classlib.User>
+    fun getDrawsInInterestPoint(idInterestPoint: Int):ArrayList<Draw>
     // INTERESTPOINTS METHODS
     fun getInterestPointById(idIP: Int): InterestPoint
     fun getInterestPointsByRange(rayon: Double, latitude: Double, longitude: Double): HashMap<Int, InterestPoint>

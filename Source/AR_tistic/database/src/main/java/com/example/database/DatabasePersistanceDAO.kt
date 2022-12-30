@@ -354,6 +354,10 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return authorsHash
     }
 
+    override fun getDrawsInInterestPoint(idInterestPoint: Int): ArrayList<Draw> {
+        TODO("Not yet implemented")
+    }
+
     override fun getDrawById(idDraw: Int): Draw? {
         Database.connect(
             url = url,
