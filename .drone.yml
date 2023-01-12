@@ -77,6 +77,7 @@ steps:
       from_secret: db_password
     CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
       from_secret: db_database
+    ADMINS: axelde_la_fuente
   depends_on: 
     - container-api
 
