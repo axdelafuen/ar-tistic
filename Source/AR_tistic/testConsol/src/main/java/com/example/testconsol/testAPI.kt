@@ -15,8 +15,8 @@ import java.net.URL
 
 fun main(){
     println("API - Test Console : \n")
-    //var url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/"
-    var url = "http://localhost:1705/"
+    var url = "https://codefirst.iut.uca.fr/containers/ARTeam-api-artistic/"
+    //var url = "http://localhost:1705/"
     var urlUserById0 = "http://localhost:1705/users/156789/"
     var urlUserById2 = URL("http://localhost:1705/users/2/")
     var urlUserById3 = URL("http://localhost:7070/users/3/")
@@ -33,7 +33,7 @@ fun main(){
 
     var api = ClientAPI()
     //api.updateUser(user1.id,user1)
-    api.deleteUser(6)
+    //api.deleteUser(6)
     println("OK")
     //println(api.getUserById(133)?.name)
     //println(api.getuserByEmail("alicaaae@alice.kt")?.name)
