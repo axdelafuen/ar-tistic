@@ -18,7 +18,7 @@ import kotlin.reflect.cast
 @Suppress("NewApi")
 class ClientAPI:IPersistenceManager,java.io.Serializable{
 
-    val url = "https://codefirst.iut.uca.fr/containers/api-artistic-axelde_la_fuente/" // for release
+    val url = "https://codefirst.iut.uca.fr/containers/ARTeam-api-artistic/" //for release
     //val url = "http://localhost:1705/" //for local
 
     fun loadData(): Collection? {
