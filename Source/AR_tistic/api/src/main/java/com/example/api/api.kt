@@ -22,8 +22,9 @@ fun main() {
 
             get("/create"){ctx ->
                 try{
-                    createTable()
-                    ctx.json("Ok").status(200)
+                    //createTable()
+                    //ctx.json("Ok").status(200)
+                    ctx.json("jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE"))
                 }catch(e:Exception){
                     //ctx.json(e.printStackTrace().toString()).status(417)
                     ctx.json(e.toString()).status(417)
