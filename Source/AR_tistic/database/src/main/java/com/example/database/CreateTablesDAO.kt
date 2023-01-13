@@ -13,7 +13,8 @@ import java.time.LocalTime
 
 fun createTable() {
     Database.connect(
-        url = "jdbc:mysql://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE"),
+        url = "jdbc:mariadb://"+System.getenv("DB_SERVER")+"/"+System.getenv("DB_DATABASE"),
+        driver = "org.mariadb.jdbc.Driver",
         user = "root",
         password = System.getenv("DB_ROOT_PASSWORD")
 /*        url = "jdbc:mysql://localhost:3306/sqlsaetest",
