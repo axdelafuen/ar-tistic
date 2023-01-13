@@ -79,7 +79,7 @@ class RegisterActivity: AppCompatActivity() {
                                         manager.persistence.createUser(manager.usr)
                                         findViewById<ProgressBar>(R.id.RegisterLoading).visibility = View.INVISIBLE
                                         val intent = Intent(applicationContext, MapActivity::class.java)
-                                        intent.putExtra("manager", manager)
+                                        //intent.putExtra("manager", manager)
                                         startActivity(intent)
                                         finish()
                                     } else {

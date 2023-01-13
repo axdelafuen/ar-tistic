@@ -26,8 +26,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     //Manager -> 'll be given to all activities
     companion object{
-        //val manager=Manager(ClientAPI())
-        val manager=Manager(Stub())
+        val manager=Manager(ClientAPI())
+        //val manager=Manager(Stub())
     }
     // Persistance loaded
     override fun onCreate(savedInstanceState: Bundle?){
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                                     // Add user to pers once passed all verifications
                                     //manager.usr = loadUser(cttLog, cttMdp)
                                     val intent = Intent(applicationContext, MapActivity::class.java)
-                                    intent.putExtra("manager", manager)
+                                    //intent.putExtra("manager", manager)
                                     startActivity(intent)
                                     finish()
                                 } else {

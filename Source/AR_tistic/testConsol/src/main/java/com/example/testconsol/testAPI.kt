@@ -32,8 +32,9 @@ fun main(){
     //println(gson.fromJson(get(URL(urlUserById0)), User::class.java).email)
 
     var api = ClientAPI()
+    //api.createUser(user1)
     //api.updateUser(user1.id,user1)
-    //api.deleteUser(6)
+    api.deleteUser(1)
     println("OK")
     //println(api.getUserById(133)?.name)
     //println(api.getuserByEmail("alicaaae@alice.kt")?.name)
