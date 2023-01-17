@@ -15,10 +15,13 @@ import com.example.classlib.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
+import kotlin.math.absoluteValue
 
 class DrawsVisualisation : AppCompatActivity() {
     lateinit var draws:ArrayList<Draw>
     lateinit var interestPoint:InterestPoint
+    lateinit var draw:ArrayList<Bitmap>
+    var idx = 0
 
     private val GALLERY_REQUEST_CODE = 1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +29,8 @@ class DrawsVisualisation : AppCompatActivity() {
         setContentView(R.layout.activity_draws_visualisation)
         createButtons()
         val id=0
-        interestPoint= manager.persistence.getInterestPointById(id)
-        draws=manager.persistence.getDrawsInInterestPoint(interestPoint.id)
+        //interestPoint= manager.persistence.getInterestPointById(id)
+        //draws=manager.persistence.getDrawsInInterestPoint(interestPoint.id)
         //buttons
         val previous = findViewById<ImageView>(R.id.previous)
         val nextt = findViewById<ImageView>(R.id.next)
@@ -49,6 +52,12 @@ class DrawsVisualisation : AppCompatActivity() {
         like.setOnClickListener{
             like()
         }
+        //Init fake var
+
+        interestPoint = InterestPoint(id=0,name="IUT", desc="IUT de Clermont", latitude=1.0000, longitude=2.00000, picture="./img/intPoint/IUT.png")
+        draws = ArrayList()
+        draws.add(Draw(id =0,name ="Peinture bleu sur fond bleu", image = "./img/draw/0.jpg", interestPoint = hashMapOf(), creationDate = Date(1999,2,2), lifeTime = Time(24,10,10), authors = hashMapOf(), nbView = 60, nbReport = 0 ))
+        draw = ArrayList()
     }
 
 
@@ -80,14 +89,18 @@ class DrawsVisualisation : AppCompatActivity() {
         }
     }
     fun previous(){
+        idx --
+        //idx=idx.absoluteValue
+        setImages()
         return
     }
     fun nextt(){
+        idx++
+        setImages()
         return
     }
     fun add(){
         openGallery()
-        setImages()
     }
     fun report(){
         return
@@ -106,22 +119,17 @@ class DrawsVisualisation : AppCompatActivity() {
             val selectedImageUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
             val x64=convertImgToX64(bitmap)
-            //GlobalScope.launch {//add the draw in pers
-                manager.persistence.createDraw(Draw(0,
-                    "draw",
-                    x64,
-                    hashMapOf(0 to interestPoint),
-                    Date(0,0,0),
-                    Time(99,99,99),
-                    hashMapOf(manager.usr.id to manager.usr),
-                    0,
-                    0
-                ))
+            manager.usr.profilePicture=x64
+            GlobalScope.launch {
+                //manager.persistence.updateUser(manager.usr.id,manager.usr)
                 println("Done")
-            //}
-            //GlobalScope.launch {//get draw from pers
-                draws=manager.persistence.getDrawsInInterestPoint(interestPoint.id)
-            //}
+            }
+            val img=convertX64toImg(x64)
+            println("\n Taille :"+draw.size)
+            draw.add(img)
+            println("\n Taille :"+draw.size)
+            //imageView.setImageBitmap(img)
+            setImages()
         }
     }
     fun convertImgToX64(bitmap: Bitmap):String{
@@ -137,16 +145,27 @@ class DrawsVisualisation : AppCompatActivity() {
         return decodedImage
     }
     fun setImages(){
-        println("\n Taille :"+draws.size)/*
-        if (draws.size==1){
+        println("\n Taille :"+draw.size)
+        if (draw.size==1){
             println("rtentre la")
             val mainDraw=findViewById<ImageView>(R.id.mainDraw)
-            mainDraw.setImageBitmap(convertX64toImg(draws[0].image))
+            mainDraw.setImageBitmap(draw[0])
         }
-        else if(draws.size>1){
+        else if(draw.size==2){
             val mainDraw=findViewById<ImageView>(R.id.mainDraw)
             val leftDraw=findViewById<ImageView>(R.id.leftDraw)
             val rightDraw=findViewById<ImageView>(R.id.rightDraw)
-        }*/
+            mainDraw.setImageBitmap(draw[((idx)%2).absoluteValue])
+            leftDraw.setImageBitmap(draw[((idx+1)%2).absoluteValue])
+            rightDraw.setImageBitmap(draw[((idx+1)%2).absoluteValue])
+        }
+        else{
+            val mainDraw=findViewById<ImageView>(R.id.mainDraw)
+            val leftDraw=findViewById<ImageView>(R.id.leftDraw)
+            val rightDraw=findViewById<ImageView>(R.id.rightDraw)
+            mainDraw.setImageBitmap(draw[((idx)%3).absoluteValue])
+            leftDraw.setImageBitmap(draw[((idx+1)%3).absoluteValue])
+            rightDraw.setImageBitmap(draw[((idx+2)%3).absoluteValue])
+        }
     }
 }

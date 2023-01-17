@@ -115,13 +115,14 @@
         android:id="@+id/addDrawing"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:minWidth="70dp"
+        android:minHeight="70dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewComments"
-        app:srcCompat="@drawable/plus"
-        android:minHeight="70dp"
-        android:minWidth="70dp"/>
+        app:srcCompat="@drawable/plus" />
 
     <ImageView
         android:id="@+id/previous"
