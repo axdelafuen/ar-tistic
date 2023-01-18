@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.isVisible
 import com.example.ar_tistic.MainActivity.Companion.manager
@@ -111,7 +112,11 @@ class DrawsVisualisation : AppCompatActivity() {
         openGallery()
     }
     fun report(){
-
+        Toast.makeText(
+            this,
+            "Demande de signalement prise en compte",
+            Toast.LENGTH_LONG
+        ).show()
         return
     }
     fun like(){
