@@ -81,10 +81,10 @@ class EditProfileActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
             val x64=convertImgToX64(bitmap)
             manager.usr.profilePicture=x64
-            //GlobalScope.launch {
+            GlobalScope.launch {
                 manager.persistence.updateUser(manager.usr.id,manager.usr)
                 //println("Done")
-            //}
+            }
             val img=convertX64toImg(x64)
             imageView.setImageBitmap(img)
         }
