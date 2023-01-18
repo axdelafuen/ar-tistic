@@ -28,8 +28,7 @@
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/drawTitle"
-        app:srcCompat="@drawable/draw1" />
+        app:layout_constraintTop_toBottomOf="@+id/drawTitle"/>
 
     <ImageView
         android:id="@+id/rightDraw"
@@ -39,8 +38,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         app:layout_constraintStart_toEndOf="@+id/mainDraw"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/draw2" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/leftDraw"
@@ -51,8 +49,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toStartOf="@+id/mainDraw"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/draw3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -102,7 +99,7 @@
         app:srcCompat="@drawable/yellow_warning" />
 
     <ImageView
-        android:id="@+id/liked"
+        android:id="@+id/liked_false"
         android:layout_width="71dp"
         android:layout_height="68dp"
         app:layout_constraintBottom_toTopOf="@+id/madeBy"
@@ -110,6 +107,17 @@
         app:layout_constraintStart_toEndOf="@+id/previous"
         app:layout_constraintTop_toBottomOf="@+id/mainDraw"
         app:srcCompat="@drawable/empty_heart" />
+
+    <ImageView
+        android:id="@+id/liked_true"
+        android:layout_width="71dp"
+        android:layout_height="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/madeBy"
+        app:layout_constraintEnd_toStartOf="@+id/next"
+        app:layout_constraintStart_toEndOf="@+id/previous"
+        app:layout_constraintTop_toBottomOf="@+id/mainDraw"
+        app:srcCompat="@drawable/full_heart"
+        tools:visibility="gone" />
 
     <ImageView
         android:id="@+id/addDrawing"

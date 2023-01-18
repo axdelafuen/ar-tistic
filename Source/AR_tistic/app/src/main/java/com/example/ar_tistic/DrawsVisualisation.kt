@@ -10,6 +10,8 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.isVisible
 import com.example.ar_tistic.MainActivity.Companion.manager
 import com.example.classlib.*
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +23,7 @@ class DrawsVisualisation : AppCompatActivity() {
     lateinit var draws:ArrayList<Draw>
     lateinit var interestPoint:InterestPoint
     lateinit var draw:ArrayList<Bitmap>
+    var like = false
     var idx = 0
 
     private val GALLERY_REQUEST_CODE = 1
@@ -36,7 +39,9 @@ class DrawsVisualisation : AppCompatActivity() {
         val nextt = findViewById<ImageView>(R.id.next)
         val add = findViewById<ImageView>(R.id.addDrawing)
         val report = findViewById<ImageView>(R.id.report)
-        val like = findViewById<ImageView>(R.id.liked)
+        val liked = findViewById<ImageView>(R.id.liked_true)
+        val like = findViewById<ImageView>(R.id.liked_false)
+        liked.isVisible=false
         previous.setOnClickListener{
             previous()
         }
@@ -50,6 +55,9 @@ class DrawsVisualisation : AppCompatActivity() {
             report()
         }
         like.setOnClickListener{
+            like()
+        }
+        liked.setOnClickListener{
             like()
         }
         //Init fake var
@@ -103,9 +111,23 @@ class DrawsVisualisation : AppCompatActivity() {
         openGallery()
     }
     fun report(){
+
         return
     }
     fun like(){
+        val full_heart=findViewById<ImageView>(R.id.liked_true)
+        val empty_heart=findViewById<ImageView>(R.id.liked_false)
+
+        if (!like){
+            full_heart.isVisible=true
+            empty_heart.isVisible=false
+            like=true
+        }
+        else{
+            full_heart.isVisible=false
+            empty_heart.isVisible=true
+            like=false
+        }
         return
     }
     fun openGallery() {
@@ -122,12 +144,9 @@ class DrawsVisualisation : AppCompatActivity() {
             manager.usr.profilePicture=x64
             GlobalScope.launch {
                 //manager.persistence.updateUser(manager.usr.id,manager.usr)
-                println("Done")
             }
             val img=convertX64toImg(x64)
-            println("\n Taille :"+draw.size)
             draw.add(img)
-            println("\n Taille :"+draw.size)
             //imageView.setImageBitmap(img)
             setImages()
         }
@@ -145,11 +164,13 @@ class DrawsVisualisation : AppCompatActivity() {
         return decodedImage
     }
     fun setImages(){
-        println("\n Taille :"+draw.size)
+        if (draw.size==0){
+            return
+        }
         if (draw.size==1){
-            println("rtentre la")
             val mainDraw=findViewById<ImageView>(R.id.mainDraw)
             mainDraw.setImageBitmap(draw[0])
+            return
         }
         else if(draw.size==2){
             val mainDraw=findViewById<ImageView>(R.id.mainDraw)
@@ -158,6 +179,7 @@ class DrawsVisualisation : AppCompatActivity() {
             mainDraw.setImageBitmap(draw[((idx)%2).absoluteValue])
             leftDraw.setImageBitmap(draw[((idx+1)%2).absoluteValue])
             rightDraw.setImageBitmap(draw[((idx+1)%2).absoluteValue])
+            return
         }
         else{
             val mainDraw=findViewById<ImageView>(R.id.mainDraw)
@@ -166,6 +188,7 @@ class DrawsVisualisation : AppCompatActivity() {
             mainDraw.setImageBitmap(draw[((idx)%3).absoluteValue])
             leftDraw.setImageBitmap(draw[((idx+1)%3).absoluteValue])
             rightDraw.setImageBitmap(draw[((idx+2)%3).absoluteValue])
+            return
         }
     }
 }
