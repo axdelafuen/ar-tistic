@@ -16,6 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.*
+import kotlin.math.absoluteValue
 
 
 class EditProfileActivity : AppCompatActivity() {
@@ -56,18 +57,6 @@ class EditProfileActivity : AppCompatActivity() {
     fun returnMap(){
         finish()
     }
-    fun convertImgToX64(bitmap: Bitmap):String{
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        var imageBytes = byteArrayOutputStream.toByteArray()
-        val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-        return imageString
-    }
-    fun convertX64toImg(imageString:String):Bitmap{
-        var imageBytes = Base64.decode(imageString, Base64.DEFAULT)
-        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-        return decodedImage
-    }
     fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -77,16 +66,30 @@ class EditProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri = data.data
-            val imageView = findViewById<ImageView>(R.id.imageView2)
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
             val x64=convertImgToX64(bitmap)
             manager.usr.profilePicture=x64
             GlobalScope.launch {
                 manager.persistence.updateUser(manager.usr.id,manager.usr)
-                //println("Done")
             }
             val img=convertX64toImg(x64)
-            imageView.setImageBitmap(img)
+            setImages(img)
         }
+    }
+    fun convertImgToX64(bitmap: Bitmap):String{
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        var imageBytes = byteArrayOutputStream.toByteArray()
+        val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return imageString
+    }
+    fun convertX64toImg(imageString:String): Bitmap {
+        var imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)!!
+        return decodedImage
+    }
+    fun setImages(img:Bitmap){
+        val pp=findViewById<ImageView>(R.id.imageView2)
+        pp.setImageBitmap(img)
     }
 }

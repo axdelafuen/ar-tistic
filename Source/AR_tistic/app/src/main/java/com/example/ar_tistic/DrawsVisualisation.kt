@@ -146,13 +146,8 @@ class DrawsVisualisation : AppCompatActivity() {
             val selectedImageUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
             val x64=convertImgToX64(bitmap)
-            manager.usr.profilePicture=x64
-            GlobalScope.launch {
-                //manager.persistence.updateUser(manager.usr.id,manager.usr)
-            }
             val img=convertX64toImg(x64)
             draw.add(img)
-            //imageView.setImageBitmap(img)
             setImages()
         }
     }
