@@ -114,7 +114,7 @@ class DrawsVisualisation : AppCompatActivity() {
     fun report(){
         Toast.makeText(
             this,
-            "Signalement prise en compte",
+            "Signalement pris en compte",
             Toast.LENGTH_LONG
         ).show()
         return
