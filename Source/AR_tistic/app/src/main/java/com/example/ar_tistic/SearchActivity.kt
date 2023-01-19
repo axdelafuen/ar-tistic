@@ -30,9 +30,7 @@ class SearchActivity: AppCompatActivity() {
         }
         val submitSearch = findViewById<ImageButton>(R.id.searchSubmit)
         submitSearch.setOnClickListener{
-            if(findViewById<EditText>(R.id.searchInput).text.isEmpty()){
-                return@setOnClickListener
-            }
+
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(findViewById<EditText>(R.id.searchInput).windowToken, 0)
 
@@ -40,12 +38,23 @@ class SearchActivity: AppCompatActivity() {
             recycler.layoutManager = LinearLayoutManager(this)
 
             GlobalScope.launch {
-                val data = searchUsers(findViewById<EditText>(R.id.searchInput).text.toString()).await()
-                runOnUiThread {
-                    val adapter = UserAdapter(data)
-                    recycler.adapter = adapter
-                    findViewById<TextView>(R.id.loading).visibility = View.INVISIBLE
+                if(findViewById<EditText>(R.id.searchInput).text.isEmpty()){
+                    val data = getAllUsers().await()
+                    runOnUiThread {
+                        val adapter = UserAdapter(data)
+                        recycler.adapter = adapter
+                        findViewById<TextView>(R.id.loading).visibility = View.INVISIBLE
+                    }
                 }
+                else{
+                    val data = searchUsers(findViewById<EditText>(R.id.searchInput).text.toString()).await()
+                    runOnUiThread {
+                        val adapter = UserAdapter(data)
+                        recycler.adapter = adapter
+                        findViewById<TextView>(R.id.loading).visibility = View.INVISIBLE
+                    }
+                }
+
             }
 
         }
@@ -58,6 +67,21 @@ class SearchActivity: AppCompatActivity() {
         }
         val data = ArrayList<User>()
         var users = manager.persistence.patternRecognitionUsers(pattern)
+        if (users != null) {
+            for(user in users){
+                println(user.email)
+                data.add(user)
+            }
+        }
+        return@async data
+    }
+
+    suspend fun getAllUsers()=GlobalScope.async{
+        runOnUiThread{
+            findViewById<TextView>(R.id.loading).visibility = View.VISIBLE
+        }
+        val data = ArrayList<User>()
+        var users = manager.persistence.getAllUsers()
         if (users != null) {
             for(user in users){
                 println(user.email)

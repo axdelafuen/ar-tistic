@@ -29,4 +29,5 @@ interface IPersistenceManager : Serializable {
     fun userLikesDrawing(idUser: Int, idDraw: Int)
     fun createInterestPoint(ip: InterestPoint)
     fun getDrawsByInterestPoint(idIP: Int): HashMap<Int, Draw>
+    fun getAllUsers(): ArrayList<User>
 }

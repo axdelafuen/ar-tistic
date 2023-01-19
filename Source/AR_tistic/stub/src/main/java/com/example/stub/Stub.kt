@@ -182,6 +182,10 @@ class  Stub:IPersistenceManager{
         TODO("Not yet implemented")
     }
 
+    override fun getAllUsers(): ArrayList<User> {
+        TODO("Not yet implemented")
+    }
+
     fun updateInterestPoint(id:Int,intPt:InterestPoint){// modify
         intPtsHashMap.put(id, InterestPoint(id,intPt.name,intPt.desc,intPt.latitude,intPt.longitude,intPt.picture))
     }

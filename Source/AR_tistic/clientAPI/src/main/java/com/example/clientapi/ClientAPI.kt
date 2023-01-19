@@ -31,6 +31,23 @@ class ClientAPI:IPersistenceManager,java.io.Serializable{
 
     // USER
 
+    override fun getAllUsers(): ArrayList<User>{
+        try{
+            val res = Gson().fromJson(/* json = */ get(URL(url+"users/")),Array<User>::class.java)
+            if(res==null || res.isEmpty()){
+                return ArrayList()
+            }
+            var users:ArrayList<User> = ArrayList()
+            for(u in res){
+                users.add(u)
+            }
+            return users
+        }catch(e:Exception){
+            println(e)
+            return ArrayList()
+        }
+    }
+
     override fun getUserById(idUser: Int): User? {
         try{
             return Gson().fromJson(get(URL(url+"users/"+idUser.toString())),User::class.java)

@@ -35,12 +35,16 @@ fun main() {
 
             get("/users") { ctx ->
                 val res = data.loadData().users
+                val users:ArrayList<User> = arrayListOf()
+                for(user in res.values){
+                   users.add(user)
+                }
                 //val res = data.usersArray
                 if(res==null){
                     ctx.json("forbidden").status(403)
                 }
                 else{
-                    ctx.json((res))
+                    ctx.json(users)
                 }
             }
             get("/users/{user-id}") { ctx ->

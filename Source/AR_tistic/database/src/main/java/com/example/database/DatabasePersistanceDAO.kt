@@ -552,6 +552,10 @@ class DatabasePersistanceDAO : IPersistenceManager{
         return hmDraws
     }
 
+    override fun getAllUsers(): ArrayList<User> {
+        TODO("Not yet implemented")
+    }
+
     private fun interestPointDataToInterestPointClass(ip: t_InterestPoint): InterestPoint{
         return InterestPoint(
             id = ip.id.value,
