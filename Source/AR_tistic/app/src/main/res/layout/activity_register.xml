@@ -114,14 +114,14 @@
             android:id="@+id/unequalPswd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:text="Veuillez entrer deux mots de passe égaux"
+            android:text="Veuillez entrer deux mots de passe similaires"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/orangeWarning"
             android:textSize="16dp"
             android:textStyle="bold"
             android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
