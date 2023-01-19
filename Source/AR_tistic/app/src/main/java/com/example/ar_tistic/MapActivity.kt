@@ -142,7 +142,7 @@ class MapActivity : AppCompatActivity(){
             intent.putExtra("manager", manager)
             startActivity(intent)
         }
-        val displayPopUp = findViewById<Button>(R.id.displayPopUp);
+        val displayPopUp = findViewById<ImageView>(R.id.PointOfInterest);
         displayPopUp.setOnClickListener {
             popUp();
         }
