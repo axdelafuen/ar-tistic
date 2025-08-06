@@ -16,7 +16,7 @@ About the project
 ===
 
   <p>
-AR-tistic est une application mobile basée sur de la réalité augmentée. L'idée est de concevoir un "réseau social" en AR. L'application permettrait d'être localisé en temps réel. Lorsque les utilisateurs approcheront des points d'intérêts, ils seront autorisés à utiliser de l'AR pour dessiner autour d'eux. Les utilisateurs pourraient donc partager leurs œuvres d'arts, et contempler celles des autres, sur les points d'intérêts disponibles sur l'application.
+AR-tistic is a mobile application based on augmented reality. The idea is to design a "social network" in AR. The application would allow users to be located in real time. When users approach points of interest, they will be allowed to use AR to draw around them. Users could therefore share their works of art, and contemplate those of others, on the points of interest available on the application.
   </p>
 
 
