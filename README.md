@@ -10,15 +10,6 @@
 
 <h1 align="center">AR - tistic</h1>
 
-<br />
-<a href="https://codefirst.iut.uca.fr/git/ARTeam/SAE-3.01/wiki">Wiki</a>
-·
-<a href="https://codefirst.iut.uca.fr/documentation/ARTeam/docusaurus/AR-tistic/">Documentation</a>
-·
-<a href="https://app.swaggerhub.com/apis/axdelafuen/AR-tistic/1.0.0">Swagger</a>
-·
-<a href="#">Download</a>
-
 </div>
 
 About the project
